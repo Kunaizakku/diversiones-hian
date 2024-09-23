@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SillasController;
+use App\Http\Controllers\MesasController;
 
 Route::get('/', function () {
     return view('index');
