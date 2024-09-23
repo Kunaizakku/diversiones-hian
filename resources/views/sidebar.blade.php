@@ -28,6 +28,8 @@
 </head>
 <body>
 
+  
+
   {{-- @php
     $PK_USUARIO = session('pk_usuario');
     $tipo_usuario = session('nombre_tipo_usuario');

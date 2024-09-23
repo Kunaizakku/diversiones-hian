@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SillasController;
 use App\Http\Controllers\MesasController;
 use App\Http\Controllers\BrincolinesController;
+use App\Http\Controllers\UsuarioController;
 
 Route::get('/', function () {
     return view('index');
@@ -47,3 +48,6 @@ Route::get('/registro', function () {
     }
 })->name('registro');
 
+Route::post('/registroUsuario', [UsuarioController::class, 'insertar'])->name('usuario.insertar');
+
+Route::match(['get', 'post'], '/login', [UsuarioController::class, 'login'])->name('usuario.login');
