@@ -62,13 +62,16 @@
 
       {{-- @if ($PK_USUARIO) --}}
       {{-- @else --}}
+    @if (session('estatus')==1)
+    @else
       <li>
-        <a href="{{ route('login') }}">
+        <a href="{{ route('iniciarsesion') }}">
             <i class='bx bx-user-plus'></i>
           <span class="links_name">Inicio de sesión</span>
         </a>
         <span class="tooltip">Sesión</span>
       </li>
+    @endif
       <li>
         <a href="{{ route('form_sillas') }}">
             <i class='bx bx-user-plus'></i>
@@ -92,14 +95,15 @@
       </li>
     {{-- @endif 
     {{-- @endif --}}
+    @if (session('estatus')==1)
         <li>
-          <a href="">
+          <a href="{{ route('logout') }}">
             <i class='bx bx-user-minus'></i>
             <span class="links_name">Cerrar sesión</span>
           </a>
           <span class="tooltip">Sesión</span>
         </li>
-      
+    @endif
 
     </ul>
   </div>

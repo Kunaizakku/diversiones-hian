@@ -31,6 +31,10 @@ Route::get('/form_brincolines', function () {
 Route::post('/formulariobrincolines', [BrincolinesController::class, 'insertarbrincolin'])->name('brincolin.insertarbrincolin');
 
 //usuario
+Route::get('/iniciarsesion', function () {
+    return view('login');
+})->name('iniciarsesion');
+
 Route::get('/login', function () {
     $PK_USUARIO = session('pk_usuario');
     if ($PK_USUARIO) {
@@ -51,3 +55,6 @@ Route::get('/registro', function () {
 Route::post('/registroUsuario', [UsuarioController::class, 'insertar'])->name('usuario.insertar');
 
 Route::match(['get', 'post'], '/login', [UsuarioController::class, 'login'])->name('usuario.login');
+
+Route::get('/logout', [UsuarioController::class, 'logout'])->name('logout');
+

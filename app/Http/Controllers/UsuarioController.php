@@ -33,25 +33,25 @@ class UsuarioController extends Controller
 
         if ($usuario) {
             // Verificar si el estatus del usuario es 0
-            if ($usuario->estatus == 0) {
+            if ($usuario->estatus_usuario == 0) {
                 // Redirigir al usuario con un mensaje de cuenta desactivada
-                return redirect()->to('/iniciarsesion')
+                return redirect()->to('/')
                     ->with('error_status', 'Tu cuenta está desactivada. Contacta al administrador.');
             }
 
             // Establecer las variables de sesión
             session([
-                'id' => $usuario->id,
-                'nombre' => $usuario->username,
+                'id' => $usuario->pk_usuario,
+                'nombre' => $usuario->usuario,
                 'contraseña' => $contraseña,
-                'rol' => $usuario->rol
+                'estatus' => $usuario->estatus_usuario
             ]);
 
             // Redirigir al usuario con un mensaje de bienvenida basado en el rol
-            if ($usuario->rol == 1) {
+            if ($usuario->estatus_usuario == 2) {
                 return redirect()->to('/')->with('success', '¡Bienvenido(a)!');
-            } elseif ($usuario->rol == 2) {
-                return redirect()->to('/')->with('success', 'Bienvenido(a): ' . $usuario->username);
+            } elseif ($usuario->estatus_usuario == 1) {
+                return redirect()->to('/')->with('success', 'Bienvenido(a): ' . $usuario->usuario);
             }
             
         } else {
@@ -60,6 +60,25 @@ class UsuarioController extends Controller
                 ->with('error_credentials', 'Usuario o contraseña incorrectos')
                 ->with('error_retry', 'Introduzca sus datos de nuevo')
                 ->with('use_js_alerts', true);
+        }
+    }
+
+    public function logout() {
+        Auth::logout(); 
+        session()->flush();// Cierra la sesión del usuario
+        return redirect('/')->with('success', 'Sesión cerrada'); // Redirige a la página de inicio de sesión u otra página de tu elección
+    }
+
+    private function buscar($usuario, $contrasena)
+    {
+        $usuario = Usuario::where('usuario', $usuario)
+            ->where('estatus_usuario', 1)
+            ->first();
+    
+        if ($usuario && $contrasena == $usuario->contrasena) {
+            return $usuario;
+        } else {
+            return null;
         }
     }
 
