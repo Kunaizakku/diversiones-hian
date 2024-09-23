@@ -3,71 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Diversiones-Hian | Registro de Mesas</title>
 </head>
 <body>
 
-  @include('sidebar')
-  
-  <div class="form-container">
-      <p class="title">Registro de Mesas</p>
-      <form class="form" id="form-register" action="" method="post">
-          @csrf
-          <div class="input-group">
-            <label for="nombre_mesa">Nombre de la Mesa</label>
-            <input autocomplete="off" type="text" name="nombre_mesa" id="nombre_mesa" placeholder="Ingresa el nombre de la mesa">
-          </div>
-          <div class="input-group">
-            <label for="tipo_mesa">Tipo de Mesa</label>
-            <input autocomplete="off" type="text" name="tipo_mesa" id="tipo_mesa" placeholder="Ingresa el tipo de mesa (Ej. Redonda, rectangular)">
-          </div>
-          <div class="input-group">
-            <label for="material_mesa">Material de la Mesa</label>
-            <input autocomplete="off" type="text" name="material_mesa" id="material_mesa" placeholder="Ingresa el material de la mesa (Ej. Madera, plástico)">
-          </div>
-          <div class="input-group">
-            <label for="color_mesa">Color de la Mesa</label>
-            <input autocomplete="off" type="text" name="color_mesa" id="color_mesa" placeholder="Ingresa el color de la mesa">
-          </div>
-          <div class="input-group">
-            <label for="cantidad_mesas">Cantidad Disponible</label>
-            <input type="number" name="cantidad_mesas" id="cantidad_mesas" placeholder="Ingresa la cantidad disponible" min="1">
-          </div>
-          <div class="input-group">
-            <label for="precio_renta_mesa">Precio de Renta por Día</label>
-            <input type="number" name="precio_renta_mesa" id="precio_renta_mesa" placeholder="Ingresa el precio de renta por día" step="0.01" min="0">
-          </div>
-          <button class="sign">Registrar Mesa</button>
+  <form action="{{ route('mesa.insertarmesa') }}" method="post" enctype="multipart/form-data">
+    @csrf
 
-          @if($errors->any())
-          @foreach($errors->all() as $error)
-              <script>
-                  function showErrorToast(message) {
-                      Swal.fire({
-                          title: message,
-                          toast: true,
-                          position: 'top-end',
-                          showConfirmButton: false,
-                          timer: 5000,
-                          timerProgressBar: true,
-                          icon: 'error',
-                          didOpen: (toast) => {
-                              toast.addEventListener('mouseenter', Swal.stopTimer);
-                              toast.addEventListener('mouseleave', Swal.resumeTimer);
-                          }
-                      });
-                  }
-                  showErrorToast('{{ $error }}');
-              </script>
-          @endforeach
-          @endif
-      </form>
+    <!-- Campo para la imagen de la mesa -->
+    <div class="input-group">
+      <label for="imagen_mesa">Imagen de la Mesa</label>
+      <input type="file" name="imagen_mesa" id="imagen_mesa">
+    </div>
 
-      {{-- <p class="signup">¿Quieres ver las mesas registradas?, <a href="{{ route('listar_mesas') }}">haz clic aquí</a>.</p> --}}
-  </div>
+    <!-- Campo para la forma de la mesa -->
+    <div class="input-group">
+      <label for="forma_mesas">Forma de la Mesa</label>
+      <input type="text" name="forma_mesas" id="forma_mesas" placeholder="Ingresa la forma de la mesa">
+    </div>
 
-  @include('fooder')
+    <!-- Campo para la cantidad de mesas -->
+    <div class="input-group">
+      <label for="cant_mesas">Cantidad de Mesas</label>
+      <input type="number" name="cant_mesas" id="cant_mesas" placeholder="Ingresa la cantidad de mesas" min="1">
+    </div>
+
+    <!-- Campo para seleccionar la audiencia dirigida de las mesas -->
+    <div class="input-group">
+      <label for="audiencia_mesas">Audiencia Dirigida</label>
+      <select name="audiencia_mesas" id="audiencia_mesas">
+        <option value="Adultos">Adultos</option>
+        <option value="Niños">Niños</option>
+      </select>
+    </div>
+
+    <!-- Botón para enviar el formulario -->
+    <input type="submit" value="Agregar Sillas">
+  </form>
 
 </body>
 </html>
