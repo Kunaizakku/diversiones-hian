@@ -7,7 +7,7 @@
   <title>Registro de Sillas</title>
 </head>
 <body>
-
+@include('sidebar')
   <form action="{{ route('silla.insertarsilla') }}" method="post" enctype="multipart/form-data">
     @csrf
 

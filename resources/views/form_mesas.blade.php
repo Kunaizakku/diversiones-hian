@@ -6,7 +6,7 @@
   <title>Diversiones-Hian | Registro de Mesas</title>
 </head>
 <body>
-
+@include('sidebar')
   <form action="{{ route('mesa.insertarmesa') }}" method="post" enctype="multipart/form-data">
     @csrf
 

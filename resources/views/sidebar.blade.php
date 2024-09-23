@@ -83,6 +83,13 @@
         </a>
         <span class="tooltip">Mesas</span>
       </li>
+      <li>
+        <a href="{{ route('form_brincolines') }}">
+            <i class='bx bx-user-plus'></i>
+          <span class="links_name">Form brincolines</span>
+        </a>
+        <span class="tooltip">Brincolines</span>
+      </li>
     {{-- @endif 
     {{-- @endif --}}
         <li>
