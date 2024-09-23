@@ -12,15 +12,15 @@
     
   <div class="form-container">
       <p class="title">Inicio de sesión</p>
-      <form class="form" id="form-register" action="" method="post">
+      <form class="form" id="form-register" action="{{route('usuario.login') }}" method="post">
           @csrf
           <div class="input-group">
           <label for="username">Nombre de usuario</label>
-          <input autocomplete="off" type="text" name="nombre_usuario" id="username" placeholder="Ingresa tu nombre de usuario">
+          <input autocomplete="off" type="text" name="usuario" id="username" placeholder="Ingresa tu nombre de usuario">
         </div>
         <div class="input-group">
           <label for="password">Contraseña</label>
-          <input type="password" name="contraseña" id="contraseña" placeholder="Ingresa tu contraseña" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Debe contener un número, una mayúscula, una minúlcula, y ser 8 caracteres" required>
+          <input type="password" name="contrasena" id="contraseña" placeholder="Ingresa tu contraseña" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Debe contener un número, una mayúscula, una minúlcula, y ser 8 caracteres" required>
         </div>
         <button class="sign">Iniciar sesión</button>
 
