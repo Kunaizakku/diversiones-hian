@@ -1,0 +1,128 @@
+.form-container {
+  width: 320px;
+  margin: 0 auto;
+  border-radius: 0.75rem;
+  background-color: #3B6B76; /* Un tono más apagado del verde */
+  padding: 2rem;
+  color: #F0F4F8; /* Un tono muy claro y suave para el texto */
+}
+
+.title {
+  text-align: center;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+  color: #F0F4F8; /* Manteniendo el color claro */
+}
+
+.form {
+  margin-top: 1.5rem;
+}
+
+.input-group {
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.input-group label {
+  display: block;
+  color: #A0AEC0; /* Tono gris suave para los labels */
+  margin-bottom: 4px;
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea {
+  width: 100%;
+  text-align: center;
+  border-radius: 0.375rem;
+  border: 1px solid #4A5568; /* Gris oscuro para el borde */
+  outline: 0;
+  background-color: #DCE7E5; /* Tono neutro y suave para los inputs */
+  padding: 0.75rem 1rem;
+  color: #2D3748; /* Texto oscuro dentro de los inputs */
+}
+
+.input-group input:focus,
+.input-group textarea:focus {
+  border-color: #718096; /* Gris intermedio para focus */
+}
+
+.forgot {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: #A0AEC0;
+  margin: 8px 0 14px 0;
+}
+
+.forgot a, .signup a {
+  color: #F0F4F8; /* Blanco claro para enlaces */
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.forgot a:hover, .signup a:hover {
+  text-decoration: underline #718096; /* Subrayado en gris intermedio */
+}
+
+.sign {
+  display: block;
+  width: 100%;
+  margin-top: 30px;
+  background-color: #2E8B57; /* Verde del sidebar para el botón de enviar */
+  padding: 0.75rem;
+  text-align: center;
+  color: #F0F4F8; /* Blanco claro para el texto */
+  border: none;
+  border-radius: 0.375rem;
+  font-weight: 600;
+}
+
+.social-message {
+  display: flex;
+  align-items: center;
+  padding-top: 1rem;
+}
+
+.line {
+  height: 1px;
+  flex: 1 1 0%;
+  background-color: #4A5568; /* Gris oscuro */
+}
+
+.social-message .message {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: #A0AEC0;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+}
+
+.social-icons .icon {
+  border-radius: 0.125rem;
+  padding: 0.75rem;
+  border: none;
+  background-color: transparent;
+  margin-left: 8px;
+}
+
+.social-icons .icon svg {
+  height: 1.25rem;
+  width: 1.25rem;
+  fill: #F0F4F8; /* Blanco claro */
+}
+
+.signup {
+  text-align: center;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: #A0AEC0;
+}
