@@ -7,6 +7,9 @@
 </head>
 <body>
 @include('sidebar')
+<body oncopy="return false" onpaste="return false">
+
+<div class="form-container">
   <form action="{{ route('mesa.insertarmesa') }}" method="post" enctype="multipart/form-data">
     @csrf
 
@@ -38,8 +41,11 @@
     </div>
 
     <!-- Botón para enviar el formulario -->
-    <input type="submit" value="Agregar Sillas">
+    <button class="sign">Agregar Mesas</button>
   </form>
+</div>
+
+@include('fooder')
 
 </body>
 </html>
