@@ -24,7 +24,9 @@ Route::get('/form_mesas', function () {
 Route::post('/formulariomesas', [MesasController::class, 'insertarmesa'])->name('mesa.insertarmesa');
 
 //brincolines
-
+Route::get('/form_brincolines', function () {
+    return view('form_brincolines'); // Aquí se retorna la vista
+})->name('form_brincolines');
 Route::post('/formulariobrincolines', [BrincolinesController::class, 'insertarbrincolin'])->name('brincolin.insertarbrincolin');
 
 //usuario
