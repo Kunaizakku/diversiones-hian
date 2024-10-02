@@ -35,6 +35,16 @@ Route::get('/iniciarsesion', function () {
     return view('login');
 })->name('iniciarsesion');
 
+// Extenciones
+Route::get('/form_extenciones', function () {
+    return view('form_extenciones');
+})->name('form_extenciones');
+
+// Manteles
+Route::get('/form_manteles', function () {
+    return view('form_manteles');
+})->name('form_manteles');
+
 Route::get('/login', function () {
     $PK_USUARIO = session('pk_usuario');
     if ($PK_USUARIO) {

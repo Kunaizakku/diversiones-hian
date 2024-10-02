@@ -93,6 +93,20 @@
         </a>
         <span class="tooltip">Brincolines</span>
       </li>
+      <li>
+        <a href="{{ route('form_extenciones') }}">
+            <i class='bx bx-user-plus'></i>
+          <span class="links_name">Form Extenciones</span>
+        </a>
+        <span class="tooltip">Extenciones</span>
+      </li>
+      <li>
+        <a href="{{ route('form_manteles') }}">
+            <i class='bx bx-user-plus'></i>
+          <span class="links_name">Form Manteles</span>
+        </a>
+        <span class="tooltip">Manteles</span>
+      </li>
     {{-- @endif 
     {{-- @endif --}}
     @if (session('estatus')==1)
