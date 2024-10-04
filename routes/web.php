@@ -5,6 +5,8 @@ use App\Http\Controllers\SillasController;
 use App\Http\Controllers\MesasController;
 use App\Http\Controllers\BrincolinesController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\ExtencionesController;
+use App\Http\Controllers\MantelesController;
 
 Route::get('/', function () {
     return view('index');
@@ -39,6 +41,7 @@ Route::get('/iniciarsesion', function () {
 Route::get('/form_extenciones', function () {
     return view('form_extenciones');
 })->name('form_extenciones');
+Route::post('/formularioextenciones', [ExtencionesController::class, 'insertarextenciones'])->name('extencion.insertarextenciones');
 
 // Manteles
 Route::get('/form_manteles', function () {
