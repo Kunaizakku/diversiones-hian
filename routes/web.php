@@ -32,11 +32,6 @@ Route::get('/form_brincolines', function () {
 })->name('form_brincolines');
 Route::post('/formulariobrincolines', [BrincolinesController::class, 'insertarbrincolin'])->name('brincolin.insertarbrincolin');
 
-//usuario
-Route::get('/iniciarsesion', function () {
-    return view('login');
-})->name('iniciarsesion');
-
 // Extenciones
 Route::get('/form_extenciones', function () {
     return view('form_extenciones');
@@ -47,6 +42,13 @@ Route::post('/formularioextenciones', [ExtencionesController::class, 'insertarex
 Route::get('/form_manteles', function () {
     return view('form_manteles');
 })->name('form_manteles');
+Route::post('/formulariomanteles', [MantelesController::class, 'insertarmanteles'])->name('mantel.insertarmanteles');
+
+
+//usuario/login
+Route::get('/iniciarsesion', function () {
+    return view('login');
+})->name('iniciarsesion');
 
 Route::get('/login', function () {
     $PK_USUARIO = session('pk_usuario');
