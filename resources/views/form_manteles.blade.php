@@ -12,7 +12,7 @@
   
   <div class="form-container">
       <p class="title">Registro de Manteles</p>
-      <form class="form" id="form-register-manteles" action="" method="post" enctype="multipart/form-data">
+      <form class="form" id="form-register-manteles" action="{{ route('mantel.insertarmanteles') }}" method="post" enctype="multipart/form-data">
           @csrf
           
           <!-- Campo para la imagen del mantel -->
@@ -31,6 +31,7 @@
           <div class="input-group">
             <label for="tipo_mantel">Tipo de Mantel</label>
             <select name="tipo_mantel" id="tipo_mantel" required>
+              <option value="">-- Seleccione una Opción --</option>
               <option value="redondo">Redondo</option>
               <option value="cuadrado">Cuadrado</option>
               <option value="rectangular">Rectangular</option>
