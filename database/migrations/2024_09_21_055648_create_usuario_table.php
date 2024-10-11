@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nombre', 50);
             $table->string('usuario', 50);
             $table->string('contrasena', 100);
+            $table->smallInteger('tipo_usuario');
             $table->smallinteger('estatus_usuario');
         });
     }

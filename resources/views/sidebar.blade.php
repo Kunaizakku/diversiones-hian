@@ -19,9 +19,9 @@
     {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> --}}
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- DataTables -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
-    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<!-- DataTables -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+  <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     {{-- SweetAlert2 --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Hian</title>
@@ -106,6 +106,20 @@
           <span class="links_name">Form Manteles</span>
         </a>
         <span class="tooltip">Manteles</span>
+      </li>
+      <li>
+        <a href="{{ route('form_rentas') }}">
+            <i class='bx bx-user-plus'></i>
+          <span class="links_name">Form Rentas</span>
+        </a>
+        <span class="tooltip">Rentas</span>
+      </li>
+      <li>
+        <a href="{{ route('lista_rentas') }}">
+            <i class='bx bx-user-plus'></i>
+          <span class="links_name">Lista Rentas</span>
+        </a>
+        <span class="tooltip">List Rentas</span>
       </li>
     {{-- @endif 
     {{-- @endif --}}

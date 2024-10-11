@@ -7,6 +7,7 @@ use App\Http\Controllers\BrincolinesController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ExtencionesController;
 use App\Http\Controllers\MantelesController;
+use App\Http\Controllers\RentasController;
 
 Route::get('/', function () {
     return view('index');
@@ -44,7 +45,15 @@ Route::get('/form_manteles', function () {
 })->name('form_manteles');
 Route::post('/formulariomanteles', [MantelesController::class, 'insertarmanteles'])->name('mantel.insertarmanteles');
 
+// Rentas
+Route::get('/form_rentas', function () {
+    return view('form_rentas');
+})->name('form_rentas');
+Route::post('/form_rentas', [RentasController::class, 'insertarrentas'])->name('renta.insertarrentas');
 
+Route::get('/lista_rentas', function () {
+    return view('lista_empleado');
+})->name('lista_rentas');
 //usuario/login
 Route::get('/iniciarsesion', function () {
     return view('login');
