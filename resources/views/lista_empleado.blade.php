@@ -19,43 +19,45 @@
                 <thead>
                     <tr>
                         <th>Nombre del empleado</th>
-                        <th>Apellido paterno</th>
-                        <th>Apellido materno</th>
-                        <th>Teléfono</th>
-                        <th>Sucursal de trabajo</th>
-                        <th>Acceso del empleado</th>
+                        <th>Usuario</th>
+                        <th>Estatus</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     <!-- Aquí irían los datos de los empleados de forma estática o añadidos con JS -->
-                    <tr>
-                        <td>Nombre</td>
-                        <td>Apellido Paterno</td>
-                        <td>Apellido Materno</td>
-                        <td>Teléfono</td>
-                        <td>Sucursal</td>
-                        <td>Acceso</td>
-                        <td>
-                            <div>
+                    @foreach ($usuarios as $user)
+                        <tr>
+                            <td> {{ $user->nombre }} </td>
+                            <td> {{ $user->usuario }} </td>
+                            <td> 
+                                @if ($user->estatus_usuario == 1)
+                                    Activo
+                                @else
+                                    Inactivo
+                                @endif 
+                            </td>
+                            <td>
                                 <div>
-                                    <a href="#">
-                                        <i class="bi bi-pencil-square" title="Editar datos"></i>
-                                    </a>
+                                    <div>
+                                        <a href="#">
+                                            <i class="bi bi-pencil-square" title="Editar datos"></i>
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="#">
+                                            <i class="bi bi-key" title="Cambiar contraseña"></i>
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <a href="#" onclick="confirmarBaja(event)">
+                                            <i class="bi bi-lock" title="Dar baja"></i>
+                                        </a>
+                                    </div>
                                 </div>
-                                <div>
-                                    <a href="#">
-                                        <i class="bi bi-key" title="Cambiar contraseña"></i>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="#" onclick="confirmarBaja(event)">
-                                        <i class="bi bi-lock" title="Dar baja"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
