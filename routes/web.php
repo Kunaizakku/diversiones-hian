@@ -8,6 +8,7 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ExtencionesController;
 use App\Http\Controllers\MantelesController;
 use App\Http\Controllers\RentasController;
+use App\Models\Usuario;
 
 Route::get('/', function () {
     return view('index');
@@ -81,4 +82,7 @@ Route::post('/registroUsuario', [UsuarioController::class, 'insertar'])->name('u
 Route::match(['get', 'post'], '/login', [UsuarioController::class, 'login'])->name('usuario.login');
 
 Route::get('/logout', [UsuarioController::class, 'logout'])->name('logout');
+
+Route::get('/lista_usuario', [UsuarioController::class,'detalle_usuario'])->name('detalle_usuario');
+
 

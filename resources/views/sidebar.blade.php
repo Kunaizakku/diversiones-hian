@@ -115,11 +115,11 @@
         <span class="tooltip">Rentas</span>
       </li>
       <li>
-        <a href="{{ route('lista_rentas') }}">
+        <a href="{{ route('detalle_usuario') }}">
             <i class='bx bx-user-plus'></i>
-          <span class="links_name">Lista Rentas</span>
+          <span class="links_name">Lista Usuario</span>
         </a>
-        <span class="tooltip">List Rentas</span>
+        <span class="tooltip">Lista Usuario</span>
       </li>
     {{-- @endif 
     {{-- @endif --}}

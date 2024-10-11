@@ -82,4 +82,10 @@ class UsuarioController extends Controller
         }
     }
 
+    public function detalle_usuario()
+    {
+        $usuarios = Usuario::all();
+        return view('lista_empleado', compact('usuarios'));
+    }
+
 }
