@@ -20,6 +20,15 @@ return new class extends Migration
             $table->string('tam_brincolines', 25);
             $table->smallinteger('estatus_brincolines');
         });
+
+        DB::table('brincolines')->insert([
+            'imagen_brincolines' => 'sin brincolin',
+            'nombre_brincolines' => 'sin brincolin',             
+            'cant_brincolines' => 0,     
+            'cat_brincolines' => 'sin cat brincolin',  
+            'tam_brincolines' => 'sin tam brincolin',                     
+            'estatus_brincolines' => 2,                          
+        ]);
     }
 
     /**

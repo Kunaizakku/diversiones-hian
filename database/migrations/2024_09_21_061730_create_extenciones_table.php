@@ -18,6 +18,14 @@ return new class extends Migration
             $table->integer('cant_extenciones');
             $table->smallinteger('estatus_extenciones');
         });
+
+        // insercion del primer registro cno "sin extención" y la iamgen en la carpeta
+        DB::table('extenciones')->insert([
+            'imagen_extenciones' => 'sin extencion',
+            'nombre_extenciones' => 'sin extencion',             
+            'cant_extenciones' => 0,                            
+            'estatus_extenciones' => 2,                          
+        ]);
     }
 
     /**
