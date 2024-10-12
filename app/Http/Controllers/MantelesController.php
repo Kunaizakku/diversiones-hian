@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class MantelesController extends Controller
 {
     public function insertarmanteles (Request $request) {
--
+
         $manteles = new Manteles;
 
         if ($request->hasFile('imagen_mantel')) {
@@ -25,7 +25,7 @@ class MantelesController extends Controller
         $manteles->estatus_manteles = 1;
 
         $manteles->save();
-        return redirect('/form_manteles')->with('success', 'Extensión agregada');
+        return redirect('/form_manteles')->with('success', 'Extensión manteles');
         
     }
 }
