@@ -50,7 +50,8 @@ Route::post('/formulariomanteles', [MantelesController::class, 'insertarmanteles
 Route::get('/form_rentas', function () {
     return view('form_rentas');
 })->name('form_rentas');
-Route::post('/form_rentas', [RentasController::class, 'insertarrentas'])->name('renta.insertarrentas');
+Route::post('insertarrentas', [RentasController::class, 'insertarrentas'])->name('renta.insertarrentas');
+
 
 Route::get('/lista_rentas', function () {
     return view('lista_empleado');

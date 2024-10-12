@@ -18,6 +18,13 @@ return new class extends Migration
             $table->integer('cant_motores');
             $table->smallinteger('estatus_motores');
         });
+
+        DB::table('motores')->insert([
+            'imagen_motores' => 'sin motor',
+            'color_motores' => 'sin motor',             
+            'cant_motores' => 0,                            
+            'estatus_motores' => 2,                          
+        ]);
     }
 
     /**

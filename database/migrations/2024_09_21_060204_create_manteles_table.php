@@ -19,6 +19,14 @@ return new class extends Migration
             $table->integer('cant_manteles');
             $table->smallinteger('estatus_manteles');
         });
+        
+        DB::table('manteles')->insert([
+            'imagen_manteles' => 'sin mantel',
+            'color_manteles' => 'sin mantel',             
+            'tipo_manteles' => 'sin tipo manteles',             
+            'cant_manteles' => 0,                            
+            'estatus_manteles' => 2,                          
+        ]);
     }
 
     /**

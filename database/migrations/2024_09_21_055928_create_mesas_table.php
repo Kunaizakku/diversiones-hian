@@ -19,6 +19,14 @@ return new class extends Migration
             $table->string('audiencia_mesas', 25);
             $table->smallinteger('estatus_mesas');
         });
+
+        DB::table('mesas')->insert([
+            'imagen_mesas' => 'sin mesa',
+            'forma_mesas' => 'sin mesa',             
+            'cant_mesas' => 0,     
+            'audiencia_mesas' => 'sin audiencia mesa',  
+            'estatus_mesas' => 2,                          
+        ]);
     }
 
     /**

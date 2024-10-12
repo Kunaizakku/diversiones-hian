@@ -19,6 +19,14 @@ return new class extends Migration
             $table->string('audiencia_sillas', 25);
             $table->smallinteger('estatus_sillas');
         });
+
+        DB::table('sillas')->insert([
+            'imagen_sillas' => 'sin silla',
+            'forma_sillas' => 'sin silla',             
+            'cant_sillas' => 0,     
+            'audiencia_sillas' => 'sin audiencia silla',  
+            'estatus_sillas' => 2,                          
+        ]);
     }
 
     /**
