@@ -70,10 +70,13 @@
 
 .sign {
   display: block;
-  width: 100%;
-  margin-top: 30px;
+  width: 150px;
+  font-size: 16px;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
   background-color: #2E8B57; /* Verde del sidebar para el botón de enviar */
-  padding: 0.75rem;
+  padding: 0.5rem 0.4rem ;
   text-align: center;
   color: #F0F4F8; /* Blanco claro para el texto */
   border: none;
@@ -125,4 +128,83 @@
   font-size: 0.75rem;
   line-height: 1rem;
   color: #A0AEC0;
+}
+
+.form-container-rentas {
+  width: 90%;
+  margin: 0 auto;
+  border-radius: 0.75rem;
+  margin-bottom: 40px;
+  background-color: #3B6B76; /* Un tono más apagado del verde */
+  padding: 2rem;
+  color: #F0F4F8; /* Un tono muy claro y suave para el texto */
+}
+
+
+/* Estilos para la disposición de campos en el formulario */
+.form-flex {
+  display: flex;
+ justify-content: flex-start; /* Ajusta el espacio entre los elementos */
+ align-items: center; /* Centra verticalmente los elementos */
+ margin-bottom: 2em 0;
+}
+
+/* Estilos para grupos de campos en el formulario de viáticos */
+.form-group-rentas {
+  border: 2px solid #192734;
+  padding: 20px;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+/* Estilos para la disposición de campos */
+.form-half-15, .form-half-25, .form-half-50, .form-half-75, .form-half-100 {
+  padding-right: 10px;
+}
+
+.form-half-10 {
+  width: 10%;
+}
+
+.form-half-15 {
+  width: 15%;
+}
+
+.form-half-25 {
+  width: 25%;
+}
+
+.form-half-50 {
+  width: 50%;
+}
+
+.form-half-75 {
+  width: 75%;
+}
+
+.form-half-100 {
+  width: 100%;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+ /* Estilos para checkboxes */
+ .checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.checkbox-item {
+  display: flex;
+  align-items: center;
+}
+.checkbox-item input {
+  margin-left: 10px;
+}
+
+ /* Estilos ocultar campos */
+ .hidden {
+  display: none;
 }

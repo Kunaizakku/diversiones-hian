@@ -9,7 +9,7 @@
   z-index: 99;
   transition: all 0.5s ease;
 }
-
+ 
 .sidebar.active {
   width: 240px;
 }
@@ -60,6 +60,7 @@
 
 .sidebar ul {
   margin-top: 20px;
+  margin-left: 0 !important;
 }
 
 .sidebar ul li {
@@ -281,3 +282,55 @@
     }
   }
   
+ /* Dropdown container: oculto por defecto y animación suave al abrir */
+.nav_list {
+  margin-left: 0 !important;
+  padding-left: 0rem !important;
+
+}
+
+/* Estilos personalizados */
+.bootstrap-dropdown .dropdown-toggle {
+    color: #fff !important; /* Texto blanco */
+}
+
+.bootstrap-dropdown .dropdown-menu {
+    display: none;
+    position: absolute;
+    min-width: 12rem;
+    padding: 0.8rem;
+    margin: 0;
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más definida */
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease; /* Transición suave */
+    background-color: #2E2E2E; /* Fondo oscuro para el dropdown */
+}
+
+.bootstrap-dropdown .dropdown-menu.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.bootstrap-dropdown .dropdown-item {
+    padding: 0.5rem 1.5rem;
+    font-weight: 500;
+    color: #fff !important; /* Texto blanco siempre */
+    transition: all 0.2s ease;
+}
+
+.bootstrap-dropdown .dropdown-item:hover {
+    background-color: #2E8B57; /* Fondo verde oscuro al pasar el mouse */
+    color: #fff !important; /* Texto blanco en hover */
+}
+
+.active-dropdown-toggle {
+    background-color: #2E8B57; /* Fondo verde oscuro al estar activo */
+    color: #fff !important; /* Texto blanco */
+}
+
+.content-below-dropdown {
+    transition: margin-top 0.3s ease; /* Transición suave para el cambio de margen */
+}
