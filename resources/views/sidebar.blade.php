@@ -1,141 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    {{-- Iconos --}}
+
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="{{ asset('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css') }}">
-    <script src="https://kit.fontawesome.com/69e6d6a4a5.js" crossorigin="anonymous"></script>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    {{-- CSS --}}
     <link rel="stylesheet" href="{{ asset('css/estilo.css') }}?v=1">
     <link rel="stylesheet" href="{{ asset('css/tablas.css') }}?v=1">
     <link rel="stylesheet" href="{{ asset('css/formularios.css') }}?v=1">
     <link rel="stylesheet" href="{{ asset('css/sidebar.css') }}?v=1">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> --}}
-    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> --}}
-    <!-- jQuery -->
+    <!-- Scripts -->
+    <script src="https://kit.fontawesome.com/69e6d6a4a5.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- DataTables -->
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
-  <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-    {{-- SweetAlert2 --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <title>Hian</title>
 </head>
+
 <body>
+    <div class="sidebar">
+        <div class="logo_content">
+            <div class="logo">
+                <div class="logo_name">Diversiones Hian</div>
+            </div>
+            <i class='bx bx-menu' id="btn"></i>
+        </div>
+        <ul class="nav_list">
+            <li>
+                <a href="{{ url('/') }}">
+                    <i class='bx bxs-home'></i>
+                    <span class="links_name">Inicio</span>
+                </a>
+                <span class="tooltip">Inicio</span>
+            </li>
 
-  
+            @if (session('estatus') == 1)
+            @else
+            <li>
+                <a href="{{ route('iniciarsesion') }}">
+                    <i class='bx bx-user-plus'></i>
+                    <span class="links_name">Inicio de sesión</span>
+                </a>
+                <span class="tooltip">Sesión</span>
+            </li>
+            @endif
 
-  {{-- @php
-    $PK_USUARIO = session('pk_usuario');
-    $tipo_usuario = session('nombre_tipo_usuario');
-  @endphp --}}
+            <!-- Dropdown Formularios -->
+            <div class="bootstrap-dropdown">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownFormularios" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class='bx bx-user-plus'></i>
+                        <span class="links_name">Formularios</span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownFormularios">
+                        <li><a class="dropdown-item" href="{{ route('form_sillas') }}">Form sillas</a></li>
+                        <li><a class="dropdown-item" href="{{ route('form_mesas') }}">Form mesas</a></li>
+                        <li><a class="dropdown-item" href="{{ route('form_brincolines') }}">Form brincolines</a></li>
+                        <li><a class="dropdown-item" href="{{ route('form_extenciones') }}">Form Extensiones</a></li>
+                        <li><a class="dropdown-item" href="{{ route('form_manteles') }}">Form Manteles</a></li>
+                        <li><a class="dropdown-item" href="{{ route('form_rentas') }}">Form Rentas</a></li>
+                    </ul>
+                </li>
+            </div>
 
-  <div class="sidebar">
-    <div class="logo_content">
-      <div class="logo">
-        <div class="logo_name">Diversiones Hian</div>
-      </div>
-      <i class='bx bx-menu' id="btn"></i>
+            <!-- Dropdown Listas -->
+            <div class="bootstrap-dropdown">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownListas" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class='bx bx-user-plus'></i>
+                        <span class="links_name">Listas</span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownListas">
+                        <li><a class="dropdown-item" href="{{ route('detalle_usuario') }}">Lista Usuario</a></li>
+                    </ul>
+                </li>
+            </div>
+
+            <div class="content-below-dropdown">
+                @if (session('estatus') == 1)
+                <li>
+                    <a href="{{ route('logout') }}">
+                        <i class='bx bx-user-minus'></i>
+                        <span class="links_name">Cerrar sesión</span>
+                    </a>
+                    <span class="tooltip">Sesión</span>
+                </li>
+                @endif
+            </div>
+        </ul>
     </div>
 
-    <ul class="nav_list">
+    <div class="home_content">
+        <div class="text">
+            <div class="content_main">
 
-      <li>
-        <a href="{{ url('/') }}">
-          <i class='bx bxs-home'></i>
-          <span class="links_name">Inicio</span>
-        </a>
-        <span class="tooltip">Inicio</span>
-      </li>
-      {{-- <li>
-        <a href="">
-          <i class='bx bx-user-circle'></i>
-        <span class="links_name">Perfil</span>
-        </a>
-        <span class="tooltip">Perfil</span>
-      </li> --}}
+                <script>
+                    $(document).ready(function () {
+                        let dropdownOpen = false; // Variable para rastrear el estado del dropdown
 
-      {{-- @if ($PK_USUARIO) --}}
-      {{-- @else --}}
-    @if (session('estatus')==1)
-    @else
-      <li>
-        <a href="{{ route('iniciarsesion') }}">
-            <i class='bx bx-user-plus'></i>
-          <span class="links_name">Inicio de sesión</span>
-        </a>
-        <span class="tooltip">Sesión</span>
-      </li>
-    @endif
-      <li>
-        <a href="{{ route('form_sillas') }}">
-            <i class='bx bx-user-plus'></i>
-          <span class="links_name">Form sillas</span>
-        </a>
-        <span class="tooltip">Sillas</span>
-      </li>
-      <li>
-        <a href="{{ route('form_mesas') }}">
-            <i class='bx bx-user-plus'></i>
-          <span class="links_name">Form mesas</span>
-        </a>
-        <span class="tooltip">Mesas</span>
-      </li>
-      <li>
-        <a href="{{ route('form_brincolines') }}">
-            <i class='bx bx-user-plus'></i>
-          <span class="links_name">Form brincolines</span>
-        </a>
-        <span class="tooltip">Brincolines</span>
-      </li>
-      <li>
-        <a href="{{ route('form_extenciones') }}">
-            <i class='bx bx-user-plus'></i>
-          <span class="links_name">Form Extenciones</span>
-        </a>
-        <span class="tooltip">Extenciones</span>
-      </li>
-      <li>
-        <a href="{{ route('form_manteles') }}">
-            <i class='bx bx-user-plus'></i>
-          <span class="links_name">Form Manteles</span>
-        </a>
-        <span class="tooltip">Manteles</span>
-      </li>
-      <li>
-        <a href="{{ route('form_rentas') }}">
-            <i class='bx bx-user-plus'></i>
-          <span class="links_name">Form Rentas</span>
-        </a>
-        <span class="tooltip">Rentas</span>
-      </li>
-      <li>
-        <a href="{{ route('detalle_usuario') }}">
-            <i class='bx bx-user-plus'></i>
-          <span class="links_name">Lista Usuario</span>
-        </a>
-        <span class="tooltip">Lista Usuario</span>
-      </li>
-    {{-- @endif 
-    {{-- @endif --}}
-    @if (session('estatus')==1)
-        <li>
-          <a href="{{ route('logout') }}">
-            <i class='bx bx-user-minus'></i>
-            <span class="links_name">Cerrar sesión</span>
-          </a>
-          <span class="tooltip">Sesión</span>
-        </li>
-    @endif
+                        // Manejar clic en el enlace del dropdown
+                        $('.nav-link.dropdown-toggle').on('click', function (e) {
+                            e.preventDefault(); // Evitar la acción por defecto
+                            dropdownOpen = !dropdownOpen; // Cambiar el estado
 
-    </ul>
-  </div>
+                            const dropdownMenu = $(this).siblings('.dropdown-menu');
 
-  <div class="home_content">
-    <div class="text">
-      <div class="content_main">
+                            // Añadir o quitar clase activa
+                            if (dropdownOpen) {
+                                dropdownMenu.addClass('show');
+                                $(this).addClass('active-dropdown-toggle'); // Añadir clase activa
+                            } else {
+                                dropdownMenu.removeClass('show');
+                                $(this).removeClass('active-dropdown-toggle'); // Quitar clase activa
+                            }
+                        });
+
+                        // Manejar el evento mouseleave para cerrar el dropdown
+                        $('.bootstrap-dropdown').on('mouseleave', function () {
+                            $(this).find('.dropdown-menu').removeClass('show');
+                            $(this).find('.nav-link.dropdown-toggle').removeClass('active-dropdown-toggle'); // Quitar clase activa
+                            dropdownOpen = false; // Resetear estado
+                        });
+                    });
+                </script>
+

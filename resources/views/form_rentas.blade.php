@@ -9,188 +9,108 @@
 <body>
 
   @include('sidebar')
-  <body oncopy="return false" onpaste="return false">
 
-  <div class="form-container">
+  <div class="form-container-rentas">
     <p class="title">Registro de Renta</p>
     <form action="{{ route('renta.insertarrentas') }}" method="post" enctype="multipart/form-data">
       @csrf
 
-      <!-- Campo para la fecha de entrega -->
-      <div class="input-group">
-        <label for="fecha_entrega">Fecha de Entrega</label>
-        <input type="datetime-local" name="fecha_entrega" id="fecha_entrega" required>
+      <div class="form-flex">
+        <div class="input-group form-half-50">
+          <label for="direccion">Dirección</label>
+          <input type="text" name="direccion" id="direccion" placeholder="Ingresa la dirección" maxlength="100" required>
+        </div>
+        <div class="input-group form-half-25">
+          <label for="fecha_entrega">Fecha de Entrega</label>
+          <input type="datetime-local" name="fecha_entrega" id="fecha_entrega" required>
+        </div>
+        <div class="input-group form-half-25">
+          <label for="celular">Número de Celular</label>
+          <input type="tel" name="celular" id="celular" placeholder="Ingresa el número de celular" required pattern="[0-9]{10}">
+        </div>
+        <div class="input-group form-half-25">
+          <label for="costo">Costo de la Renta</label>
+          <input type="number" name="costo" id="costo" placeholder="Ingresa el costo" min="0" step="0.01" required>
+        </div>
       </div>
 
-      <!-- Campo para el número de celular -->
+      <!-- Checkboxes para Sillas, Mesas, Manteles y Brincolines -->
       <div class="input-group">
-        <label for="celular">Número de Celular</label>
-        <input type="tel" name="celular" id="celular" placeholder="Ingresa el número de celular" required pattern="[0-9]{10}">
+        <label for="opciones_renta">Selecciona los elementos de renta</label>
+        <div class="checkbox-group">
+          <div class="checkbox-item">
+            <label for="sillas">Sillas:</label>
+            <input type="checkbox" id="sillas" name="opciones_renta[]" value="sillas">
+          </div>
+          <div class="checkbox-item">
+            <label for="mesas">Mesas</label>
+            <input type="checkbox" id="mesas" name="opciones_renta[]" value="mesas">
+          </div>
+          <div class="checkbox-item">
+            <label for="manteles">Manteles</label>
+            <input type="checkbox" id="manteles" name="opciones_renta[]" value="manteles">
+          </div>
+          <div class="checkbox-item">
+            <label for="brincolines">Brincolines</label>
+            <input type="checkbox" id="brincolines" name="opciones_renta[]" value="brincolines">
+          </div>
+        </div>
       </div>
 
-      <!-- Campo para la dirección -->
-      <div class="input-group">
-        <label for="direccion">Dirección</label>
-        <input type="text" name="direccion" id="direccion" placeholder="Ingresa la dirección" maxlength="100" required>
-      </div>
-
-      <!-- Campo para el costo de la renta -->
-      <div class="input-group">
-        <label for="costo">Costo de la Renta</label>
-        <input type="number" name="costo" id="costo" placeholder="Ingresa el costo" min="0" step="0.01" required>
-      </div>
-
-      <!-- SILLAS -->
-      <div class="input-group">
-        <h1 for="">Sillas</h1>
-        <select name="fk_sillas" id="fk_sillas" required>
-            @php
-                    use App\Models\Sillas;
-                    $datos_sillas = Sillas::select('sillas.*')->wherein('estatus_sillas', [1,2])->get();
-            @endphp
-
-            @foreach ($datos_sillas as $dato)
-            <option value="{{$dato->pk_sillas}}">{{$dato->forma_sillas}}</option>
-            @endforeach
-        </select>
-        <label for="">cantidad de sillas</label>
+      <!-- Campos ocultos para Sillas -->
+      <div id="sillas_inputs" class="hidden input-group">
+        <h2>Sillas</h2>
+        <label for="cant_sillas_renta">Cantidad de sillas</label>
         <input type="number" name="cant_sillas_renta" id="cant_sillas_renta" value="0">
-        <label for="">Audiencia</label>
-        <select name="audiencia_sillas_renta" id="" >
-        <option value="">Selecciona una opción</option>
-            @php
-                    $datos_audiencia_sillas = Sillas::select('sillas.*')->wherein('estatus_sillas', [1])->get();
-            @endphp
-
-            @foreach ($datos_audiencia_sillas as $dato)
-            <option value="{{$dato->pk_sillas}}">{{$dato->audiencia_sillas}}</option>
-            @endforeach
+        <label for="audencia_sillas_renta">Audiencia</label>
+        <select name="audencia_sillas_renta">
+          <option value="">Selecciona una opción</option>
         </select>
       </div>
 
-      <!-- MESAS -->
-      <div class="input-group">
-        <h1 for="">Mesas</h1>
-        <select name="fk_mesas" id="fk_mesas" required>
-            @php
-                    use App\Models\Mesas;
-                    $datos_mesas = Mesas::select('mesas.*')->wherein('estatus_mesas', [1,2])->get();
-            @endphp
-
-            @foreach ($datos_mesas as $dato)
-            <option value="{{$dato->pk_mesas}}">{{$dato->forma_mesas}}</option>
-            @endforeach
-        </select>
-        <label for="">cantidad de mesas</label>
+      <!-- Campos ocultos para Mesas -->
+      <div id="mesas_inputs" class="hidden input-group">
+        <h2>Mesas</h2>
+        <label for="cant_mesas_renta">Cantidad de mesas</label>
         <input type="number" name="cant_mesas_renta" id="cant_mesas_renta" value="0">
-        <label for="">Audiencia</label>
-        <select name="audiencia_mesas_renta" id="audiencia_mesas_renta" >
-        <option value="">Selecciona una opción</option>
-            @php
-                    $datos_audiencia_mesas = Mesas::select('mesas.*')->wherein('estatus_mesas', [1])->get();
-            @endphp
-
-            @foreach ($datos_audiencia_mesas as $dato)
-            <option value="{{$dato->pk_mesas}}">{{$dato->audiencia_mesas}}</option>
-            @endforeach
+        <label for="audencia_mesas_renta">Audiencia</label>
+        <select name="audencia_mesas_renta">
+          <option value="">Selecciona una opción</option>
         </select>
       </div>
 
-      <!-- MANTELES -->
-      <div class="input-group">
-        <h1 for="">Manteles</h1>
-        <select name="fk_manteles" id="fk_manteles" required>
-            @php
-                    use App\Models\Manteles;
-                    $datos_manteles = Manteles::select('manteles.*')->wherein('estatus_manteles', [1,2])->get();
-            @endphp
-
-            @foreach ($datos_manteles as $dato)
-            <option value="{{$dato->pk_manteles}}">{{$dato->color_manteles}}</option>
-            @endforeach
-        </select>
-        <label for="">cantidad de manteles</label>
+      <!-- Campos ocultos para Manteles -->
+      <div id="manteles_inputs" class="hidden input-group">
+        <h2>Manteles</h2>
+        <label for="cant_manteles_renta">Cantidad de manteles</label>
         <input type="number" name="cant_manteles_renta" id="cant_manteles_renta" value="0">
-        <label for="">tipo de mantel</label>
-        <select name="tipo_manteles_renta" id="tipo_manteles_renta">
-        <option value="">Selecciona una opción</option>
-            @php
-                    $datos_tipo_manteles = Manteles::select('manteles.*')->wherein('estatus_manteles', [1])->get();
-            @endphp
-
-            @foreach ($datos_tipo_manteles as $dato)
-            <option value="{{$dato->pk_manteles}}}}">{{$dato->tipo_manteles}}</option>
-            @endforeach
-        </select>
-
-      <!-- BRNCOLINES -->
-      <div class="input-group">
-        <h1 for="">Brincolines</h1>
-        <select name="fk_brincolines" id="fk_brincolines" required>
-            @php
-                    use App\Models\Brincolines;
-                    $datos_brincolines = Brincolines::select('brincolines.*')->wherein('estatus_brincolines', [1,2])->get();
-            @endphp
-
-            @foreach ($datos_brincolines as $dato)
-            <option value="{{$dato->pk_brincolines}}">{{$dato->nombre_brincolines}}</option>
-            @endforeach
-        </select>
-        <label for="">categoria de brincolines</label>
-        <select name="cat_brincolines_renta" id="cat_brincolines_renta">
-        <option value="">Selecciona una opción</option>
-            @php
-                    $datos_categoria_brincolines = Brincolines::select('brincolines.*')->wherein('estatus_brincolines', [1])->get();
-            @endphp
-
-            @foreach ($datos_categoria_brincolines as $dato)
-            <option value="{{$dato->pk_brincolines}}">{{$dato->cat_brincolines}}</option>
-            @endforeach
-        </select>
-        <label for="">Tamano brincolin</label>
-        <select name="tam_brincolines_renta" id="tam_brincolines_renta" >
-        <option value="">Selecciona una opción</option>
-            @php
-                    $datos_tamano_brincolines = Brincolines::select('brincolines.*')->wherein('estatus_brincolines', [1])->get();
-            @endphp
-
-            @foreach ($datos_tamano_brincolines as $dato)
-            <option value="{{$dato->pk_brincolines}}">{{$dato->tam_brincolines}}</option>
-            @endforeach
+        <label for="tipo_manteles_renta">Tipo de mantel</label>
+        <select name="tipo_manteles_renta">
+          <option value="">Selecciona una opción</option>
         </select>
       </div>
 
-      <!-- MOTORES -->
-      <div class="input-group">
-        <h1 for="">Motores</h1>
-        <select name="fk_motores" id="fk_motores" required>
-            @php
-                    use App\Models\Motores;
-                    $datos_motores = Motores::select('motores.*')->wherein('estatus_motores', [1,2])->get();
-            @endphp
-
-            @foreach ($datos_motores as $dato)
-            <option value="{{$dato->pk_motores}}">{{$dato->color_motores}}</option>
-            @endforeach
+      <!-- Campos ocultos para Brincolines -->
+      <div id="brincolines_inputs" class="hidden input-group">
+        <h2>Brincolines</h2>
+        <label for="categoria_brincolines_renta">Categoría de brincolines</label>
+        <select name="categoria_brincolines_renta">
+          <option value="">Selecciona una opción</option>
+        </select>
+        <label for="tamaño_brincolines_renta">Tamaño del brincolin</label>
+        <select name="tamaño_brincolines_renta">
+          <option value="">Selecciona una opción</option>
+        </select>
+        <label for="motores_brincolines_renta">Motores</label>
+        <select name="motores_brincolines_renta">
+          <option value="">Selecciona una opción</option>
+        </select>
+        <label for="extenciones_brincolines_renta">Extenciones para el brincolin</label>
+        <select name="extenciones_brincolines_renta">
+          <option value="">Selecciona una opción</option>
         </select>
       </div>
 
-      <!-- EXTENCIONES -->
-      <div class="input-group">
-        <h1 for="">Extenciones</h1>
-        <select name="fk_extenciones" id="fk_extenciones" required>
-            @php
-                    use App\Models\Extenciones;
-                    $datos_Extenciones = Extenciones::select('extenciones.*')->wherein('estatus_extenciones', [1,2])->get();
-            @endphp
-
-            @foreach ($datos_Extenciones as $dato)
-            <option value="{{$dato->pk_extenciones}}">{{$dato->nombre_extenciones}}</option>
-            @endforeach
-        </select>
-      </div>
-
-      <!-- Botón para enviar el formulario -->
       <div class="input-group">
         <button class="sign">Registrar Renta</button>
       </div>
@@ -199,6 +119,16 @@
   </div>
 
   @include('fooder')
+
+  <script>
+    // Mostrar/ocultar campos basados en los checkboxes
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', function() {
+        document.getElementById(`${this.id}_inputs`).classList.toggle('hidden', !this.checked);
+      });
+    });
+  </script>
 
 </body>
 </html>
