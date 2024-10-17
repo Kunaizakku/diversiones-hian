@@ -91,7 +91,6 @@
     </script>
 
       </form>
-      <p class="signup">¿Aun no tienes una cuenta con nosotros?, <a href="{{ route('registro') }}">Registrate aquí</a>.</p>
     </div>
 
     @include('fooder')

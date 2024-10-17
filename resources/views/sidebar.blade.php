@@ -75,9 +75,10 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownListas" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class='bx bx-user-plus'></i>
-                        <span class="links_name">Listas</span>
+                        <span class="links_name">Usuarios</span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownListas">
+                        <li><a class="dropdown-item" href="{{ route('registro') }}">Form Usuario</a></li>
                         <li><a class="dropdown-item" href="{{ route('detalle_usuario') }}">Lista Usuario</a></li>
                     </ul>
                 </li>
