@@ -21,6 +21,9 @@ Route::get('/form_sillas', function () {
 })->name('form_sillas');
 Route::post('/formulariosillas', [SillasController::class, 'insertarsilla'])->name('silla.insertarsilla');
 
+Route::get('/lista_sillas', function () {
+    return view('lista_sillas'); // Aquí se retorna la vista
+})->name('lista_sillas');
 
 //mesas
 Route::get('/form_mesas', function () {
@@ -28,11 +31,19 @@ Route::get('/form_mesas', function () {
 })->name('form_mesas');
 Route::post('/formulariomesas', [MesasController::class, 'insertarmesa'])->name('mesa.insertarmesa');
 
+Route::get('/lista_mesas', function () {
+    return view('lista_mesas'); // Aquí se retorna la vista
+})->name('lista_mesas');
+
 //brincolines
 Route::get('/form_brincolines', function () {
     return view('form_brincolines'); // Aquí se retorna la vista
 })->name('form_brincolines');
 Route::post('/formulariobrincolines', [BrincolinesController::class, 'insertarbrincolin'])->name('brincolin.insertarbrincolin');
+
+Route::get('/lista_brincolines', function () {
+    return view('lista_brincolines'); // Aquí se retorna la vista
+})->name('lista_brincolines');
 
 // Extenciones
 Route::get('/form_extenciones', function () {
@@ -40,11 +51,19 @@ Route::get('/form_extenciones', function () {
 })->name('form_extenciones');
 Route::post('/formularioextenciones', [ExtencionesController::class, 'insertarextenciones'])->name('extencion.insertarextenciones');
 
+Route::get('/lista_extenciones', function () {
+    return view('lista_extenciones'); // Aquí se retorna la vista
+})->name('lista_extenciones');
+
 // Manteles
 Route::get('/form_manteles', function () {
     return view('form_manteles');
 })->name('form_manteles');
 Route::post('/formulariomanteles', [MantelesController::class, 'insertarmanteles'])->name('mantel.insertarmanteles');
+
+Route::get('/lista_manteles', function () {
+    return view('lista_manteles'); // Aquí se retorna la vista
+})->name('lista_manteles');
 
 // Rentas
 Route::get('/form_rentas', function () {
@@ -52,10 +71,12 @@ Route::get('/form_rentas', function () {
 })->name('form_rentas');
 Route::post('insertarrentas', [RentasController::class, 'insertarrentas'])->name('renta.insertarrentas');
 
-
 Route::get('/lista_rentas', function () {
-    return view('lista_empleado');
+    return view('lista_rentas'); // Aquí se retorna la vista
 })->name('lista_rentas');
+
+
+
 //usuario/login
 Route::get('/iniciarsesion', function () {
     return view('login');
@@ -77,6 +98,10 @@ Route::get('/registro', function () {
         return view('registro');
     }
 })->name('registro');
+
+// Route::get('/lista_empleados', function () {
+//     return view('lista_empleado');
+// })->name('lista_empleados');
 
 Route::post('/registroUsuario', [UsuarioController::class, 'insertar'])->name('usuario.insertar');
 

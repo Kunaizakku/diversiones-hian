@@ -1,0 +1,113 @@
+/* Configuración para dividir en dos columnas */
+.main-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* Estilos para las columnas del calendario y la tabla */
+.calendar-container, .right-container {
+    width: 50%;
+    padding: 20px;
+}
+
+/* Estilos del calendario */
+.calendar-container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#calendar {
+    text-align: center;
+}
+
+#calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#monthAndYear {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.calendar-container button {
+    background-color: #2E8B57;;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.calendar-container button:hover {
+    background-color: #2E8B57;;
+}
+
+.calendar-container table {
+    width: 100%;
+    border-collapse:collapse;
+}
+
+.calendar-container th, td {
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.calendar-container thead th {
+    background-color: #2E8B57;;
+    color: white;
+}
+
+.calendar-container tbody td {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+}
+
+.calendar-container tbody td:hover {
+    background-color: #e1f5fe;
+}
+
+.calendar-container tbody td.active {
+    background-color: #2E8B57;  ;
+    color: white;
+}
+
+#calendar-footer {
+    margin-top: 20px;
+}
+
+#selectedDate {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #f9f9f9;
+}
+
+/* Media Queries para Responsividad */
+@media (max-width: 1024px) {
+    .main-container {
+        flex-direction: column; /* Cambia la dirección a columna en pantallas más pequeñas */
+    }
+    .calendar-container, .right-container {
+        width: 100%; /* Cada contenedor ocupa el 100% del ancho */
+        padding: 10px; /* Ajusta el padding para pantallas pequeñas */
+    }
+}
+
+/* Opcional: Mejora de la tabla para pantallas pequeñas */
+@media (max-width: 768px) {
+    .calendar-container table, .calendar-container th, .calendar-container td {
+        font-size: 12px; /* Reduce el tamaño de la fuente */
+        width: 100%;
+    }
+    .calendar-container th, .calendar-container td {
+        padding: 8px; /* Reduce el padding para ajustar mejor el contenido */
+    }
+}
