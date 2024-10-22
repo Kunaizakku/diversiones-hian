@@ -187,6 +187,8 @@
 }
 
 .input-group {
+  display: flex;
+  flex-direction: column;
   margin-bottom: 15px;
 }
 
@@ -208,3 +210,10 @@
  .hidden {
   display: none;
 }
+
+
+.input-group h2{
+  display: flex;
+}
+
+

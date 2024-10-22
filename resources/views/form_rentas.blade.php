@@ -36,7 +36,7 @@
 
       <!-- Checkboxes para Sillas, Mesas, Manteles y Brincolines -->
       <div class="input-group">
-        <label for="opciones_renta">Selecciona los elementos de renta</label>
+        <label for="opciones_renta">Selecciona los elementos de renta - &nbsp;</label>
         <div class="checkbox-group">
           <div class="checkbox-item">
             <label for="sillas">Sillas:</label>
@@ -116,19 +116,30 @@
       </div>
 
     </form>
-  </div>
 
-  @include('fooder')
+  </div>
 
   <script>
     // Mostrar/ocultar campos basados en los checkboxes
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    
     checkboxes.forEach(checkbox => {
       checkbox.addEventListener('change', function() {
-        document.getElementById(`${this.id}_inputs`).classList.toggle('hidden', !this.checked);
+        const relatedInputs = document.getElementById(`${this.id}_inputs`);
+        if (relatedInputs) {
+          relatedInputs.classList.toggle('hidden', !this.checked);
+        }
       });
     });
   </script>
+  <style>
+    .hidden {
+  display: none;
+}
+  </style>
+
+  @include('fooder')
+  
 
 </body>
 </html>

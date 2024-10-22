@@ -177,7 +177,7 @@
     position: absolute;
     min-height: 100%; /* Para asegurar que al menos ocupe el 100% de la altura de la ventana */
     width: calc(100% - 78px);
-    left: 78px;
+    left: 40px;
     box-shadow: 0 5px 10px rgba(0,0,0,0.2px);
     transition: all 0.5s ease;
   }
@@ -298,7 +298,7 @@
     display: none;
     position: absolute;
     min-width: 12rem;
-    padding: 0.8rem;
+    padding: 1rem;
     margin: 0;
     border-radius: 8px; /* Bordes redondeados */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más definida */
@@ -334,3 +334,5 @@
 .content-below-dropdown {
     transition: margin-top 0.3s ease; /* Transición suave para el cambio de margen */
 }
+
+

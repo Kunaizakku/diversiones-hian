@@ -9,8 +9,6 @@
 <body>
 
   @include('sidebar')
-  @include('mensaje')
-
   
   <div class="form-container">
       <p class="title">Registro de Extensiones</p>

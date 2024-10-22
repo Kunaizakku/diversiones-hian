@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ asset('css/estilo.css') }}?v=1">
     <link rel="stylesheet" href="{{ asset('css/tablas.css') }}?v=1">
     <link rel="stylesheet" href="{{ asset('css/formularios.css') }}?v=1">
+    <link rel="stylesheet" href="{{ asset('css/calendario.css') }}?v=1">
     <link rel="stylesheet" href="{{ asset('css/sidebar.css') }}?v=1">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -70,7 +71,25 @@
                 </li>
             </div>
 
-            <!-- Dropdown Listas -->
+             <!-- Dropdown Listas -->
+             <div class="bootstrap-dropdown">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownListas" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class='bx bx-user-plus'></i>
+                        <span class="links_name">Listas</span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownListas">
+                        <li><a class="dropdown-item" href="{{ route('lista_sillas') }}">Lista Silla</a></li>
+                        <li><a class="dropdown-item" href="{{ route('lista_mesas') }}">Lista Mesas</a></li>
+                        <li><a class="dropdown-item" href="{{ route('lista_brincolines') }}">Lista Brincolines</a></li>
+                        <li><a class="dropdown-item" href="{{ route('lista_extenciones') }}">Lista Extenciones</a></li>
+                        <li><a class="dropdown-item" href="{{ route('lista_manteles') }}">Lista Manteles</a></li>
+                        <li><a class="dropdown-item" href="{{ route('lista_rentas') }}">Lista Rentas</a></li>
+                    </ul>
+                </li>
+            </div>
+
+            <!-- Dropdown Usuarios -->
             <div class="bootstrap-dropdown">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownListas" role="button" data-bs-toggle="dropdown" aria-expanded="false">
