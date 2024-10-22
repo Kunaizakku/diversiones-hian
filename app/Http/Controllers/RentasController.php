@@ -38,4 +38,15 @@ class RentasController extends Controller
         // Redireccionar o devolver respuesta
         return redirect('/form_rentas')->with('success', 'Rnta registrada agregada');
     }
+
+
+    //pruebas////////////////////////
+        public function getRentas($pk_rentas)
+        {
+            
+            $rentas = Rentas::whereDate('fecha_entrega', $pk_rentas)->get();
+
+            return response()->json($rentas);
+        }
+
 }

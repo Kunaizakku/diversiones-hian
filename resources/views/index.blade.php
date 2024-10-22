@@ -150,23 +150,56 @@
         }
     
         // Función para seleccionar una fecha
-        function selectDate(cell, year, month, date) {
-            // Remover clase 'active' de la celda previamente seleccionada
-            const activeCell = document.querySelector(".active");
-            if (activeCell) {
-                activeCell.classList.remove("active");
-            }
-    
-            // Añadir clase 'active' a la nueva celda seleccionada
-            cell.classList.add("active");
-    
-            // Actualizar la fecha seleccionada y el valor del input
-            selectedDate = new Date(year, month, date);
-            selectedDateInput.value = selectedDate.toLocaleDateString();
+    // Función para seleccionar una fecha
+    function selectDate(cell, year, month, date) {
+        // Remover clase 'active' de la celda previamente seleccionada
+        const activeCell = document.querySelector(".active");
+        if (activeCell) {
+            activeCell.classList.remove("active");
         }
-    
-        // Generar el calendario al cargar la página con la fecha de hoy
-        generateCalendar(currentMonth, currentYear);
+
+        // Añadir clase 'active' a la nueva celda seleccionada
+        cell.classList.add("active");
+
+        // Actualizar la fecha seleccionada y el valor del input
+        selectedDate = new Date(year, month, date);
+        const formattedDate = selectedDate.toISOString().split('T')[0]; // Formato YYYY-MM-DD
+        selectedDateInput.value = selectedDate.toLocaleDateString();
+        console.log("Fecha seleccionada:", formattedDate);
+        
+
+        // Llamada AJAX para obtener las rentas de la fecha seleccionada
+        fetch(`/get-rentas/${formattedDate}`)
+            .then(response => response.json())
+            .then(data => updateEmployeeTable(data))
+            .catch(error => console.error('Error:', error));
+    }
+
+    // Función para actualizar la tabla de rentas con los datos recibidos
+    function updateEmployeeTable(rentas) {
+        const tbody = document.querySelector("#tabla-empleados tbody");
+        tbody.innerHTML = "";  // Limpiar tabla
+
+        if (rentas.length === 0) {
+            tbody.innerHTML = "<tr><td colspan='4'>No hay rentas para esta fecha</td></tr>";
+        } else {
+            rentas.forEach(renta => {
+                const row = document.createElement("tr");
+
+                row.innerHTML = `
+                    <td>${renta.nombre_empleado}</td>
+                    <td>${renta.direccion}</td>
+                    <td>${renta.estatus}</td>
+                    <td><a href="#"><i class="bi bi-eye" title="Ver más detalles"></i></a></td>
+                `;
+
+                tbody.appendChild(row);
+            });
+        }
+    }
+
+    // Generar el calendario al cargar la página con la fecha de hoy
+    generateCalendar(currentMonth, currentYear);
     </script>
     
     

@@ -112,3 +112,7 @@ Route::get('/logout', [UsuarioController::class, 'logout'])->name('logout');
 Route::get('/lista_usuario', [UsuarioController::class,'detalle_usuario'])->name('detalle_usuario');
 
 
+/////pruebas
+Route::get('/get-rentas/{pk_rentas}', [RentasController::class, 'getRentas']);
+
+
