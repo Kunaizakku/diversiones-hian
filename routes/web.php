@@ -76,6 +76,7 @@ Route::get('/lista_rentas', function () {
 })->name('lista_rentas');
 
 
+Route::get('/renta/{pk_rentas}', [RentasController::class, 'ver_renta'])->name('renta.ver_renta');
 
 //usuario/login
 Route::get('/iniciarsesion', function () {

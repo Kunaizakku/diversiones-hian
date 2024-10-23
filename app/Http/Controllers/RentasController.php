@@ -39,6 +39,26 @@ class RentasController extends Controller
         return redirect('/form_rentas')->with('success', 'Rnta registrada agregada');
     }
 
+    public function ver_renta($pk_rentas)
+{
+    
+    $ver_renta = Rentas::findOrFail($pk_rentas);
+
+    $dato_renta = Rentas::join('sillas', 'sillas.pk_sillas', '=', 'rentas.fk_sillas')
+        ->join('mesas', 'mesas.pk_mesas', '=', 'rentas.fk_mesas')
+        ->join('manteles', 'manteles.pk_manteles', '=', 'rentas.fk_manteles')
+        ->join('brincolines', 'brincolines.pk_brincolines', '=', 'rentas.fk_brincolines')
+        ->join('motores', 'motores.pk_motores', '=', 'rentas.fk_motores')
+        ->join('extenciones', 'extenciones.pk_extenciones', '=', 'rentas.fk_extenciones')
+        ->where('rentas.pk_rentas', '=', $pk_rentas)  // esto lo filrta ya que compara el pk de la renta y la que se busco al precionar el boton en la lista de rentas
+        ->where('rentas.estatus_renta', '=', 1) 
+        ->first();  // recuerda qeu el first es apra cuando quieres ver 1 solo y no varios
+
+    return view('ver_renta', compact('ver_renta', 'dato_renta'));
+}
+
+
+
 
     //pruebas////////////////////////
         public function getRentas($pk_rentas)
@@ -46,7 +66,7 @@ class RentasController extends Controller
             
             $rentas = Rentas::whereDate('fecha_entrega', $pk_rentas)->get();
 
-            return response()->json($rentas);
+            return response()->json($rentas, );
         }
 
 }

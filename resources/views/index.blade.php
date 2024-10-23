@@ -177,26 +177,31 @@
 
     // Función para actualizar la tabla de rentas con los datos recibidos
     function updateEmployeeTable(rentas) {
-        const tbody = document.querySelector("#tabla-empleados tbody");
-        tbody.innerHTML = "";  // Limpiar tabla
+    const tbody = document.querySelector("#tabla-empleados tbody");
+    tbody.innerHTML = "";  // Limpiar tabla
 
-        if (rentas.length === 0) {
-            tbody.innerHTML = "<tr><td colspan='4'>No hay rentas para esta fecha</td></tr>";
-        } else {
-            rentas.forEach(renta => {
-                const row = document.createElement("tr");
+    if (rentas.length === 0) {
+        tbody.innerHTML = "<tr><td colspan='4'>No hay rentas para esta fecha</td></tr>";
+    } else {
+        rentas.forEach(renta => {
+            const row = document.createElement("tr");
 
-                row.innerHTML = `
-                    <td>${renta.fecha_entrega}</td>
-                    <td>${renta.direccion}</td>
-                    <td>${renta.celular}</td>
-                    <td><a href="#"><i class="bi bi-eye" title="Ver más detalles"></i></a></td>
-                `;
+            // Crear la URL para ver la renta usando el pk_rentas
+            //EN SCRIPT ES DIFERENTE Y SE Cpone primero esto de abajo *(es el remplazo de el  route (ver clip y esas chingaderas))
+            const viewRentaUrl = `/renta/${renta.pk_rentas}`; // Ruta a la que deseas redirigir
+                                            //esta variable renta es de la de el getrentas, por que de ahi jalas todas las rentas
+            row.innerHTML = `
+                <td>${renta.fecha_entrega}</td>
+                <td>${renta.direccion}</td>
+                <td>${renta.celular}</td>
+                <td><a href="${viewRentaUrl}"><i class="bi bi-eye" title="Ver más detalles"></i></a></td>
+            `;
 
-                tbody.appendChild(row);
-            });
-        }
+            tbody.appendChild(row);
+        });
     }
+}
+
 
     // Generar el calendario al cargar la página con la fecha de hoy
     generateCalendar(currentMonth, currentYear);
