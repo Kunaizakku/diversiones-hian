@@ -46,9 +46,9 @@
                 <table id="tabla-empleados">
                     <thead>
                         <tr>
-                            <th>Nom empleado</th>
+                            <th>fecha entrega</th>
                             <th>Direccion</th>
-                            <th>Estatus</th>
+                            <th>Celular</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -187,9 +187,9 @@
                 const row = document.createElement("tr");
 
                 row.innerHTML = `
-                    <td>${renta.nombre_empleado}</td>
+                    <td>${renta.fecha_entrega}</td>
                     <td>${renta.direccion}</td>
-                    <td>${renta.estatus}</td>
+                    <td>${renta.celular}</td>
                     <td><a href="#"><i class="bi bi-eye" title="Ver más detalles"></i></a></td>
                 `;
 
