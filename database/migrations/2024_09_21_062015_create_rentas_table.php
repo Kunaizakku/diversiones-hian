@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('rentas', function (Blueprint $table) {
             $table->id('pk_rentas')->autoIncrement();
-            $table->datetime('fecha_entrega');
-            $table->integer('celular');
+            $table->date('fecha_entrega');
+            $table->string('celular', 10);
             $table->string('direccion', 100);
             $table->integer('costo');
             // $table->unsignedBigInteger('fk_inventario');
