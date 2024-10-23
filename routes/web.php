@@ -75,6 +75,8 @@ Route::get('/lista_rentas', function () {
     return view('lista_rentas'); // Aquí se retorna la vista
 })->name('lista_rentas');
 
+Route::get('/get-rentas/{pk_rentas}', [RentasController::class, 'verRentasCalendario']);
+
 
 Route::get('/renta/{pk_rentas}', [RentasController::class, 'ver_renta'])->name('renta.ver_renta');
 
@@ -114,6 +116,6 @@ Route::get('/lista_usuario', [UsuarioController::class,'detalle_usuario'])->name
 
 
 /////pruebas
-Route::get('/get-rentas/{pk_rentas}', [RentasController::class, 'getRentas']);
+
 
 
