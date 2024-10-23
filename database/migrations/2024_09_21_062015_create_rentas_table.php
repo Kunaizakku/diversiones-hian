@@ -36,8 +36,8 @@ return new class extends Migration
 
             $table->unsignedBigInteger('fk_brincolines');
             $table->foreign('fk_brincolines')->references('pk_brincolines')->on('brincolines');
-            $table->string('cat_brincolines_renta', 100)->nullable();
-            $table->string('tam_brincolines_renta', 100)->nullable();
+            // $table->string('cat_brincolines_renta', 100)->nullable();
+            // $table->string('tam_brincolines_renta', 100)->nullable();
 
             $table->unsignedBigInteger('fk_motores');
             $table->foreign('fk_motores')->references('pk_motores')->on('motores');
