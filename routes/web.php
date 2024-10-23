@@ -76,6 +76,7 @@ Route::get('/lista_rentas', function () {
 })->name('lista_rentas');
 
 
+Route::get('/renta/{pk_rentas}', [RentasController::class, 'ver_renta'])->name('renta.ver_renta');
 
 //usuario/login
 Route::get('/iniciarsesion', function () {
@@ -110,5 +111,9 @@ Route::match(['get', 'post'], '/login', [UsuarioController::class, 'login'])->na
 Route::get('/logout', [UsuarioController::class, 'logout'])->name('logout');
 
 Route::get('/lista_usuario', [UsuarioController::class,'detalle_usuario'])->name('detalle_usuario');
+
+
+/////pruebas
+Route::get('/get-rentas/{pk_rentas}', [RentasController::class, 'getRentas']);
 
 
