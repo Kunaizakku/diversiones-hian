@@ -190,61 +190,61 @@
         const selectedDateInput = document.getElementById("selectedDate");
         const prevMonthBtn = document.getElementById("prevMonth");
         const nextMonthBtn = document.getElementById("nextMonth");
-
+    
         let date = new Date();
         let selectedCell; // Variable para almacenar la celda seleccionada
         
         function renderCalendar() {
             const month = date.getMonth();
             const year = date.getFullYear();
-
+    
             // Obtener el primer día del mes
             const firstDay = new Date(year, month, 1);
             // Número de días en el mes
             const totalDays = new Date(year, month + 1, 0).getDate();
             // Obtener el último día del mes
             const lastDay = new Date(year, month, totalDays).getDay();
-
+    
             // Reiniciar el calendario
             calendar.innerHTML = '';
-
+    
             // Agregar los espacios en blanco para el primer día
             let row = document.createElement('tr');
             for (let i = 0; i < firstDay.getDay(); i++) {
                 let cell = document.createElement('td');
                 row.appendChild(cell);
             }
-
+    
             // Agregar los días del mes
             for (let day = 1; day <= totalDays; day++) {
                 const cell = document.createElement('td');
                 cell.textContent = day;
                 cell.addEventListener('click', () => selectDate(day, cell));
                 row.appendChild(cell);
-
+    
                 // Si el día es sábado, agregar una nueva fila
                 if ((firstDay.getDay() + day) % 7 === 0) {
                     calendar.appendChild(row);
                     row = document.createElement('tr');
                 }
             }
-
+    
             // Agregar espacios en blanco para el final del mes
             for (let i = lastDay + 1; i < 7; i++) {
                 let cell = document.createElement('td');
                 row.appendChild(cell);
             }
-
+    
             calendar.appendChild(row);
             monthAndYear.textContent = `${date.toLocaleString('default', { month: 'long' })} ${year}`;
         }
-
+    
         function selectDate(day, cell) {
             const month = date.getMonth() + 1;
             const year = date.getFullYear();
             const formattedDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
             selectedDateInput.value = formattedDate;
-
+    
             // Desmarcar la celda previamente seleccionada
             if (selectedCell) {
                 selectedCell.classList.remove('active');
@@ -252,7 +252,7 @@
             // Marcar la nueva celda seleccionada
             cell.classList.add('active');
             selectedCell = cell;
-
+    
             // Hacer la solicitud AJAX
             fetch(`/get-rentas/${formattedDate}`)
                 .then(response => response.json())
@@ -264,7 +264,7 @@
                     // Crear la URL para ver la renta usando el pk_rentas dentro del ciclo forEach
                     data.forEach(renta => {
                         const viewRentaUrl = `/renta/${renta.pk_rentas}`; // Ruta a la que deseas redirigir
-
+    
                         const row = `
                             <tr>
                                 <td>${renta.fecha_entrega}</td>
@@ -279,26 +279,32 @@
                 })
                 .catch(error => console.error('Error:', error)); // Manejo de errores
         }
-
-
-
-function setTodayDate() {
-    const today = new Date();
-    const day = String(today.getDate()).padStart(2, '0'); // Día de dos dígitos
-    const month = String(today.getMonth() + 1).padStart(2, '0'); // Mes de dos dígitos
-    const year = today.getFullYear();
-    selectedDateInput.value = `${year}/${month}/${day}`; // Formato: año/mes/día
-}
-
-
+    
+        function setTodayDate() {
+            const today = new Date();
+            const day = String(today.getDate()).padStart(2, '0'); // Día de dos dígitos
+            const month = String(today.getMonth() + 1).padStart(2, '0'); // Mes de dos dígitos
+            const year = today.getFullYear();
+            selectedDateInput.value = `${year}/${month}/${day}`; // Formato: año/mes/día
+        }
+    
+        // Botones para cambiar de mes
+        prevMonthBtn.addEventListener('click', () => {
+            date.setMonth(date.getMonth() - 1);
+            renderCalendar();
+        });
+    
+        nextMonthBtn.addEventListener('click', () => {
+            date.setMonth(date.getMonth() + 1);
+            renderCalendar();
+        });
+    
         // Inicializar el calendario y establecer la fecha de hoy
         renderCalendar();
         setTodayDate(); // Llama a la función para establecer la fecha de hoy
-
-
-        
-
+    
     </script>
+    
     @include('fooder')
 </body>
 </html>
