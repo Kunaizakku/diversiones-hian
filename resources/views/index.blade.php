@@ -10,7 +10,7 @@
 .main-container {
     display: flex; /* Flexbox para alinear el calendario y la tabla */
     width: 100%;
-    height: calc(100vh - 40px); /* Altura del contenedor */
+    /* height: calc(100vh - 40px); Altura del contenedor  */
 }
 
 .calendar-container {
@@ -240,44 +240,36 @@
         }
 
         function selectDate(day, cell) {
-            const month = date.getMonth() + 1; // Se suma 1 porque getMonth() es 0-indexed
-            const year = date.getFullYear();
-            const selectedDate = `${day}/${month}/${year}`;
-            selectedDateInput.value = selectedDate;
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Se suma 1 y se asegura que el mes sea siempre de dos dígitos
+    const year = date.getFullYear();
+    const formattedDay = String(day).padStart(2, '0'); // Asegura que el día también sea de dos dígitos
+    const selectedDate = `${year}/${month}/${formattedDay}`; // Formato: año/mes/día
+    selectedDateInput.value = selectedDate;
 
-            // Desmarcar la celda previamente seleccionada
-            if (selectedCell) {
-                selectedCell.classList.remove('active');
-            }
+    // Desmarcar la celda previamente seleccionada
+    if (selectedCell) {
+        selectedCell.classList.remove('active');
+    }
 
-            // Marcar la nueva celda seleccionada
-            cell.classList.add('active');
-            selectedCell = cell; // Actualizar la celda seleccionada
+    // Marcar la nueva celda seleccionada
+    cell.classList.add('active');
+    selectedCell = cell; // Actualizar la celda seleccionada
 
-            fetch(`/get-rentas/${formattedDate}`)
-            .then(response => response.json())
-            .then(data => updateEmployeeTable(data))
-            .catch(error => console.error('Error:', error));
-        }
+    // Reemplazar fetch si es necesario
+    fetch(`/get-rentas/${selectedDate}`)
+    .then(response => response.json())
+    .then(data => updateEmployeeTable(data))
+    .catch(error => console.error('Error:', error));
+}
 
-        prevMonthBtn.addEventListener('click', () => {
-            date.setMonth(date.getMonth() - 1);
-            renderCalendar();
-        });
+function setTodayDate() {
+    const today = new Date();
+    const day = String(today.getDate()).padStart(2, '0'); // Día de dos dígitos
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // Mes de dos dígitos
+    const year = today.getFullYear();
+    selectedDateInput.value = `${year}/${month}/${day}`; // Formato: año/mes/día
+}
 
-        nextMonthBtn.addEventListener('click', () => {
-            date.setMonth(date.getMonth() + 1);
-            renderCalendar();
-        });
-
-        // Función para formatear la fecha actual y establecerla en el input
-        function setTodayDate() {
-            const today = new Date();
-            const day = today.getDate();
-            const month = today.getMonth() + 1; // Sumar 1 porque getMonth() es 0-indexed
-            const year = today.getFullYear();
-            selectedDateInput.value = `${day}/${month}/${year}`; // Formato: día/mes/año
-        }
 
         // Inicializar el calendario y establecer la fecha de hoy
         renderCalendar();
