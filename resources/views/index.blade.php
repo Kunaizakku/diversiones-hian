@@ -159,17 +159,17 @@
             <table id="tabla-empleados">
                 <thead>
                     <tr>
-                        <th>Nom empleado</th>
+                        <th>Fecha de entrega</th>
                         <th>Direccion</th>
-                        <th>Estatus</th>
+                        <th>Telefono Registrado</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Juan Pérez</td>
-                        <td>jperez</td>
-                        <td>Activo</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                         <td>
                             <div>
                                 <a href="#">
@@ -240,27 +240,47 @@
         }
 
         function selectDate(day, cell) {
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Se suma 1 y se asegura que el mes sea siempre de dos dígitos
-    const year = date.getFullYear();
-    const formattedDay = String(day).padStart(2, '0'); // Asegura que el día también sea de dos dígitos
-    const selectedDate = `${year}/${month}/${formattedDay}`; // Formato: año/mes/día
-    selectedDateInput.value = selectedDate;
+            const month = date.getMonth() + 1;
+            const year = date.getFullYear();
+            const formattedDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+            selectedDateInput.value = formattedDate;
 
-    // Desmarcar la celda previamente seleccionada
-    if (selectedCell) {
-        selectedCell.classList.remove('active');
-    }
+            // Desmarcar la celda previamente seleccionada
+            if (selectedCell) {
+                selectedCell.classList.remove('active');
+            }
+            // Marcar la nueva celda seleccionada
+            cell.classList.add('active');
+            selectedCell = cell;
 
-    // Marcar la nueva celda seleccionada
-    cell.classList.add('active');
-    selectedCell = cell; // Actualizar la celda seleccionada
+            // Hacer la solicitud AJAX
+            fetch(`/get-rentas/${formattedDate}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Limpiar la tabla
+                    const tableBody = document.querySelector("#tabla-empleados tbody");
+                    tableBody.innerHTML = '';
+                    
+                    // Crear la URL para ver la renta usando el pk_rentas dentro del ciclo forEach
+                    data.forEach(renta => {
+                        const viewRentaUrl = `/renta/${renta.pk_rentas}`; // Ruta a la que deseas redirigir
 
-    // Reemplazar fetch si es necesario
-    fetch(`/get-rentas/${selectedDate}`)
-    .then(response => response.json())
-    .then(data => updateEmployeeTable(data))
-    .catch(error => console.error('Error:', error));
-}
+                        const row = `
+                            <tr>
+                                <td>${renta.fecha_entrega}</td>
+                                <td>${renta.direccion}</td>
+                                <td>${renta.celular}</td>
+                                <td><a href="${viewRentaUrl}"><i class="bi bi-eye" title="Ver más detalles"></i></a></td>
+                            </tr>`;
+                        
+                        // Agregar la fila a la tabla
+                        tableBody.innerHTML += row;
+                    });
+                })
+                .catch(error => console.error('Error:', error)); // Manejo de errores
+        }
+
+
 
 function setTodayDate() {
     const today = new Date();
@@ -277,32 +297,10 @@ function setTodayDate() {
 
 
         
-function updateEmployeeTable(rentas) {
-    const tbody = document.querySelector("#tabla-empleados tbody");
-    tbody.innerHTML = "";  // Limpiar tabla
 
-    if (rentas.length === 0) {
-        tbody.innerHTML = "<tr><td colspan='4'>No hay rentas para esta fecha</td></tr>";
-    } else {
-        rentas.forEach(renta => {
-            const row = document.createElement("tr");
-
-            // Crear la URL para ver la renta usando el pk_rentas
-            //EN SCRIPT ES DIFERENTE Y SE Cpone primero esto de abajo *(es el remplazo de el  route (ver clip y esas chingaderas))
-            const viewRentaUrl = `/renta/${renta.pk_rentas}`; // Ruta a la que deseas redirigir
-                                            //esta variable renta es de la de el getrentas, por que de ahi jalas todas las rentas
-            row.innerHTML = `
-                <td>${renta.fecha_entrega}</td>
-                <td>${renta.direccion}</td>
-                <td>${renta.celular}</td>
-                <td><a href="${viewRentaUrl}"><i class="bi bi-eye" title="Ver más detalles"></i></a></td>
-            `;
-
-            tbody.appendChild(row);
-        });
-    }
-}
     </script>
     @include('fooder')
 </body>
 </html>
+
+

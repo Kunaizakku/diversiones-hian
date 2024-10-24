@@ -58,15 +58,19 @@ class RentasController extends Controller
 }
 
 
+    public function verRentasCalendario($pk_rentas)
+    {
+        
+        $rentas = Rentas::whereDate('fecha_entrega', $pk_rentas)->get();
+
+        return response()->json($rentas, );
+    }
+
+    }
+
 
 
     //pruebas////////////////////////
-        public function getRentas($pk_rentas)
-        {
-            
-            $rentas = Rentas::whereDate('fecha_entrega', $pk_rentas)->get();
 
-            return response()->json($rentas, );
-        }
 
-}
+
