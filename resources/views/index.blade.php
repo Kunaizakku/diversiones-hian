@@ -10,7 +10,7 @@
 .main-container {
     display: flex; /* Flexbox para alinear el calendario y la tabla */
     width: 100%;
-    height: calc(100vh - 40px); /* Altura del contenedor */
+    /* height: calc(100vh - 40px); Altura del contenedor  */
 }
 
 .calendar-container {
@@ -282,24 +282,14 @@
 
 
 
-        prevMonthBtn.addEventListener('click', () => {
-            date.setMonth(date.getMonth() - 1);
-            renderCalendar();
-        });
+function setTodayDate() {
+    const today = new Date();
+    const day = String(today.getDate()).padStart(2, '0'); // Día de dos dígitos
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // Mes de dos dígitos
+    const year = today.getFullYear();
+    selectedDateInput.value = `${year}/${month}/${day}`; // Formato: año/mes/día
+}
 
-        nextMonthBtn.addEventListener('click', () => {
-            date.setMonth(date.getMonth() + 1);
-            renderCalendar();
-        });
-
-        // Función para formatear la fecha actual y establecerla en el input
-        function setTodayDate() {
-            const today = new Date();
-            const day = today.getDate();
-            const month = today.getMonth() + 1; // Sumar 1 porque getMonth() es 0-indexed
-            const year = today.getFullYear();
-            selectedDateInput.value = `${day}/${month}/${year}`; // Formato: día/mes/año
-        }
 
         // Inicializar el calendario y establecer la fecha de hoy
         renderCalendar();
