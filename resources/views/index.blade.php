@@ -302,7 +302,6 @@
         // Inicializar el calendario y establecer la fecha de hoy
         renderCalendar();
         setTodayDate(); // Llama a la función para establecer la fecha de hoy
-    
     </script>
     
     @include('fooder')
