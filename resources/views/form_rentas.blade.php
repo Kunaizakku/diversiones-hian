@@ -60,6 +60,10 @@
       <!-- Campos ocultos para Sillas -->
       <div id="sillas_inputs" class="hidden input-group">
         <h2>Sillas</h2>
+        <label for="tipo_sillas_renta">Tipo de silla</label>
+        <select name="tipo_sillas_renta">
+          <option value="">Selecciona una opción</option>
+        </select>
         <label for="cant_sillas_renta">Cantidad de sillas</label>
         <input type="number" name="cant_sillas_renta" id="cant_sillas_renta" value="0">
         <label for="audencia_sillas_renta">Audiencia</label>
@@ -71,6 +75,10 @@
       <!-- Campos ocultos para Mesas -->
       <div id="mesas_inputs" class="hidden input-group">
         <h2>Mesas</h2>
+        <label for="tipo_mesas_renta">Tipo de mesas</label>
+        <select name="tipo_mesas_renta">
+          <option value="">Selecciona una opción</option>
+        </select>
         <label for="cant_mesas_renta">Cantidad de mesas</label>
         <input type="number" name="cant_mesas_renta" id="cant_mesas_renta" value="0">
         <label for="audencia_mesas_renta">Audiencia</label>
@@ -82,6 +90,10 @@
       <!-- Campos ocultos para Manteles -->
       <div id="manteles_inputs" class="hidden input-group">
         <h2>Manteles</h2>
+        <label for="tipo_manteles_renta">Tipo de mantel</label>
+        <select name="tipo_manteles_renta">
+          <option value="">Selecciona una opción</option>
+        </select>
         <label for="cant_manteles_renta">Cantidad de manteles</label>
         <input type="number" name="cant_manteles_renta" id="cant_manteles_renta" value="0">
         <label for="tipo_manteles_renta">Tipo de mantel</label>
@@ -93,8 +105,8 @@
       <!-- Campos ocultos para Brincolines -->
       <div id="brincolines_inputs" class="hidden input-group">
         <h2>Brincolines</h2>
-        <label for="categoria_brincolines_renta">Categoría de brincolines</label>
-        <select name="categoria_brincolines_renta">
+        <label for="tipo_brincolines_renta">Tipo de brincolin</label>
+        <select name="tipo_brincolines_renta">
           <option value="">Selecciona una opción</option>
         </select>
         <label for="tamaño_brincolines_renta">Tamaño del brincolin</label>
