@@ -10,6 +10,13 @@
 
   @include('sidebar')
 
+  @if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+
   <div class="form-container-rentas">
     <p class="title">Registro de Renta</p>
     <form action="{{ route('renta.insertarrentas') }}" method="post" enctype="multipart/form-data">

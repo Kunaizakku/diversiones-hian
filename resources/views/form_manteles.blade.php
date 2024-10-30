@@ -9,7 +9,13 @@
 <body>
 
   @include('sidebar')
-  @include('mensaje')
+
+  @if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
   
   <div class="form-container">
       <p class="title">Registro de Manteles</p>
