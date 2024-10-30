@@ -9,6 +9,14 @@
 <body>
 
   @include('sidebar')
+
+  @if (session('success'))
+  <div class="alert alert-success">
+      {{ session('success') }}
+  </div>
+@endif
+
+
   
   <div class="form-container">
       <p class="title">Registro de Extensiones</p>

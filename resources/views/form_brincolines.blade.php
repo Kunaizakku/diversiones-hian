@@ -9,6 +9,14 @@
 <body>
 
   @include('sidebar')
+
+  @if (session('success'))
+      <div class="alert alert-success">
+          {{ session('success') }}
+      </div>
+  @endif
+
+  
   <body oncopy="return false" onpaste="return false">
     
   <div class="form-container">

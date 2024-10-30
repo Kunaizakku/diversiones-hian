@@ -49,7 +49,7 @@ class UsuarioController extends Controller
 
             // Redirigir al usuario con un mensaje de bienvenida basado en el rol
             if ($usuario->estatus_usuario == 2) {
-                return redirect()->to('/')->with('success', '¡Bienvenido(a)!');
+                return redirect()->to('/')->with('success', '¡Bienvenido(a) ' . $usuario->usuario);
             } elseif ($usuario->estatus_usuario == 1) {
                 return redirect()->to('/')->with('success', 'Bienvenido(a): ' . $usuario->usuario);
             }

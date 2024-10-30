@@ -122,6 +122,13 @@
 </head>
 <body>
     @include("sidebar")
+
+    @if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
    
     <div class="main-container body-container">
         <!-- Contenedor del calendario -->
