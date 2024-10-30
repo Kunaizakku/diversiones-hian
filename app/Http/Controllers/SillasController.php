@@ -23,6 +23,6 @@ class SillasController extends Controller
         $sillas->estatus_sillas = 1;
 
         $sillas->save();
-        return redirect('/form_sillas');
+        return redirect('/form_sillas')->with('success', 'Silla agregada');
     }
 }

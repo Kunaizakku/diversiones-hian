@@ -25,7 +25,7 @@ class MantelesController extends Controller
         $manteles->estatus_manteles = 1;
 
         $manteles->save();
-        return redirect('/form_manteles')->with('success', 'Extensión manteles');
+        return redirect('/form_manteles')->with('success', 'Mantel agregada');
         
     }
 }

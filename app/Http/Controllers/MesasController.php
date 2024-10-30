@@ -22,7 +22,7 @@ class MesasController extends Controller
         $mesas->estatus_mesas = 1;
 
         $mesas->save();
-        return redirect('/form_mesas');
+        return redirect('/form_mesas')->with('success', 'Mesa agregada');
 }
  
 
