@@ -20,7 +20,7 @@ class UsuarioController extends Controller
 
         $usuario->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Usuario agregado');
 
     }
 

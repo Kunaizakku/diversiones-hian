@@ -24,6 +24,6 @@ class BrincolinesController extends Controller
         $brincolines->estatus_brincolines = 1;
 
         $brincolines->save();
-        return redirect('/form_brincolines');
+        return redirect('/form_brincolines')->with('success', 'Brincolin agregada');
     }
 }
