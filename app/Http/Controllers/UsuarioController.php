@@ -8,10 +8,9 @@ use Illuminate\Support\Facades\Auth;
 
 class UsuarioController extends Controller
 {
-    
-    /* inserción de datos */
-    public function insertar(Request $req){
-        $usuario= new Usuario();
+    /* Inserción de datos */
+    public function insertar(Request $req) {
+        $usuario = new Usuario();
         
         $usuario->nombre = $req->nombre;
         $usuario->usuario = $req->usuario;
@@ -21,11 +20,9 @@ class UsuarioController extends Controller
         $usuario->save();
 
         return redirect()->back()->with('success', 'Usuario agregado');
-
     }
 
-    public function login(Request $request)
-    {
+    public function login(Request $request) {
         $nombre = $request->input('usuario');
         $contraseña = $request->input('contrasena');
 
@@ -34,8 +31,7 @@ class UsuarioController extends Controller
         if ($usuario) {
             // Verificar si el estatus del usuario es 0
             if ($usuario->estatus_usuario == 0) {
-                // Redirigir al usuario con un mensaje de cuenta desactivada
-                return redirect()->to('/iniciarsesion')
+                return redirect()->to('/')
                     ->with('error_status', 'Tu cuenta está desactivada. Contacta al administrador.');
             }
 
@@ -43,19 +39,12 @@ class UsuarioController extends Controller
             session([
                 'id' => $usuario->pk_usuario,
                 'nombre' => $usuario->usuario,
-                'contraseña' => $contraseña,
+                'contrasena' => $contraseña,
                 'estatus' => $usuario->estatus_usuario
             ]);
 
-            // Redirigir al usuario con un mensaje de bienvenida basado en el rol
-            if ($usuario->estatus_usuario == 2) {
-                return redirect()->to('/')->with('success', '¡Bienvenido(a) ' . $usuario->usuario);
-            } elseif ($usuario->estatus_usuario == 1) {
-                return redirect()->to('/')->with('success', 'Bienvenido(a): ' . $usuario->usuario);
-            }
-            
+            return redirect()->to('/')->with('success', '¡Bienvenido(a) ' . $usuario->usuario);
         } else {
-            // Redirigir al usuario con un mensaje de error
             return redirect()->to('/iniciarsesion')
                 ->with('error_credentials', 'Usuario o contraseña incorrectos')
                 ->with('error_retry', 'Introduzca sus datos de nuevo')
@@ -65,12 +54,11 @@ class UsuarioController extends Controller
 
     public function logout() {
         Auth::logout(); 
-        session()->flush();// Cierra la sesión del usuario
-        return redirect('/')->with('success', 'Sesión cerrada'); // Redirige a la página de inicio de sesión u otra página de tu elección
+        session()->flush(); // Cierra la sesión del usuario
+        return redirect('/')->with('success', 'Sesión cerrada');
     }
 
-    private function buscar($usuario, $contrasena)
-    {
+    private function buscar($usuario, $contrasena) {
         $usuario = Usuario::where('usuario', $usuario)
             ->first();
     
@@ -81,10 +69,8 @@ class UsuarioController extends Controller
         }
     }
 
-    public function detalle_usuario()
-    {
+    public function detalle_usuario() {
         $usuarios = Usuario::all();
         return view('lista_empleado', compact('usuarios'));
     }
-
 }
