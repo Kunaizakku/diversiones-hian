@@ -41,25 +41,25 @@
     <!-- Campo para subir la imagen de la silla -->
     <div class="input-group">
       <label for="imagen_silla">Imagen de la Silla</label>
-      <input type="file" name="imagen_silla" id="imagen_silla">
+      <input type="file" name="imagen_silla" id="imagen_silla" required>
     </div>
 
     <!-- Campo para ingresar la forma de la silla -->
     <div class="input-group">
       <label for="forma_sillas">Forma de la Silla</label>
-      <input type="text" name="forma_sillas" id="forma_sillas" placeholder="Ej. Redonda, Cuadrada">
+      <input type="text" name="forma_sillas" id="forma_sillas" placeholder="Ej. Redonda, Cuadrada" required>
     </div>
 
     <!-- Campo para ingresar la cantidad de sillas -->
     <div class="input-group">
       <label for="cant_sillas">Cantidad de Sillas</label>
-      <input type="number" name="cant_sillas" id="cant_sillas" placeholder="Ingresa la cantidad de sillas" min="1">
+      <input type="number" name="cant_sillas" id="cant_sillas" placeholder="Ingresa la cantidad de sillas" min="1" required>
     </div>
 
     <!-- Campo para seleccionar la audiencia dirigida de las sillas -->
     <div class="input-group">
       <label for="audiencia_sillas">Audiencia Dirigida</label>
-      <select name="audiencia_sillas" id="audiencia_sillas">
+      <select name="audiencia_sillas" id="audiencia_sillas" required>
         <option value="Adultos">Adultos</option>
         <option value="Niños">Niños</option>
       </select>
