@@ -1,27 +1,33 @@
 <?php
 
 namespace App\Http\Controllers;
-use \App\Models\Extenciones;
 
+use \App\Models\Extenciones;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log; // Para el manejo de logs
 
 class ExtencionesController extends Controller
 {
-    public function insertarextenciones(Request $request) {
+    public function insertarextenciones(Request $request)
+    {
+        try {
+            $extenciones = new Extenciones;
 
-        $extenciones = new Extenciones;
+            if ($request->hasFile('imagen_extenciones')) {
+                $imagen = $request->file('imagen_extenciones');
+                $rutaimagen = $imagen->store('public/images');
+                $extenciones->imagen_extenciones = str_replace('public/', '', $rutaimagen);
+            }
 
-        if ($request->hasFile('imagen_extenciones')) {
-            $imagen = $request->file('imagen_extenciones');
-            $rutaimagen = $imagen->store('public/images');
-            $extenciones->imagen_extenciones = str_replace('public/', '', $rutaimagen);
-        }
             $extenciones->nombre_extenciones = $request->nombre_extenciones;
             $extenciones->cant_extenciones = $request->cant_extenciones;
             $extenciones->estatus_extenciones = 1;
 
             $extenciones->save();
             return redirect('/form_extenciones')->with('success', 'Extensión agregada');
-       
+        } catch (\Exception $e) {
+            Log::error('Error al agregar extensión: ' . $e->getMessage()); // Registro del error
+            return redirect('/form_extenciones')->with('error', 'Ocurrió un error al agregar la extensión. Inténtalo de nuevo.');
+        }
     }
 }

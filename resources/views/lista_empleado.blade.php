@@ -6,11 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="ruta/a/tu/imagen.ico" rel="icon">
     <title>Empleados registrados</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- Incluye SweetAlert -->
 </head>
 <body class="body">
 
     @include('sidebar')
-    
+
     <div class="body-container">
         <div class="table-container">
             <h1>Empleados registrados</h1>
@@ -25,7 +26,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Aquí irían los datos de los empleados de forma estática o añadidos con JS -->
                     @foreach ($usuarios as $user)
                         <tr>
                             <td> {{ $user->nombre }} </td>
@@ -64,7 +64,6 @@
     </div>
 
     <script>
-        // Tabla con DataTable
         $(document).ready(function () {
             $('#tabla-empleados').DataTable({
                 "language": {

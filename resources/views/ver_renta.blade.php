@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="ruta/a/tu/imagen.ico" rel="icon">
     <title>Rentas Registradas</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         .body_container_table_rent_details {
             display: flex;
@@ -101,6 +102,17 @@
 
     <div class="body_container_table_rent_details">
         <h1>Información de Renta</h1>
+
+        @if (session('error'))
+          <script>
+            Swal.fire({
+              title: 'Error!',
+              text: '{{ session('error') }}',
+              icon: 'error',
+              confirmButtonText: 'Aceptar'
+            });
+          </script>
+        @endif
 
         <div class="card">
             <!-- Datos Generales -->
