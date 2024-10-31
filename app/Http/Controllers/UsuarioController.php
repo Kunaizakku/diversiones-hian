@@ -31,7 +31,7 @@ class UsuarioController extends Controller
         if ($usuario) {
             // Verificar si el estatus del usuario es 0
             if ($usuario->estatus_usuario == 0) {
-                return redirect()->to('/')
+                return redirect()->to('/iniciarsesion')
                     ->with('error_status', 'Tu cuenta está desactivada. Contacta al administrador.');
             }
 

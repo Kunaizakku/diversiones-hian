@@ -11,7 +11,7 @@
  
   @include('sidebar')
 
-    @if (session('success'))
+    {{-- @if (session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
@@ -27,7 +27,7 @@
         <div class="alert alert-danger">
             {{ session('error_status') }}
         </div>
-    @endif
+    @endif --}}
         
   <div class="form-container">
       <p class="title">Inicio de sesión</p>
