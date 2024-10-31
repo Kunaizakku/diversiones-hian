@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Registro de Renta</title>
 </head>
@@ -13,7 +13,7 @@
   @if (session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
-    </div>
+    </div> 
 @endif
 
 
@@ -68,7 +68,8 @@
       <div id="sillas_inputs" class="hidden input-group">
         <h2>Sillas</h2>
         <label for="tipo_sillas_renta">Tipo de silla</label>
-        <select name="tipo_sillas_renta">
+        <select name="fk_sillas">
+          
           <option value="">Selecciona una opción</option>
         </select>
         <label for="cant_sillas_renta">Cantidad de sillas</label>
