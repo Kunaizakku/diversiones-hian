@@ -3,13 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Rentas;
-
 use Illuminate\Http\Request;
 
 class RentasController extends Controller
 {
     public function insertarrentas(Request $request)
     {
+        // Validar los datos del formulario (opcional)
+        $request->validate([
+            'fecha_entrega' => 'required|date',
+            'celular' => 'required|string',
+            'direccion' => 'required|string',
+            // Agregar más reglas de validación según sea necesario
+        ]);
+
         // Crear una nueva instancia de Renta y asignar los valores del formulario
         $rentas = new Rentas();
         $rentas->fecha_entrega = $request->input('fecha_entrega');
@@ -33,44 +40,42 @@ class RentasController extends Controller
         $rentas->estatus_renta = 1; // O lo que corresponda
 
         // Guardar en la base de datos
-        $rentas->save();
-
-        // Redireccionar o devolver respuesta
-        return redirect('/form_rentas')->with('success', 'Rnta registrada agregada');
+        try {
+            $rentas->save();
+            return redirect('/form_rentas')->with('success', 'Renta registrada con éxito');
+        } catch (\Exception $e) {
+            return redirect('/form_rentas')->with('error', 'Error al registrar la renta: ' . $e->getMessage());
+        }
     }
 
     public function ver_renta($pk_rentas)
-{
-    
-    $ver_renta = Rentas::findOrFail($pk_rentas);
+    {
+        $ver_renta = Rentas::find($pk_rentas);
 
-    $dato_renta = Rentas::join('sillas', 'sillas.pk_sillas', '=', 'rentas.fk_sillas')
-        ->join('mesas', 'mesas.pk_mesas', '=', 'rentas.fk_mesas')
-        ->join('manteles', 'manteles.pk_manteles', '=', 'rentas.fk_manteles')
-        ->join('brincolines', 'brincolines.pk_brincolines', '=', 'rentas.fk_brincolines')
-        ->join('motores', 'motores.pk_motores', '=', 'rentas.fk_motores')
-        ->join('extenciones', 'extenciones.pk_extenciones', '=', 'rentas.fk_extenciones')
-        ->where('rentas.pk_rentas', '=', $pk_rentas)  // esto lo filrta ya que compara el pk de la renta y la que se busco al precionar el boton en la lista de rentas
-        ->where('rentas.estatus_renta', '=', 1) 
-        ->first();  // recuerda qeu el first es apra cuando quieres ver 1 solo y no varios
+        if (!$ver_renta) {
+            return redirect('/rentas')->with('error', 'Renta no encontrada');
+        }
 
-    return view('ver_renta', compact('ver_renta', 'dato_renta'));
-}
+        $dato_renta = Rentas::join('sillas', 'sillas.pk_sillas', '=', 'rentas.fk_sillas')
+            ->join('mesas', 'mesas.pk_mesas', '=', 'rentas.fk_mesas')
+            ->join('manteles', 'manteles.pk_manteles', '=', 'rentas.fk_manteles')
+            ->join('brincolines', 'brincolines.pk_brincolines', '=', 'rentas.fk_brincolines')
+            ->join('motores', 'motores.pk_motores', '=', 'rentas.fk_motores')
+            ->join('extenciones', 'extenciones.pk_extenciones', '=', 'rentas.fk_extenciones')
+            ->where('rentas.pk_rentas', '=', $pk_rentas)
+            ->where('rentas.estatus_renta', '=', 1)
+            ->first();
 
+        return view('ver_renta', compact('ver_renta', 'dato_renta'));
+    }
 
     public function verRentasCalendario($pk_rentas)
     {
-        
-        $rentas = Rentas::whereDate('fecha_entrega', $pk_rentas)->get();
-
-        return response()->json($rentas, );
+        try {
+            $rentas = Rentas::whereDate('fecha_entrega', $pk_rentas)->get();
+            return response()->json($rentas);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error al obtener rentas: ' . $e->getMessage()], 500);
+        }
     }
-
-    }
-
-
-
-    //pruebas////////////////////////
-
-
-
+}

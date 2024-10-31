@@ -5,17 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">  
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Registro de Renta</title>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- Incluye SweetAlert -->
 </head>
 <body>
 
   @include('sidebar')
 
   @if (session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div> 
-@endif
-
+    <script>
+      Swal.fire({
+        title: 'Éxito!',
+        text: '{{ session('success') }}',
+        icon: 'success',
+        confirmButtonText: 'Aceptar'
+      });
+    </script>
+  @endif
 
   <div class="form-container-rentas">
     <p class="title">Registro de Renta</p>
@@ -69,7 +74,6 @@
         <h2>Sillas</h2>
         <label for="tipo_sillas_renta">Tipo de silla</label>
         <select name="fk_sillas">
-          
           <option value="">Selecciona una opción</option>
         </select>
         <label for="cant_sillas_renta">Cantidad de sillas</label>
@@ -154,12 +158,11 @@
   </script>
   <style>
     .hidden {
-  display: none;
-}
+      display: none;
+    }
   </style>
 
   @include('fooder')
   
-
 </body>
 </html>

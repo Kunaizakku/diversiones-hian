@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Diversiones-Hian | Registro</title>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- Incluye SweetAlert -->
 </head>
 <body>
 
   @include('sidebar')
-  <body oncopy="return false" onpaste="return false">
-    
+
   <div class="form-container">
       <p class="title">Registro</p>
       <form class="form" id="form-register" action="{{route('usuario.insertar')}}" method="post">
@@ -25,86 +25,59 @@
           </div>
         <div class="input-group">
           <label for="password">Contraseña</label>
-          <input type="password" name="contrasena" id="contraseña" placeholder="Ingresa tu contraseña" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Debe contener un número, una mayúscula, una minúlcula, y ser 8 caracteres" required>
+          <input type="password" name="contrasena" id="contraseña" placeholder="Ingresa tu contraseña" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Debe contener un número, una mayúscula, una minúscula, y ser 8 caracteres" required>
         </div>
         <div class="input-group">
-          <label for="password">Comfirmar contraseña</label>
-          <input type="password" name="conf_contrasena" id="conf_contraseña" placeholder="Ingresa tu contraseña" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Debe contener un número, una mayúscula, una minúlcula, y ser 8 caracteres" required>
+          <label for="password">Confirmar contraseña</label>
+          <input type="password" name="conf_contrasena" id="conf_contraseña" placeholder="Ingresa tu contraseña" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Debe contener un número, una mayúscula, una minúscula, y ser 8 caracteres" required>
         </div>
-        <button class="sign">Registrate</button>
+        <button class="sign">Regístrate</button>
+
+        @if(session('success'))
+            <script>
+                Swal.fire({
+                    title: 'Éxito!',
+                    text: '{{ session('success') }}',
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar'
+                });
+            </script>
+        @endif
 
         @if($errors->any())
-        @foreach($errors->all() as $error)
-            <script>
-                function showErrorToast(message) {
+            @foreach($errors->all() as $error)
+                <script>
                     Swal.fire({
-                        title: message,
-                        toast: true,
-                        position: 'top-end',
-                        showConfirmButton: false,
-                        timer: 5000,
-                        timerProgressBar: true,
+                        title: 'Error',
+                        text: '{{ $error }}',
                         icon: 'error',
-                        didOpen: (toast) => {
-                            toast.addEventListener('mouseenter', Swal.stopTimer);
-                            toast.addEventListener('mouseleave', Swal.resumeTimer);
-                        }
+                        confirmButtonText: 'Cerrar'
                     });
-                }
-                showErrorToast('{{ $error }}');
-            </script>
-        @endforeach
-    @endif
-    
-    <script>
-        document.getElementById('form-register').addEventListener('submit', function(event) {
-            var correo = document.getElementById('correo').value;
-            var confirmar_correo = document.getElementById('conf_correo').value;
-            var contraseña = document.getElementById('contraseña').value;
-            var confirmar_contraseña = document.getElementById('conf_contraseña').value;
-    
-            if (correo !== confirmar_correo) {
-                Swal.fire({
-                    title: 'Los correos no coinciden.',
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 5000,
-                    timerProgressBar: true,
-                    icon: 'error',
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer);
-                        toast.addEventListener('mouseleave', Swal.resumeTimer);
-                    }
-                });
-                event.preventDefault();
-            }
+                </script>
+            @endforeach
+        @endif
 
-            if (contraseña !== confirmar_contraseña) {
-                Swal.fire({
-                    title: 'Las contraseñas no coinciden.',
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 5000,
-                    timerProgressBar: true,
-                    icon: 'error',
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer);
-                        toast.addEventListener('mouseleave', Swal.resumeTimer);
-                    }
-                });
-                event.preventDefault();
-            }
-        });
-    </script>
+        <script>
+            document.getElementById('form-register').addEventListener('submit', function(event) {
+                var contraseña = document.getElementById('contraseña').value;
+                var confirmar_contraseña = document.getElementById('conf_contraseña').value;
+
+                if (contraseña !== confirmar_contraseña) {
+                    Swal.fire({
+                        title: 'Las contraseñas no coinciden.',
+                        icon: 'error',
+                        confirmButtonText: 'Cerrar'
+                    });
+                    event.preventDefault();
+                }
+            });
+        </script>
 
       </form>
       <p class="signup">¿Ya tienes una cuenta con nosotros?, <a href="{{ route('login') }}">inicia sesión aquí</a>.</p>
-    </div>
+  </div>
 
-    </body>
-    @include('fooder')
+  @include('fooder')
 
 </body>
 </html>
