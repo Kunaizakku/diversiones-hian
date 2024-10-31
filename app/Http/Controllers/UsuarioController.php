@@ -35,7 +35,7 @@ class UsuarioController extends Controller
             // Verificar si el estatus del usuario es 0
             if ($usuario->estatus_usuario == 0) {
                 // Redirigir al usuario con un mensaje de cuenta desactivada
-                return redirect()->to('/')
+                return redirect()->to('/iniciarsesion')
                     ->with('error_status', 'Tu cuenta está desactivada. Contacta al administrador.');
             }
 
@@ -72,7 +72,6 @@ class UsuarioController extends Controller
     private function buscar($usuario, $contrasena)
     {
         $usuario = Usuario::where('usuario', $usuario)
-            ->where('estatus_usuario', 1)
             ->first();
     
         if ($usuario && $contrasena == $usuario->contrasena) {
