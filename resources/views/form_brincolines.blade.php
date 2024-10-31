@@ -41,7 +41,7 @@
             <!-- Campo para la imagen del brincolín -->
             <div class="input-group">
                 <label for="imagen_brincolines">Imagen del Brincolín</label>
-                <input type="file" name="imagen_brincolines" id="imagen_brincolines" required>
+                <input type="file" name="imagen_brincolines" id="imagen_brincolines" required required>
             </div>
             
             <!-- Campo para el nombre del brincolín -->

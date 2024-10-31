@@ -38,25 +38,25 @@
             <!-- Campo para la imagen de la mesa -->
             <div class="input-group">
                 <label for="imagen_mesa">Imagen de la Mesa</label>
-                <input type="file" name="imagen_mesa" id="imagen_mesa">
+                <input type="file" name="imagen_mesa" id="imagen_mesa" required>
             </div>
 
             <!-- Campo para la forma de la mesa -->
             <div class="input-group">
                 <label for="forma_mesas">Forma de la Mesa</label>
-                <input type="text" name="forma_mesas" id="forma_mesas" placeholder="Ingresa la forma de la mesa">
+                <input type="text" name="forma_mesas" id="forma_mesas" placeholder="Ingresa la forma de la mesa" required>
             </div>
 
             <!-- Campo para la cantidad de mesas -->
             <div class="input-group">
                 <label for="cant_mesas">Cantidad de Mesas</label>
-                <input type="number" name="cant_mesas" id="cant_mesas" placeholder="Ingresa la cantidad de mesas" min="1">
+                <input type="number" name="cant_mesas" id="cant_mesas" placeholder="Ingresa la cantidad de mesas" min="1" required>
             </div>
 
             <!-- Campo para seleccionar la audiencia dirigida de las mesas -->
             <div class="input-group">
                 <label for="audiencia_mesas">Audiencia Dirigida</label>
-                <select name="audiencia_mesas" id="audiencia_mesas">
+                <select name="audiencia_mesas" id="audiencia_mesas" required>
                     <option value="Adultos">Adultos</option>
                     <option value="Niños">Niños</option>
                 </select>
