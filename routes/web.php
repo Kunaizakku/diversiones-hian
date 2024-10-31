@@ -11,9 +11,12 @@ use App\Http\Controllers\RentasController;
 use App\Models\Usuario;
 
 Route::get('/', function () {
-    return view('index');
-})->name('index');
+    return view('login');
+})->name('login');
 
+Route::get('/inicio', function () {
+        return view('index');
+})->name('inicio');
 
 //sillas
 Route::get('/form_sillas', function () {

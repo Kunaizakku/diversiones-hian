@@ -43,7 +43,7 @@ class UsuarioController extends Controller
                 'estatus' => $usuario->estatus_usuario
             ]);
 
-            return redirect()->to('/')->with('success', '¡Bienvenido(a) ' . $usuario->usuario);
+            return redirect()->to('/inicio')->with('success', '¡Bienvenido(a) ' . $usuario->usuario);
         } else {
             return redirect()->to('/iniciarsesion')
                 ->with('error_credentials', 'Usuario o contraseña incorrectos')
