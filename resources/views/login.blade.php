@@ -11,6 +11,24 @@
 
   @include('sidebar')
 
+    {{-- @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @elseif (session('error_credentials'))
+        <div class="alert alert-danger">
+            {{ session('error_credentials') }}
+        </div>
+    @elseif (session('error_retry'))
+        <div class="alert alert-danger">
+            {{ session('error_retry') }}
+        </div>
+    @elseif (session ('error_status'))
+        <div class="alert alert-danger">
+            {{ session('error_status') }}
+        </div>
+    @endif --}}
+        
   <div class="form-container">
       <p class="title">Inicio de sesión</p>
       <form class="form" id="form-login" action="{{ route('usuario.login') }}" method="post">
