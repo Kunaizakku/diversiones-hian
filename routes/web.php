@@ -11,8 +11,8 @@ use App\Http\Controllers\RentasController;
 use App\Models\Usuario;
 
 Route::get('/', function () {
-    return view('login');
-})->name('login');
+    return view('index');
+})->name('index');
 
 
 //sillas

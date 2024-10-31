@@ -5,16 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Registro de Sillas</title>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- Incluye SweetAlert -->
 </head>
 <body>
 @include('sidebar')
 
 @if (session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
+    <script>
+        Swal.fire({
+            title: 'Éxito!',
+            text: '{{ session('success') }}',
+            icon: 'success',
+            confirmButtonText: 'Aceptar'
+        });
+    </script>
 @endif
 
+@if (session('error'))
+    <script>
+        Swal.fire({
+            title: 'Error',
+            text: '{{ session('error') }}',
+            icon: 'error',
+            confirmButtonText: 'Cerrar'
+        });
+    </script>
+@endif
 
 <body oncopy="return false" onpaste="return false">
 

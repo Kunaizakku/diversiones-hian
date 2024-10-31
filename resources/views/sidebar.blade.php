@@ -38,7 +38,7 @@
         <ul class="nav_list">
             <li>
                 <a href="{{ url('/') }}">
-                    <i class='bx bxs-home'></i>
+                    <i class='bi bi-house'></i>
                     <span class="links_name">Inicio</span>
                 </a>
                 <span class="tooltip">Inicio</span>
@@ -48,7 +48,7 @@
             @else
             <li>
                 <a href="{{ route('iniciarsesion') }}">
-                    <i class='bx bx-user-plus'></i>
+                    <i class='bi bi-person-plus'></i>
                     <span class="links_name">Inicio de sesión</span>
                 </a>
                 <span class="tooltip">Sesión</span>
@@ -59,7 +59,7 @@
             <div class="bootstrap-dropdown">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownFormularios" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class='bx bx-user-plus'></i>
+                        <i class='bi bi-file-earmark-text'></i>
                         <span class="links_name">Formularios</span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownFormularios">
@@ -73,18 +73,18 @@
                 </li>
             </div>
 
-             <!-- Dropdown Listas -->
-             <div class="bootstrap-dropdown">
+            <!-- Dropdown Listas -->
+            <div class="bootstrap-dropdown">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownListas" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class='bx bx-user-plus'></i>
+                        <i class='bi bi-list-ul'></i>
                         <span class="links_name">Listas</span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownListas">
                         <li><a class="dropdown-item" href="{{ route('lista_sillas') }}">Lista Silla</a></li>
                         <li><a class="dropdown-item" href="{{ route('lista_mesas') }}">Lista Mesas</a></li>
                         <li><a class="dropdown-item" href="{{ route('lista_brincolines') }}">Lista Brincolines</a></li>
-                        <li><a class="dropdown-item" href="{{ route('lista_extenciones') }}">Lista Extenciones</a></li>
+                        <li><a class="dropdown-item" href="{{ route('lista_extenciones') }}">Lista Extensiones</a></li>
                         <li><a class="dropdown-item" href="{{ route('lista_manteles') }}">Lista Manteles</a></li>
                         <li><a class="dropdown-item" href="{{ route('lista_rentas') }}">Lista Rentas</a></li>
                     </ul>
@@ -94,11 +94,11 @@
             <!-- Dropdown Usuarios -->
             <div class="bootstrap-dropdown">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownListas" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class='bx bx-user-plus'></i>
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUsuarios" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class='bi bi-person'></i>
                         <span class="links_name">Usuarios</span>
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownListas">
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownUsuarios">
                         <li><a class="dropdown-item" href="{{ route('registro') }}">Form Usuario</a></li>
                         <li><a class="dropdown-item" href="{{ route('detalle_usuario') }}">Lista Usuario</a></li>
                     </ul>
@@ -109,7 +109,7 @@
                 @if (session('estatus') == 1)
                 <li>
                     <a href="{{ route('logout') }}">
-                        <i class='bx bx-user-minus'></i>
+                        <i class='bi bi-box-arrow-right'></i>
                         <span class="links_name">Cerrar sesión</span>
                     </a>
                     <span class="tooltip">Sesión</span>
@@ -152,4 +152,3 @@
                         });
                     });
                 </script>
-

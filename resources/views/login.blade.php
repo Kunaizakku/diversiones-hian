@@ -8,12 +8,12 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- Incluye SweetAlert -->
 </head>
 <body>
- 
+
   @include('sidebar')
-    
+
   <div class="form-container">
       <p class="title">Inicio de sesión</p>
-      <form class="form" id="form-register" action="{{ route('usuario.login') }}" method="post">
+      <form class="form" id="form-login" action="{{ route('usuario.login') }}" method="post">
           @csrf
           <div class="input-group">
               <label for="username">Nombre de usuario</label>
@@ -81,13 +81,11 @@
                   </script>
               @endforeach
           @endif
-    
-          <script>
-              document.getElementById('form-register').addEventListener('submit', function(event) {
-                  var contraseña = document.getElementById('contraseña').value;
-                  // Aquí podrías agregar más validaciones si es necesario.
 
-                  // Solo un ejemplo de validación adicional.
+          <script>
+              document.getElementById('form-login').addEventListener('submit', function(event) {
+                  var contraseña = document.getElementById('contraseña').value;
+
                   if (contraseña.length < 8) {
                       Swal.fire({
                           title: 'La contraseña debe tener al menos 8 caracteres.',
