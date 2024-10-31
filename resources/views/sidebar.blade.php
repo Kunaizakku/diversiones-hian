@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,6 +29,16 @@
 </head>
 
 <body>
+
+@if(session('id'))
+        
+        
+        @else
+            <script>
+                window.location.href="{{url('/')}}";
+            </script>
+@endif
+
     <div class="sidebar">
         <div class="logo_content">
             <div class="logo">
@@ -37,7 +48,7 @@
         </div>
         <ul class="nav_list">
             <li>
-                <a href="{{ url('/') }}">
+                <a href="{{ url('/inicio') }}">
                     <i class='bi bi-house'></i>
                     <span class="links_name">Inicio</span>
                 </a>
