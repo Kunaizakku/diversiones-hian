@@ -31,10 +31,10 @@
         <div class="input-group form-half-50">
           <label for="direccion">Dirección</label>
           <input type="text" name="direccion" id="direccion" placeholder="Ingresa la dirección" maxlength="100" required>
-        </div>
+        </div> 
         <div class="input-group form-half-25">
           <label for="fecha_entrega">Fecha de Entrega</label>
-          <input type="datetime-local" name="fecha_entrega" id="fecha_entrega" required>
+          <input type="date" name="fecha_entrega" id="fecha_entrega" required>
         </div>
         <div class="input-group form-half-25">
           <label for="celular">Número de Celular</label>
@@ -74,13 +74,17 @@
         <h2>Sillas</h2>
         <label for="tipo_sillas_renta">Tipo de silla</label>
         <select name="fk_sillas">
-          <option value="">Selecciona una opción</option>
+            @foreach ($opcion_sillas as $opc_silla)
+            <option value="{{ $opc_silla->pk_sillas }}">{{ $opc_silla->forma_sillas }}</option> <!-- Ajusta según el campo que necesites -->
+            @endforeach
         </select>
         <label for="cant_sillas_renta">Cantidad de sillas</label>
         <input type="number" name="cant_sillas_renta" id="cant_sillas_renta" value="0">
         <label for="audencia_sillas_renta">Audiencia</label>
         <select name="audencia_sillas_renta">
-          <option value="">Selecciona una opción</option>
+            <option value="sin audencia">Selecciona una audiencia</option>
+            <option value="Adultos">Adultos</option>
+            <option value="Niños">Niños</option>
         </select>
       </div>
 
@@ -88,14 +92,18 @@
       <div id="mesas_inputs" class="hidden input-group">
         <h2>Mesas</h2>
         <label for="tipo_mesas_renta">Tipo de mesas</label>
-        <select name="tipo_mesas_renta">
-          <option value="">Selecciona una opción</option>
+        <select name="fk_mesas">
+            @foreach ($opcion_mesas as $opc_mesas)
+            <option value="{{ $opc_mesas->pk_mesas }}">{{ $opc_mesas->forma_mesas }}</option> <!-- Ajusta según el campo que necesites -->
+            @endforeach
         </select>
         <label for="cant_mesas_renta">Cantidad de mesas</label>
         <input type="number" name="cant_mesas_renta" id="cant_mesas_renta" value="0">
         <label for="audencia_mesas_renta">Audiencia</label>
         <select name="audencia_mesas_renta">
-          <option value="">Selecciona una opción</option>
+            <option value="sin audiencia">Selecciona una audiencia</option>
+            <option value="Adultos">Adultos</option>
+            <option value="Niños">Niños</option>
         </select>
       </div>
 
@@ -103,14 +111,18 @@
       <div id="manteles_inputs" class="hidden input-group">
         <h2>Manteles</h2>
         <label for="tipo_manteles_renta">Tipo de mantel</label>
-        <select name="tipo_manteles_renta">
-          <option value="">Selecciona una opción</option>
+        <select name="fk_manteles">
+            @foreach ($opcion_manteles as $opc_manteles)
+              <option value="{{ $opc_manteles->pk_manteles }}">{{ $opc_manteles->color_manteles }}</option> <!-- Ajusta según el campo que necesites -->
+            @endforeach
         </select>
         <label for="cant_manteles_renta">Cantidad de manteles</label>
         <input type="number" name="cant_manteles_renta" id="cant_manteles_renta" value="0">
         <label for="tipo_manteles_renta">Tipo de mantel</label>
         <select name="tipo_manteles_renta">
-          <option value="">Selecciona una opción</option>
+            <option value="sin mantel">selecciona un mantel</option>
+            <option value="Adultos">Cuadrado</option>
+            <option value="Niños">redondo</option>
         </select>
       </div>
 
@@ -118,25 +130,27 @@
       <div id="brincolines_inputs" class="hidden input-group">
         <h2>Brincolines</h2>
         <label for="tipo_brincolines_renta">Tipo de brincolin</label>
-        <select name="tipo_brincolines_renta">
-          <option value="">Selecciona una opción</option>
-        </select>
-        <label for="tamaño_brincolines_renta">Tamaño del brincolin</label>
-        <select name="tamaño_brincolines_renta">
-          <option value="">Selecciona una opción</option>
+        <select name="fk_brincolines">
+            @foreach ($opcion_brincolines as $opc_brincolines)
+              <option value="{{ $opc_brincolines->pk_brincolines }}">{{ $opc_brincolines->nombre_brincolines }}</option> <!-- Ajusta según el campo que necesites -->
+            @endforeach
         </select>
         <label for="motores_brincolines_renta">Motores</label>
-        <select name="motores_brincolines_renta">
-          <option value="">Selecciona una opción</option>
+        <select name="fk_motores">
+            @foreach ($opcion_motores as $opc_motores)
+              <option value="{{ $opc_motores->pk_motores }}">{{ $opc_motores->color_motores }}</option> <!-- Ajusta según el campo que necesites -->
+            @endforeach
         </select>
         <label for="extenciones_brincolines_renta">Extenciones para el brincolin</label>
-        <select name="extenciones_brincolines_renta">
-          <option value="">Selecciona una opción</option>
+        <select name="fk_extenciones">
+            @foreach ($opcion_extenciones as $opc_extenciones)
+              <option value="{{ $opc_extenciones->pk_extenciones }}">{{ $opc_extenciones->nombre_extenciones }}</option> <!-- Ajusta según el campo que necesites -->
+            @endforeach
         </select>
       </div>
 
       <div class="input-group">
-        <button class="sign">Registrar Renta</button>
+        <button type="submit" class="sign">Registrar Renta</button>
       </div>
 
     </form>
@@ -155,6 +169,11 @@
         }
       });
     });
+
+
+    ////////SCRIPT DEL A FECHA////
+    const today = new Date().toISOString().split("T")[0];
+    document.getElementById("fecha_entrega").setAttribute("min", today);
   </script>
   <style>
     .hidden {

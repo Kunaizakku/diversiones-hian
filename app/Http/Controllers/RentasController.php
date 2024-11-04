@@ -3,12 +3,33 @@
 namespace App\Http\Controllers;
 
 use App\Models\Rentas;
+use App\Models\Sillas;
+use App\Models\Mesas;
+use App\Models\Manteles;
+use App\Models\Brincolines;
+use App\Models\Motores;
+use App\Models\Extenciones;
+
 use Illuminate\Http\Request;
 
 class RentasController extends Controller
 {
+    ///////////Esta funcion es para que en los select de el "form_renta" se muestre la informacion///////////////
+    public function datosdeinventario()
+    {
+        $opcion_sillas = Sillas::whereIn('estatus_sillas', [1, 2])->get();//RECUERDA EL "WHERE IN" PARA MULTIPLES VALORES EN ESTE CASO 1 Y 2
+        $opcion_mesas = Mesas::whereIn('estatus_mesas', [1, 2])->get();
+        $opcion_manteles = Manteles::whereIn('estatus_manteles', [1, 2])->get();
+        $opcion_brincolines = Brincolines::whereIn('estatus_brincolines', [1, 2])->get();
+        $opcion_motores = Motores::whereIn('estatus_motores', [1, 2])->get();
+        $opcion_extenciones = Extenciones::whereIn('estatus_extenciones', [1, 2])->get();
+
+        return view('form_rentas', compact('opcion_sillas', 'opcion_mesas', 'opcion_manteles', 'opcion_brincolines', 'opcion_motores', 'opcion_extenciones'));
+    }
+
     public function insertarrentas(Request $request)
     {
+        try {
         // Validar los datos del formulario (opcional)
         $request->validate([
             'fecha_entrega' => 'required|date',
@@ -33,14 +54,15 @@ class RentasController extends Controller
         $rentas->cant_manteles_renta = $request->input('cant_manteles_renta');
         $rentas->tipo_manteles_renta = $request->input('tipo_manteles_renta');
         $rentas->fk_brincolines = $request->input('fk_brincolines');
-        $rentas->cat_brincolines_renta = $request->input('cat_brincolines_renta');
-        $rentas->tam_brincolines_renta = $request->input('tam_brincolines_renta');
         $rentas->fk_motores = $request->input('fk_motores');
         $rentas->fk_extenciones = $request->input('fk_extenciones');
         $rentas->estatus_renta = 1; // O lo que corresponda
 
+        // $rentas->save();
+        // return redirect('/form_rentas')->with('success', 'Renta registrada con éxito');
+        
         // Guardar en la base de datos
-        try {
+
             $rentas->save();
             return redirect('/form_rentas')->with('success', 'Renta registrada con éxito');
         } catch (\Exception $e) {

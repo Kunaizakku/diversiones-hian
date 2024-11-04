@@ -69,10 +69,11 @@ Route::get('/lista_manteles', function () {
 })->name('lista_manteles');
 
 // Rentas
-Route::get('/form_rentas', function () {
-    return view('form_rentas');
-})->name('form_rentas');
-Route::post('insertarrentas', [RentasController::class, 'insertarrentas'])->name('renta.insertarrentas');
+// Route::get('/form_rentas', function () {
+//     return view('form_rentas');
+// })->name('form_rentas');
+Route::get('/form_rentas', [RentasController::class, 'datosdeinventario'])->name('form_rentas');
+Route::post('insertarrentas', [RentasController::class, 'insertarrentas'])->name('renta.insertarrentas');     
 
 Route::get('/lista_rentas', function () {
     return view('lista_rentas'); // Aquí se retorna la vista
