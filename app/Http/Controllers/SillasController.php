@@ -29,4 +29,10 @@ class SillasController extends Controller
             return redirect('/form_sillas')->with('error', 'Error al agregar la silla: ' . $e->getMessage());
         }
     }
+
+    public function ver_sillas()
+    {
+        $dato_sillas = Sillas::where('estatus_sillas', 1)->get();
+        return view('lista_sillas', compact('dato_sillas'));
+    }
 }

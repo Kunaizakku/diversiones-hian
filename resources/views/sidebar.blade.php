@@ -92,12 +92,12 @@
                         <span class="links_name">Listas</span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownListas">
-                        <li><a class="dropdown-item" href="{{ route('lista_sillas') }}">Lista Silla</a></li>
-                        <li><a class="dropdown-item" href="{{ route('lista_mesas') }}">Lista Mesas</a></li>
-                        <li><a class="dropdown-item" href="{{ route('lista_brincolines') }}">Lista Brincolines</a></li>
-                        <li><a class="dropdown-item" href="{{ route('lista_extenciones') }}">Lista Extensiones</a></li>
+                        <li><a class="dropdown-item" href="{{ route('silla.listasillas') }}">Lista Silla</a></li>
+                        <li><a class="dropdown-item" href="{{ route('mesa.listamesas') }}">Lista Mesas</a></li>
+                        <li><a class="dropdown-item" href="{{ route('brincolin.listabrincolines') }}">Lista Brincolines</a></li>
+                        <li><a class="dropdown-item" href="{{ route('extencion.listaextenciones') }}">Lista Extensiones</a></li>
                         <li><a class="dropdown-item" href="{{ route('lista_manteles') }}">Lista Manteles</a></li>
-                        <li><a class="dropdown-item" href="{{ route('lista_rentas') }}">Lista Rentas</a></li>
+                        <li><a class="dropdown-item" href="{{ route('renta.listarentas') }}">Lista Rentas</a></li>
                     </ul>
                 </li>
             </div>

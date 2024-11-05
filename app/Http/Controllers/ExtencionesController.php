@@ -30,4 +30,9 @@ class ExtencionesController extends Controller
             return redirect('/form_extenciones')->with('error', 'Ocurrió un error al agregar la extensión. Inténtalo de nuevo.');
         }
     }
+
+    public function ver_extenciones(){
+        $dato_extensiones = Extenciones::where('estatus_extenciones', 1)->get();
+        return view('lista_extenciones', compact('dato_extensiones'));
+    }
 }

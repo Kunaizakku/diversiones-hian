@@ -31,4 +31,9 @@ class MesasController extends Controller
             return redirect('/form_mesas')->with('error', 'Ocurrió un error al agregar la mesa. Inténtalo de nuevo.'); 
         }
     }
+
+    public function ver_mesas(){
+        $dato_mesas = Mesas::where('estatus_mesas', 1)->get();
+        return view('lista_mesas', compact('dato_mesas'));
+    }
 }

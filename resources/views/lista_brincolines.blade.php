@@ -23,45 +23,32 @@
                         <th>Cantidad</th>
                         <th>Categoría</th>
                         <th>Tamaño</th>
-                        <th></th>
+                        <th>Estado de Brincolines</th>
+                        <th>Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <!-- Datos de ejemplo estáticos -->
+                    @foreach ($dato_brincolines as $brincolin)
                     <tr>
-                        <td><img src="ruta/a/imagen_brincolin1.jpg" alt="Imagen del brincolín" width="50"></td>
-                        <td>Brincolín Acuático</td>
-                        <td>5</td>
-                        <td>Acuático</td>
-                        <td>Grande</td>
+                        <td><img src="{{ asset('storage/' . $brincolin->imagen_brincolines) }}" alt="$brincolin->nombre_brincolines" width="50"></td>
+                        <td>{{$brincolin->nombre_brincolines}}</td>
+                        <td>{{$brincolin->cant_brincolines}}</td>
+                        <td>{{$brincolin->cat_brincolines}}</td>
+                        <td>{{$brincolin->tam_brincolines}}</td>
+                        <td>{{ $brincolin->estatus_sillas == 1 ? 'Activo' : 'Inactivo' }}</td>
                         <td>
                             <div>
                                 <a href="#">
-                                    <i class="bi bi-pencil-square" title="Editar brincolín"></i>
+                                    <i class="bi bi-pencil-square" title="Editar silla"></i>
                                 </a>
                                 <a href="#" onclick="confirmarBaja(event)">
-                                    <i class="bi bi-lock" title="Eliminar brincolín"></i>
+                                    <i class="bi bi-lock" title="Eliminar silla"></i>
                                 </a>
                             </div>
                         </td>
                     </tr>
-                    <tr>
-                        <td><img src="ruta/a/imagen_brincolin2.jpg" alt="Imagen del brincolín" width="50"></td>
-                        <td>Brincolín Seco</td>
-                        <td>8</td>
-                        <td>Seco</td>
-                        <td>Mediano</td>
-                        <td>
-                            <div>
-                                <a href="#">
-                                    <i class="bi bi-pencil-square" title="Editar brincolín"></i>
-                                </a>
-                                <a href="#" onclick="confirmarBaja(event)">
-                                    <i class="bi bi-lock" title="Eliminar brincolín"></i>
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

@@ -31,4 +31,9 @@ class MantelesController extends Controller
             return redirect('/form_manteles')->with('error', 'Ocurrió un error al agregar el mantel. Inténtalo de nuevo.');
         }
     }
+
+    public function ver_manteles(){
+        $dato_manteles = Manteles::where('estatus_manteles', 1)->get();
+        return view('lista_manteles', compact('dato_manteles'));
+    }
 }

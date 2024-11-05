@@ -22,43 +22,31 @@
                         <th>Forma de la Mesa</th>
                         <th>Cantidad</th>
                         <th>Audiencia Dirigida</th>
-                        <th></th>
+                        <th>Estado de Mesas</th>
+                        <th>Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <!-- Datos de ejemplo estáticos -->
+                    @foreach ($dato_mesas as $mesa)
                     <tr>
-                        <td><img src="ruta/a/imagen_mesa1.jpg" alt="Imagen de la mesa" width="50"></td>
-                        <td>Rectangular</td>
-                        <td>8</td>
-                        <td>Adultos</td>
+                        <td><img src="{{ asset('storage/' . $mesa->imagen_mesas) }}" alt="$mesa->forma_mesas" width="50"></td>
+                        <td>{{$mesa->forma_mesas}}</td>
+                        <td>{{$mesa->cant_mesas}}</td>
+                        <td>{{$mesa->audiencia_mesas}}</td>
+                        <td>{{ $mesa->estatus_mesas == 1 ? 'Activas' : 'Inactivas' }}</td>
                         <td>
                             <div>
                                 <a href="#">
-                                    <i class="bi bi-pencil-square" title="Editar mesa"></i>
+                                    <i class="bi bi-pencil-square" title="Editar silla"></i>
                                 </a>
                                 <a href="#" onclick="confirmarBaja(event)">
-                                    <i class="bi bi-lock" title="Eliminar mesa"></i>
+                                    <i class="bi bi-lock" title="Eliminar silla"></i>
                                 </a>
                             </div>
                         </td>
                     </tr>
-                    <tr>
-                        <td><img src="ruta/a/imagen_mesa2.jpg" alt="Imagen de la mesa" width="50"></td>
-                        <td>Redonda</td>
-                        <td>12</td>
-                        <td>Niños</td>
-                        <td>
-                            <div>
-                                <a href="#">
-                                    <i class="bi bi-pencil-square" title="Editar mesa"></i>
-                                </a>
-                                <a href="#" onclick="confirmarBaja(event)">
-                                    <i class="bi bi-lock" title="Eliminar mesa"></i>
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

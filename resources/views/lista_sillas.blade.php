@@ -22,16 +22,19 @@
                         <th>Forma de la Silla</th>
                         <th>Cantidad</th>
                         <th>Audiencia Dirigida</th>
-                        <th></th>
+                        <th>Estado de Sillas</th>
+                        <th>Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <!-- Datos de ejemplo estáticos -->
+                     @foreach ($dato_sillas as $silla)
                     <tr>
-                        <td><img src="ruta/a/imagen_silla1.jpg" alt="Imagen de la silla" width="50"></td>
-                        <td>Redonda</td>
-                        <td>10</td>
-                        <td>Adultos</td>
+                        <td><img src="{{ asset('storage/' . $silla->imagen_sillas) }}" alt="$silla->forma_sillas" width="50"></td>
+                        <td>{{$silla->forma_sillas}}</td>
+                        <td>{{$silla->cant_sillas}}</td>
+                        <td>{{$silla->audiencia_sillas}}</td>
+                        <td>{{ $silla->estatus_sillas == 1 ? 'Activo' : 'Inactivo' }}</td>
                         <td>
                             <div>
                                 <a href="#">
@@ -43,22 +46,7 @@
                             </div>
                         </td>
                     </tr>
-                    <tr>
-                        <td><img src="ruta/a/imagen_silla2.jpg" alt="Imagen de la silla" width="50"></td>
-                        <td>Cuadrada</td>
-                        <td>15</td>
-                        <td>Niños</td>
-                        <td>
-                            <div>
-                                <a href="#">
-                                    <i class="bi bi-pencil-square" title="Editar silla"></i>
-                                </a>
-                                <a href="#" onclick="confirmarBaja(event)">
-                                    <i class="bi bi-lock" title="Eliminar silla"></i>
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

@@ -100,4 +100,18 @@ class RentasController extends Controller
             return response()->json(['error' => 'Error al obtener rentas: ' . $e->getMessage()], 500);
         }
     }
+
+
+    public function ver_rentasLista()
+    {
+        $dato_rentas = Rentas::join('sillas', 'sillas.pk_sillas', '=', 'rentas.fk_sillas')
+            ->join('mesas', 'mesas.pk_mesas', '=', 'rentas.fk_mesas')
+            ->join('manteles', 'manteles.pk_manteles', '=', 'rentas.fk_manteles')
+            ->join('brincolines', 'brincolines.pk_brincolines', '=', 'rentas.fk_brincolines')
+            ->join('motores', 'motores.pk_motores', '=', 'rentas.fk_motores')
+            ->join('extenciones', 'extenciones.pk_extenciones', '=', 'rentas.fk_extenciones')
+            ->where('rentas.estatus_renta', '=', 1)
+            ->Get();
+        return view('lista_rentas', compact('dato_rentas'));
+    }
 }

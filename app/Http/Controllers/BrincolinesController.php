@@ -32,4 +32,11 @@ class BrincolinesController extends Controller
             return redirect('/form_brincolines')->with('error', 'Ocurrió un error al agregar el brincolín. Inténtalo de nuevo.');
         }
     }
+
+    public function ver_brincolines()
+    {
+        $dato_brincolines = Brincolines::where('estatus_brincolines', 1)->get();
+
+        return view('lista_brincolines', compact('dato_brincolines'));
+    }
 }
