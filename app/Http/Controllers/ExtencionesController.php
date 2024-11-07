@@ -35,4 +35,24 @@ class ExtencionesController extends Controller
         $dato_extensiones = Extenciones::where('estatus_extenciones', 1)->get();
         return view('lista_extenciones', compact('dato_extensiones'));
     }
+
+
+    public function editarextencion($pk_extenciones){
+        $dato_extenciones = Extenciones::find($pk_extenciones);
+        return view('editar_extenciones', compact('dato_extenciones'));
+    }                
+
+    public function actualizarextencion($pk_extenciones, Request $request){
+        $editar_extenciones = Extenciones::find($pk_extenciones);
+
+        if ($request->hasFile('imagen_extenciones')) {
+            $imagen = $request->file('imagen_extenciones');
+            $rutaimagen = $imagen->store('public/images');
+            $editar_extenciones->imagen_extenciones = str_replace('public/', '', $rutaimagen);
+        }
+        $editar_extenciones->nombre_extenciones = $request->nombre_extenciones;
+        $editar_extenciones->cant_extenciones = $request->cant_extenciones;
+        $editar_extenciones->save();
+        return redirect('/lista_extenciones')->with('success', 'Extensión actualizada');
+    }
 }

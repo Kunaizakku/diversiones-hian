@@ -37,7 +37,7 @@
                         <td>{{ $mesa->estatus_mesas == 1 ? 'Activas' : 'Inactivas' }}</td>
                         <td>
                             <div>
-                                <a href="#">
+                                <a href="{{ route('mesa.editarmesa', ['pk_mesas' => $mesa->pk_mesas]) }}">
                                     <i class="bi bi-pencil-square" title="Editar silla"></i>
                                 </a>
                                 <a href="#" onclick="confirmarBaja(event)">

@@ -37,7 +37,7 @@
                         <td>{{ $silla->estatus_sillas == 1 ? 'Activo' : 'Inactivo' }}</td>
                         <td>
                             <div>
-                                <a href="#">
+                                <a href="{{route('silla.editarsilla', ['pk_sillas' => $silla->pk_sillas])}}">
                                     <i class="bi bi-pencil-square" title="Editar silla"></i>
                                 </a>
                                 <a href="#" onclick="confirmarBaja(event)">

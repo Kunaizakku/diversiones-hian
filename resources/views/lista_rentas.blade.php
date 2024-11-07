@@ -41,7 +41,7 @@
                         <td>{{$renta->nombre_brincolines}}</td>
                         <td>
                             <div>
-                                <a href="#">
+                                <a href="{{ route('renta.editarrenta', [ 'pk_rentas' => $renta->pk_rentas]) }}">
                                     <i class="bi bi-pencil-square" title="Editar renta"></i>
                                 </a>
                                 <a href="#" onclick="confirmarBaja(event)">

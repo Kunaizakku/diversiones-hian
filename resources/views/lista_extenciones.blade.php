@@ -35,7 +35,7 @@
                         <td>{{ $extencion->estatus_extenciones == 1 ? 'Activo' : 'Inactivo' }}</td>
                         <td>
                             <div>
-                                <a href="#">
+                                <a href="{{ route('extencion.editarextencion', ['pk_extenciones' => $extencion->pk_extenciones]) }}">
                                     <i class="bi bi-pencil-square" title="Editar silla"></i>
                                 </a>
                                 <a href="#" onclick="confirmarBaja(event)">

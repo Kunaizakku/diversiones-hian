@@ -79,7 +79,10 @@
                         <li><a class="dropdown-item" href="{{ route('form_brincolines') }}">Form brincolines</a></li>
                         <li><a class="dropdown-item" href="{{ route('form_extenciones') }}">Form Extensiones</a></li>
                         <li><a class="dropdown-item" href="{{ route('form_manteles') }}">Form Manteles</a></li>
-                        <li><a class="dropdown-item" href="{{ route('form_rentas') }}">Form Rentas</a></li>
+                        <!-- con este "href" diferente es lo del controlador de renta apra que la consulta se peuda
+                            usar en varias vistas, asi va: { route('name en el web.php', ['la variable creada en el controlador' => 'el nombre de la vista a dirigir']) }--> 
+                        <li><a class="dropdown-item" href="{{ route('form_renta', ['vista' => 'form_rentas']) }}">Form Rentas</a></li>
+                        
                     </ul>
                 </li>
             </div>

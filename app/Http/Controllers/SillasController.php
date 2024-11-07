@@ -35,4 +35,29 @@ class SillasController extends Controller
         $dato_sillas = Sillas::where('estatus_sillas', 1)->get();
         return view('lista_sillas', compact('dato_sillas'));
     }
+
+    public function editarsilla($pk_sillas){
+        $dato_sillas = Sillas::find($pk_sillas);
+
+        return view('editar_sillas', compact('dato_sillas'));
+    }
+
+    public function actualizarsilla(Request $request, $pk_sillas){
+        $editar_sillas = Sillas::find($pk_sillas);
+
+
+        if ($request->hasFile('imagen_silla')) {
+            $imagen = $request->file('imagen_silla');
+            $rutaimagen = $imagen->store('public/images'); 
+            $editar_sillas->imagen_sillas = str_replace('public/', '', $rutaimagen);
+        }
+
+        $editar_sillas->forma_sillas = $request->forma_sillas;
+        $editar_sillas->cant_sillas = $request->cant_sillas;
+        $editar_sillas->audiencia_sillas = $request->audiencia_sillas;
+
+        $editar_sillas->save();
+        return redirect('/lista_sillas')->with('success', 'Silla actualizada');
+    }
+
 }
