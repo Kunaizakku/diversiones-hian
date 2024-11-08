@@ -66,21 +66,24 @@ class RentasController extends Controller
         // return redirect('/form_rentas')->with('success', 'Renta registrada con éxito');
         
         // Guardar en la base de datos
+<<<<<<< HEAD
+        $rentas->save();
+
+        // Redireccionar o devolver respuesta
+        return redirect('/form_rentas')->with('success', 'Renta registrada con éxito');
+=======
 
             $rentas->save();
             return redirect()->route('form_renta', ['vista' => 'form_rentas'])->with('success', 'Renta registrada con éxito');
         } catch (\Exception $e) {
             return redirect()->route('form_renta', ['vista' => 'form_rentas'])->with('error', 'Error al registrar la renta: ' . $e->getMessage());
         }
+>>>>>>> e2924288e12b757e68930a8e592b8c27559f41b0
     }
 
     public function ver_renta($pk_rentas)
     {
-        $ver_renta = Rentas::find($pk_rentas);
-
-        if (!$ver_renta) {
-            return redirect('/rentas')->with('error', 'Renta no encontrada');
-        }
+        $ver_renta = Rentas::findOrFail($pk_rentas);
 
         $dato_renta = Rentas::join('sillas', 'sillas.pk_sillas', '=', 'rentas.fk_sillas')
             ->join('mesas', 'mesas.pk_mesas', '=', 'rentas.fk_mesas')
@@ -97,12 +100,9 @@ class RentasController extends Controller
 
     public function verRentasCalendario($pk_rentas)
     {
-        try {
-            $rentas = Rentas::whereDate('fecha_entrega', $pk_rentas)->get();
-            return response()->json($rentas);
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Error al obtener rentas: ' . $e->getMessage()], 500);
-        }
+        $rentas = Rentas::whereDate('fecha_entrega', $pk_rentas)->get();
+
+        return response()->json($rentas);
     }
 
 
@@ -177,3 +177,4 @@ class RentasController extends Controller
         return redirect('/lista_rentas')->with('success', 'Renta actualizada exitosamente');
     }
 }
+    

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="ruta/a/tu/imagen.ico" rel="icon">
     <title>Rentas Registradas</title>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- Incluye SweetAlert -->
     <style>
         .body_container_table_rent_details {
             display: flex;
@@ -97,6 +97,27 @@
     </style>
 </head>
 <body>
+    @if (session('success'))
+    <script>
+        Swal.fire({
+            title: 'Éxito!',
+            text: '{{ session('success') }}',
+            icon: 'success',
+            confirmButtonText: 'Aceptar'
+        });
+    </script>
+    @endif
+
+    @if (session('error'))
+    <script>
+        Swal.fire({
+            title: 'Error!',
+            text: '{{ session('error') }}',
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+        });
+    </script>
+    @endif
 
     @include('sidebar')
 
