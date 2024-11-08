@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,6 +29,16 @@
 </head>
 
 <body>
+
+@if(session('id'))
+        
+        
+        @else
+            <script>
+                window.location.href="{{url('/')}}";
+            </script>
+@endif
+
     <div class="sidebar">
         <div class="logo_content">
             <div class="logo">
@@ -37,7 +48,7 @@
         </div>
         <ul class="nav_list">
             <li>
-                <a href="{{ url('/') }}">
+                <a href="{{ url('/inicio') }}">
                     <i class='bi bi-house'></i>
                     <span class="links_name">Inicio</span>
                 </a>
@@ -68,7 +79,10 @@
                         <li><a class="dropdown-item" href="{{ route('form_brincolines') }}">Form brincolines</a></li>
                         <li><a class="dropdown-item" href="{{ route('form_extenciones') }}">Form Extensiones</a></li>
                         <li><a class="dropdown-item" href="{{ route('form_manteles') }}">Form Manteles</a></li>
-                        <li><a class="dropdown-item" href="{{ route('form_rentas') }}">Form Rentas</a></li>
+                        <!-- con este "href" diferente es lo del controlador de renta apra que la consulta se peuda
+                            usar en varias vistas, asi va: { route('name en el web.php', ['la variable creada en el controlador' => 'el nombre de la vista a dirigir']) }--> 
+                        <li><a class="dropdown-item" href="{{ route('form_renta', ['vista' => 'form_rentas']) }}">Form Rentas</a></li>
+                        
                     </ul>
                 </li>
             </div>
@@ -81,12 +95,12 @@
                         <span class="links_name">Listas</span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownListas">
-                        <li><a class="dropdown-item" href="{{ route('lista_sillas') }}">Lista Silla</a></li>
-                        <li><a class="dropdown-item" href="{{ route('lista_mesas') }}">Lista Mesas</a></li>
-                        <li><a class="dropdown-item" href="{{ route('lista_brincolines') }}">Lista Brincolines</a></li>
-                        <li><a class="dropdown-item" href="{{ route('lista_extenciones') }}">Lista Extensiones</a></li>
+                        <li><a class="dropdown-item" href="{{ route('silla.listasillas') }}">Lista Silla</a></li>
+                        <li><a class="dropdown-item" href="{{ route('mesa.listamesas') }}">Lista Mesas</a></li>
+                        <li><a class="dropdown-item" href="{{ route('brincolin.listabrincolines') }}">Lista Brincolines</a></li>
+                        <li><a class="dropdown-item" href="{{ route('extencion.listaextenciones') }}">Lista Extensiones</a></li>
                         <li><a class="dropdown-item" href="{{ route('lista_manteles') }}">Lista Manteles</a></li>
-                        <li><a class="dropdown-item" href="{{ route('lista_rentas') }}">Lista Rentas</a></li>
+                        <li><a class="dropdown-item" href="{{ route('renta.listarentas') }}">Lista Rentas</a></li>
                     </ul>
                 </li>
             </div>

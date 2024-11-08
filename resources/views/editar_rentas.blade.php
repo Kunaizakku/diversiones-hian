@@ -23,26 +23,26 @@
   @endif
 
   <div class="form-container-rentas">
-    <p class="title">Registro de Renta</p>
-    <form action="{{ route('renta.insertarrentas') }}" method="post" enctype="multipart/form-data">
+    <p class="title">Editar Renta</p>
+    <form action="{{ route('renta.actualizarrenta', $ver_renta->pk_rentas) }}" method="post" enctype="multipart/form-data">
       @csrf
 
       <div class="form-flex">
         <div class="input-group form-half-50">
           <label for="direccion">Dirección</label>
-          <input type="text" name="direccion" id="direccion" placeholder="Ingresa la dirección" maxlength="100" required>
+          <input type="text" name="direccion" id="direccion" placeholder="Ingresa la dirección" maxlength="100" value="{{ $dato_renta_fks->direccion }}" required>
         </div> 
         <div class="input-group form-half-25">
           <label for="fecha_entrega">Fecha de Entrega</label>
-          <input type="date" name="fecha_entrega" id="fecha_entrega" required>
+          <input type="date" name="fecha_entrega" id="fecha_entrega" value="{{ $dato_renta_fks->fecha_entrega }}" required>
         </div>
         <div class="input-group form-half-25">
           <label for="celular">Número de Celular</label>
-          <input type="tel" name="celular" id="celular" placeholder="Ingresa el número de celular" required pattern="[0-9]{10}">
+          <input type="tel" name="celular" id="celular" placeholder="Ingresa el número de celular" value="{{ $dato_renta_fks->celular }}" required pattern="[0-9]{10}">
         </div>
         <div class="input-group form-half-25">
           <label for="costo">Costo de la Renta</label>
-          <input type="number" name="costo" id="costo" placeholder="Ingresa el costo" min="0" step="0.01" required>
+          <input type="number" name="costo" id="costo" placeholder="Ingresa el costo" min="0" step="0.01" value="{{ $dato_renta_fks->costo }}" required>
         </div>
       </div>
 
@@ -73,15 +73,18 @@
       <div id="sillas_inputs" class="hidden input-group">
         <h2>Sillas</h2>
         <label for="tipo_sillas_renta">Tipo de silla</label>
-        <select name="fk_sillas">
+        <select name="fk_sillas" value="{{ $dato_renta_fks->fk_sillas }}">
             @foreach ($opcion_sillas as $opc_silla)
-            <option value="{{ $opc_silla->pk_sillas }}">{{ $opc_silla->forma_sillas }}</option> <!-- Ajusta según el campo que necesites -->
+            <option value="{{ $opc_silla->pk_sillas }}"
+            {{ $dato_renta_fks->fk_sillas == $opc_silla->pk_sillas ? 'selected' : '' }}>
+            {{ $opc_silla->forma_sillas }}
+          </option> <!-- Ajusta según el campo que necesites -->
             @endforeach
         </select>
         <label for="cant_sillas_renta">Cantidad de sillas</label>
-        <input type="number" name="cant_sillas_renta" id="cant_sillas_renta" value="0">
+        <input type="number" name="cant_sillas_renta" id="cant_sillas_renta" value="{{ $dato_renta_fks->cant_sillas_renta }}">
         <label for="audencia_sillas_renta">Audiencia</label>
-        <select name="audencia_sillas_renta">
+        <select name="audencia_sillas_renta" value="{{ $dato_renta_fks->audencia_sillas_renta }}">
             <option value="sin audencia">Selecciona una audiencia</option>
             <option value="Adultos">Adultos</option>
             <option value="Niños">Niños</option>
@@ -92,15 +95,18 @@
       <div id="mesas_inputs" class="hidden input-group">
         <h2>Mesas</h2>
         <label for="tipo_mesas_renta">Tipo de mesas</label>
-        <select name="fk_mesas">
+        <select name="fk_mesas" value="{{ $dato_renta_fks->fk_mesas }}">
             @foreach ($opcion_mesas as $opc_mesas)
-            <option value="{{ $opc_mesas->pk_mesas }}">{{ $opc_mesas->forma_mesas }}</option> <!-- Ajusta según el campo que necesites -->
+            <option value="{{ $opc_mesas->pk_mesas }}"
+            {{ $dato_renta_fks->fk_mesas == $opc_mesas->pk_mesas ? 'selected' : '' }}>
+            {{ $opc_mesas->forma_mesas }}
+          </option> <!-- Ajusta según el campo que necesites -->
             @endforeach
         </select>
         <label for="cant_mesas_renta">Cantidad de mesas</label>
-        <input type="number" name="cant_mesas_renta" id="cant_mesas_renta" value="0">
+        <input type="number" name="cant_mesas_renta" id="cant_mesas_renta" value="{{ $dato_renta_fks->cant_mesas_renta }}">
         <label for="audencia_mesas_renta">Audiencia</label>
-        <select name="audencia_mesas_renta">
+        <select name="audencia_mesas_renta" value="{{ $dato_renta_fks->audencia_mesas_renta }}">
             <option value="sin audiencia">Selecciona una audiencia</option>
             <option value="Adultos">Adultos</option>
             <option value="Niños">Niños</option>
@@ -111,15 +117,18 @@
       <div id="manteles_inputs" class="hidden input-group">
         <h2>Manteles</h2>
         <label for="tipo_manteles_renta">Tipo de mantel</label>
-        <select name="fk_manteles">
+        <select name="fk_manteles" value="{{ $dato_renta_fks->fk_manteles }}">
             @foreach ($opcion_manteles as $opc_manteles)
-              <option value="{{ $opc_manteles->pk_manteles }}">{{ $opc_manteles->color_manteles }}</option> <!-- Ajusta según el campo que necesites -->
+              <option value="{{ $opc_manteles->pk_manteles }}"
+              {{ $dato_renta_fks->fk_manteles == $opc_manteles->pk_manteles ? 'selected' : '' }}>
+              {{ $opc_manteles->color_manteles }}
+              </option> <!-- Ajusta según el campo que necesites -->
             @endforeach
         </select>
         <label for="cant_manteles_renta">Cantidad de manteles</label>
-        <input type="number" name="cant_manteles_renta" id="cant_manteles_renta" value="0">
+        <input type="number" name="cant_manteles_renta" id="cant_manteles_renta" value="{{ $dato_renta_fks->cant_manteles_renta }}">
         <label for="tipo_manteles_renta">Tipo de mantel</label>
-        <select name="tipo_manteles_renta">
+        <select name="tipo_manteles_renta" value="{{ $dato_renta_fks->tipo_manteles_renta }}">
             <option value="sin mantel">selecciona un mantel</option>
             <option value="Adultos">Cuadrado</option>
             <option value="Niños">redondo</option>
@@ -132,25 +141,34 @@
         <label for="tipo_brincolines_renta">Tipo de brincolin</label>
         <select name="fk_brincolines">
             @foreach ($opcion_brincolines as $opc_brincolines)
-              <option value="{{ $opc_brincolines->pk_brincolines }}">{{ $opc_brincolines->nombre_brincolines }}</option> <!-- Ajusta según el campo que necesites -->
+              <option value="{{ $opc_brincolines->pk_brincolines }}"
+              {{ $dato_renta_fks->fk_brincolines == $opc_brincolines->pk_brincolines ? 'selected' : '' }}>
+              {{ $opc_brincolines->nombre_brincolines }}
+              </option> <!-- Ajusta según el campo que necesites -->
             @endforeach
         </select>
         <label for="motores_brincolines_renta">Motores</label>
         <select name="fk_motores">
             @foreach ($opcion_motores as $opc_motores)
-              <option value="{{ $opc_motores->pk_motores }}">{{ $opc_motores->color_motores }}</option> <!-- Ajusta según el campo que necesites -->
+              <option value="{{ $opc_motores->pk_motores }}"
+                {{ $dato_renta_fks->fk_motores == $opc_motores->pk_motores ? 'selected' : '' }}>
+                {{ $opc_motores->color_motores }}
+              </option> <!-- Ajusta según el campo que necesites -->
             @endforeach
         </select>
         <label for="extenciones_brincolines_renta">Extenciones para el brincolin</label>
         <select name="fk_extenciones">
             @foreach ($opcion_extenciones as $opc_extenciones)
-              <option value="{{ $opc_extenciones->pk_extenciones }}">{{ $opc_extenciones->nombre_extenciones }}</option> <!-- Ajusta según el campo que necesites -->
+              <option value="{{ $opc_extenciones->pk_extenciones }}"
+              {{ $dato_renta_fks->fk_extenciones == $opc_extenciones->pk_extenciones ? 'selected' : '' }}>
+              {{ $opc_extenciones->nombre_extenciones }}
+            </option> <!-- Ajusta según el campo que necesites -->
             @endforeach
         </select>
       </div>
 
       <div class="input-group">
-        <button type="submit" class="sign">Registrar Renta</button>
+        <button type="submit" class="sign">Actualizar Renta</button>
       </div>
 
     </form>

@@ -5,11 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Diversiones-Hian | Inicio de sesión</title>
+  <link rel="stylesheet" href="{{ asset('css/estilo.css') }}?v=1">
+  <link rel="stylesheet" href="{{ asset('css/tablas.css') }}?v=1">
+  <link rel="stylesheet" href="{{ asset('css/formularios.css') }}?v=1">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- Incluye SweetAlert -->
 </head>
 <body>
-
-  @include('sidebar')
+@if(session('id'))
+            <script>
+                window.location.href="{{url('/inicio')}}";
+            </script>
+        
+        @else
+            
+@endif
+ 
 
     {{-- @if (session('success'))
         <div class="alert alert-success">
@@ -29,7 +39,7 @@
         </div>
     @endif --}}
         
-  <div class="form-container">
+  <div class="form-container" style="margin-top: 15vh; >
       <p class="title">Inicio de sesión</p>
       <form class="form" id="form-login" action="{{ route('usuario.login') }}" method="post">
           @csrf
