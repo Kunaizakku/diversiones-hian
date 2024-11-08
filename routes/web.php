@@ -8,6 +8,8 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ExtencionesController;
 use App\Http\Controllers\MantelesController;
 use App\Http\Controllers\RentasController;
+use App\Http\Controllers\MotoresController;
+use App\Models\Motores;
 use App\Models\Usuario;
 
 Route::get('/', function () {
@@ -67,14 +69,13 @@ Route::get('/editar_extenciones/{pk_extenciones}', [ExtencionesController::class
 Route::post('/actualizarextenciones/{pk_extenciones}', [ExtencionesController::class, 'actualizarextencion'])->name('extencion.actualizarextencion');
 
 // Manteles
-Route::get('/form_manteles', function () {
-    return view('form_manteles');
-})->name('form_manteles');
+Route::get('/form_manteles', function () { return view('form_manteles'); })->name('form_manteles');
 Route::post('/formulariomanteles', [MantelesController::class, 'insertarmanteles'])->name('mantel.insertarmanteles');
-
-Route::get('/lista_manteles', function () {
-    return view('lista_manteles'); // Aquí se retorna la vista
-})->name('lista_manteles');
+Route::get('/lista_manteles', [MantelesController::class, 'ver_manteles'])->name('mantel.listamanteles');
+Route::get('/editar_manteles/{pk_manteles}', [MantelesController::class, 'editarmantel'])->name('mantel.editarmantel');
+Route::post('/actualizarmanteles/{pk_manteles}', [MantelesController::class, 'actualizarmanteles'])->name('mantel.actualizarmantel');
+Route::get('/bajamanteles/{pk_manteles}', [MantelesController::class, 'bajamanteles'])->name('mantel.bajamanteles');
+Route::get('/activarmanteles/{pk_manteles}', [MantelesController::class, 'activarmanteles'])->name('mantel.activarmanteles');
 
 // Rentas
 
@@ -99,11 +100,19 @@ Route::get('/editar_rentas/{pk_rentas}', [RentasController::class, 'editarrenta'
 
 Route::post('/actualizarrentas/{pk_rentas}', [RentasController::class, 'actualizarrenta'])->name('renta.actualizarrenta');
 
+// Motores
+
+Route::get('/form_motores', function () { return view('form_motores'); })->name('form_motores');
+Route::post('/formulariomotores', [MotoresController::class, 'insertarmotor'])->name('motor.insertarmotor');
+Route::get('/lista_motores', [MotoresController::class, 'ver_motores'])->name('motor.listamotores');
+Route::get('/editar_motores/{pk_motores}', [MotoresController::class, 'editarmotor'])->name('motor.editarmotor');
+Route::post('/actualizarmotores/{pk_motores}', [MotoresController::class, 'actualizarmotores'])->name('motor.actualizarmotor');
+Route::get('/bajamotores/{pk_motores}', [MotoresController::class, 'bajamotores'])->name('motor.bajamotores');
+Route::get('/activarmotores/{pk_motores}', [MotoresController::class, 'activarmotores'])->name('motor.activarmotores');
+
 
 //usuario/login
-Route::get('/iniciarsesion', function () {
-    return view('login');
-})->name('iniciarsesion');
+Route::get('/iniciarsesion', function () { return view('login'); })->name('iniciarsesion');
 
 Route::get('/login', function () {
     $PK_USUARIO = session('pk_usuario');

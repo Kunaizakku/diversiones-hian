@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="ruta/a/tu/imagen.ico" rel="icon">
-    <title>Lista Manteles</title>
+    <title>Lista Motores</title>
 </head>
 <body class="body">
 
@@ -26,39 +26,37 @@
     
     <div class="body-container">
         <div class="table-container">
-            <h1>Manteles Registradas</h1>
+            <h1>Motores Registradas</h1>
             <br>
-            <table id="tabla-mantel">
+            <table id="tabla-motor">
                 <thead>
                     <tr>
-                        <th>Imagen del mantel</th>
-                        <th>Color del mantel</th>
-                        <th>Tipo de mantel</th>
+                        <th>Imagen del motor</th>
+                        <th>Color del motor</th>
                         <th>Cantidad</th>
-                        <th>Estado del mantel</th>
+                        <th>Estado del motor</th>
                         <th>Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($dato_mantel as $mantel)
+                    @foreach ($dato_motor as $motor)
                     <tr>
-                        <td><img src="{{ asset('storage/' . $mantel->imagen_manteles) }}" alt="" width="50"></td>
-                        <td>{{$mantel->color_manteles}}</td>
-                        <td>{{$mantel->tipo_manteles}}</td>
-                        <td>{{$mantel->cant_manteles}}</td>
-                        <td>{{$mantel->estatus_manteles == 1 ? 'Activo' : 'Inactivo' }}</td>
+                        <td><img src="{{ asset('storage/' . $motor->imagen_motores) }}" alt="" width="50"></td>
+                        <td>{{$motor->color_motores}}</td>
+                        <td>{{$motor->cant_motores}}</td>
+                        <td>{{$motor->estatus_motores == 1 ? 'Activo' : 'Inactivo' }}</td>
                         <td>
                             <div>
-                                <a href="{{route('mantel.editarmantel', ['pk_manteles' => $mantel->pk_manteles])}}">
-                                    <i class="bi bi-pencil-square" title="Editar mantel"></i>
+                                <a href="{{route('motor.editarmotor', ['pk_motores' => $motor->pk_motores])}}">
+                                    <i class="bi bi-pencil-square" title="Editar motor"></i>
                                 </a>
-                                @if ($mantel->estatus_manteles == 1)
-                                <a href="{{route('mantel.bajamanteles', ['pk_manteles' => $mantel->pk_manteles])}}" >
-                                    <i class="bi bi-lock" title="Inactivar mantel"></i>
+                                @if ($motor->estatus_motores == 1)
+                                <a href="{{route('motor.bajamotores', ['pk_motores' => $motor->pk_motores])}}" >
+                                    <i class="bi bi-lock" title="Inactivar motor"></i>
                                 </a>
                                 @else
-                                <a href="{{route('mantel.activarmanteles', ['pk_manteles' => $mantel->pk_manteles])}}" >
-                                    <i class="bi bi-unlock" title="Activar mantel"></i>
+                                <a href="{{route('motor.activarmotores', ['pk_motores' => $motor->pk_motores])}}" >
+                                    <i class="bi bi-unlock" title="Activar motor"></i>
                                 </a>
                                 @endif
                             </div>
@@ -73,7 +71,7 @@
     <script>
         // Tabla con DataTable
         $(document).ready(function () {
-            $('#tabla-mantel').DataTable({
+            $('#tabla-motor').DataTable({
                 "language": {
                     "search": "Buscar:",
                     "info": "Mostrando START a END de TOTAL registros",
