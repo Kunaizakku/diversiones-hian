@@ -45,7 +45,7 @@
           @csrf
           <div class="input-group">
               <label for="username">Nombre de usuario</label>
-              <input autocomplete="off" type="text" name="usuario" id="username" placeholder="Ingresa tu nombre de usuario">
+              <input autocomplete="off" type="text" name="usuario" id="username" placeholder="Ingresa tu nombre de usuario" required>
           </div>
           <div class="input-group">
               <label for="password">Contraseña</label>
