@@ -33,7 +33,41 @@ class MantelesController extends Controller
     }
 
     public function ver_manteles(){
-        $dato_manteles = Manteles::where('estatus_manteles', 1)->get();
-        return view('lista_manteles', compact('dato_manteles'));
+        $dato_mantel = Manteles::get();
+        return view('lista_manteles', compact('dato_mantel'));
+    }
+
+    public function editarmantel($pk_manteles){
+        $dato_mantel = Manteles::find($pk_manteles);
+
+        return view('editar_manteles', compact('dato_mantel'));
+    }
+
+    public function actualizarmanteles($pk_manteles, Request $request){
+        $editar_manteles = Manteles::find($pk_manteles);
+
+        if ($request->hasFile('imagen_manteles')) {
+            $imagen = $request->file('imagen_manteles');
+            $rutaimagen = $imagen->store('public/images');
+            $editar_manteles->imagen_manteles = str_replace('public/', '', $rutaimagen);
+        }
+        $editar_manteles->color_manteles = $request->color_manteles;
+        $editar_manteles->cant_manteles = $request->cant_manteles;
+        $editar_manteles->save();
+        return redirect('/lista_manteles')->with('success', 'mantel actualizada');
+    }
+
+    public function bajamanteles($pk_manteles){
+        $baja_manteles = Manteles::find($pk_manteles);
+        $baja_manteles->estatus_manteles = 0;
+        $baja_manteles->save();
+        return redirect('/lista_manteles')->with('success', 'mantel dado de baja');
+    }
+
+    public function activarmanteles($pk_manteles){
+        $baja_manteles = Manteles::find($pk_manteles);
+        $baja_manteles->estatus_manteles = 1;
+        $baja_manteles->save();
+        return redirect('/lista_manteles')->with('success', 'mantel dado de alta');
     }
 }
