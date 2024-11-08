@@ -21,41 +21,30 @@
                         <th>Imagen de la Extensión</th>
                         <th>Nombre de la Extensión</th>
                         <th>Cantidad</th>
-                        <th></th>
+                        <th>Estado de Extenciones</th>
+                        <th>Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <!-- Datos de ejemplo estáticos -->
+                    @foreach ($dato_extensiones as $extencion)
                     <tr>
-                        <td><img src="ruta/a/imagen_extension1.jpg" alt="Imagen de la extensión" width="50"></td>
-                        <td>Extensión Básica</td>
-                        <td>5</td>
+                        <td><img src="{{ asset('storage/' . $extencion->imagen_extenciones) }}" alt="$extencion->nombre_extenciones" width="50"></td>
+                        <td>{{$extencion->nombre_extenciones}}</td>
+                        <td>{{$extencion->cant_extenciones}}</td>
+                        <td>{{ $extencion->estatus_extenciones == 1 ? 'Activo' : 'Inactivo' }}</td>
                         <td>
                             <div>
-                                <a href="#">
-                                    <i class="bi bi-pencil-square" title="Editar extensión"></i>
+                                <a href="{{ route('extencion.editarextencion', ['pk_extenciones' => $extencion->pk_extenciones]) }}">
+                                    <i class="bi bi-pencil-square" title="Editar silla"></i>
                                 </a>
                                 <a href="#" onclick="confirmarBaja(event)">
-                                    <i class="bi bi-lock" title="Eliminar extensión"></i>
+                                    <i class="bi bi-lock" title="Eliminar silla"></i>
                                 </a>
                             </div>
                         </td>
                     </tr>
-                    <tr>
-                        <td><img src="ruta/a/imagen_extension2.jpg" alt="Imagen de la extensión" width="50"></td>
-                        <td>Extensión Avanzada</td>
-                        <td>10</td>
-                        <td>
-                            <div>
-                                <a href="#">
-                                    <i class="bi bi-pencil-square" title="Editar extensión"></i>
-                                </a>
-                                <a href="#" onclick="confirmarBaja(event)">
-                                    <i class="bi bi-lock" title="Eliminar extensión"></i>
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
