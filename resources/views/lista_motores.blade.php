@@ -46,7 +46,7 @@
                         <td>{{$motor->cant_motores}}</td>
                         <td>{{$motor->estatus_motores == 1 ? 'Activo' : 'Inactivo' }}</td>
                         <td>
-                            <div>
+                            <div> 
                                 <a href="{{route('motor.editarmotor', ['pk_motores' => $motor->pk_motores])}}">
                                     <i class="bi bi-pencil-square" title="Editar motor"></i>
                                 </a>

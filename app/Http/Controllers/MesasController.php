@@ -33,7 +33,7 @@ class MesasController extends Controller
     }
 
     public function ver_mesas(){
-        $dato_mesas = Mesas::where('estatus_mesas', 1)->get();
+        $dato_mesas = Mesas::whereIn('estatus_mesas', [1,0])->get();
         return view('lista_mesas', compact('dato_mesas'));
     }
 
@@ -61,4 +61,19 @@ class MesasController extends Controller
         
         return redirect('/lista_mesas')->with('success', 'Mesa actualizada');
     }
+
+    public function bajamesas($pk_mesas){
+        $baja_mesas = Mesas::find($pk_mesas);
+        $baja_mesas->estatus_mesas = 0;
+        $baja_mesas->save();
+        return redirect('/lista_mesas')->with('success', 'Mesa dado de baja');
+    }
+ 
+    public function activarmesas($pk_mesas){
+        $baja_mesas = Mesas::find($pk_mesas);
+        $baja_mesas->estatus_mesas = 1;
+        $baja_mesas->save();
+        return redirect('/lista_mesas')->with('success', 'Mesa dado de alta');
+    }
+
 }

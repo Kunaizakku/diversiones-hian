@@ -40,9 +40,15 @@
                                 <a href="{{route('silla.editarsilla', ['pk_sillas' => $silla->pk_sillas])}}">
                                     <i class="bi bi-pencil-square" title="Editar silla"></i>
                                 </a>
-                                <a href="#" onclick="confirmarBaja(event)">
-                                    <i class="bi bi-lock" title="Eliminar silla"></i>
+                                @if ($silla->estatus_sillas == 1)
+                                <a href="{{route('silla.bajasillas', ['pk_sillas' => $silla->pk_sillas])}}" >
+                                    <i class="bi bi-lock" title="Inactivar silla"></i>
                                 </a>
+                                @else
+                                <a href="{{route('silla.activarsillas', ['pk_sillas' => $silla->pk_sillas])}}" >
+                                    <i class="bi bi-unlock" title="Activar silla"></i>
+                                </a>
+                                @endif
                             </div>
                         </td>
                     </tr>
