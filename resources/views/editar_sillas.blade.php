@@ -42,7 +42,9 @@
     <!-- Campo para subir la imagen de la silla -->
     <div class="input-group" >
       <label for="">Imagen Actual</label>
-      <img src="{{ asset('storage/' . $dato_sillas->imagen_sillas) }}" alt="" width="150" >
+      <div class="img_form_edit">
+        <img src="{{ asset('storage/' . $dato_sillas->imagen_sillas) }}" alt="" width="150" >
+      </div>
     </div>
 
     <div class="input-group">

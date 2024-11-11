@@ -40,7 +40,9 @@
             
             <div class="input-group" >
                 <label for="">Imagen Actual</label>
-                <img src="{{ asset('storage/' . $dato_brincolines->imagen_brincolines) }}" alt="" width="100" >
+                <div class="img_form_edit">
+                    <img src="{{ asset('storage/' . $dato_brincolines->imagen_brincolines) }}" alt="" width="100" >
+                </div>
             </div>
 
             <!-- Campo para la imagen del brincolín -->

@@ -40,7 +40,9 @@
 
             <div class="input-group" >
                 <label for="">Imagen Actual</label>
-                <img src="{{ asset('storage/' . $dato_extenciones->imagen_extenciones) }}" alt="" width="150" >
+                <div class="img_form_edit">
+                    <img src="{{ asset('storage/' . $dato_extenciones->imagen_extenciones) }}" alt="" width="150" >
+                </div>
             </div>
 
             <!-- Campo para la imagen de la extensión -->
