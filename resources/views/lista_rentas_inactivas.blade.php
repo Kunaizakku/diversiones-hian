@@ -44,8 +44,8 @@
                                 <a href="{{ route('renta.editarrenta', [ 'pk_rentas' => $renta->pk_rentas]) }}">
                                     <i class="bi bi-pencil-square" title="Editar renta"></i>
                                 </a>
-                                <a href="{{route('renta.bajarentas', ['pk_rentas' => $renta->pk_rentas])}}" >
-                                    <i class="bi bi-lock" title="Desactivar renta"></i>
+                                <a href="{{route('renta.activarrentas', ['pk_rentas' => $renta->pk_rentas])}}" >
+                                    <i class="bi bi-unlock" title="Activar renta"></i>
                                 </a>
                                 <a href="{{ route('renta.ver_renta', ['pk_rentas' => $renta->pk_rentas]) }}">
                                     <i class="bi bi-eye" title="Mostrar informacion derenta"></i>
@@ -78,18 +78,18 @@
             });
         });
 
-        // function confirmarBaja(event) {
-        //     event.preventDefault();
+        function confirmarBaja(event) {
+            event.preventDefault();
 
-        //     const link = event.target.closest('a');
+            const link = event.target.closest('a');
 
-        //     if (link) {
-        //         const confirmacion = confirm('¿Seguro que deseas eliminar esta renta?');
-        //         if (confirmacion) {
-        //             // Acción para eliminar el registro
-        //         }
-        //     }
-        // }
+            if (link) {
+                const confirmacion = confirm('¿Seguro que deseas eliminar esta renta?');
+                if (confirmacion) {
+                    // Acción para eliminar el registro
+                }
+            }
+        }
     </script>
 
     @include('fooder')

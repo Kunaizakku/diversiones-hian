@@ -244,7 +244,7 @@
             }
             cell.classList.add('active');
             selectedCell = cell;
-
+ 
             fetch(`/get-rentas/${formattedDate}`)
                 .then(response => response.json())
                 .then(data => {
