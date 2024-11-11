@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller
 {
@@ -14,7 +15,8 @@ class UsuarioController extends Controller
         
         $usuario->nombre = $req->nombre;
         $usuario->usuario = $req->usuario;
-        $usuario->contrasena = $req->contrasena;
+        // Hashear la contraseña antes de guardarla en la base de datos
+        $usuario->contrasena = Hash::make($req->contrasena);
         $usuario->estatus_usuario = 1;
 
         $usuario->save();
@@ -26,9 +28,9 @@ class UsuarioController extends Controller
         $nombre = $request->input('usuario');
         $contraseña = $request->input('contrasena');
 
-        $usuario = $this->buscar($nombre, $contraseña);
+        $usuario = Usuario::where('usuario', $nombre)->first();
 
-        if ($usuario) {
+        if ($usuario && Hash::check($contraseña, $usuario->contrasena)) {
             // Verificar si el estatus del usuario es 0
             if ($usuario->estatus_usuario == 0) {
                 return redirect()->to('/iniciarsesion')
@@ -39,7 +41,6 @@ class UsuarioController extends Controller
             session([
                 'id' => $usuario->pk_usuario,
                 'nombre' => $usuario->usuario,
-                'contrasena' => $contraseña,
                 'estatus' => $usuario->estatus_usuario
             ]);
 
@@ -56,17 +57,6 @@ class UsuarioController extends Controller
         Auth::logout(); 
         session()->flush(); // Cierra la sesión del usuario
         return redirect('/')->with('success', 'Sesión cerrada');
-    }
-
-    private function buscar($usuario, $contrasena) {
-        $usuario = Usuario::where('usuario', $usuario)
-            ->first();
-    
-        if ($usuario && $contrasena == $usuario->contrasena) {
-            return $usuario;
-        } else {
-            return null;
-        }
     }
 
     public function detalle_usuario() {
