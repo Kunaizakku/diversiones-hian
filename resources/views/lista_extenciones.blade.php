@@ -48,9 +48,15 @@
                                 <a href="{{ route('extencion.editarextencion', ['pk_extenciones' => $extencion->pk_extenciones]) }}">
                                     <i class="bi bi-pencil-square editar" title="Editar extensión"></i>
                                 </a>
-                                <a href="#" onclick="confirmarBaja(event)">
-                                    <i class="bi bi-lock eliminar" title="Eliminar extensión"></i>
+                                @if ($extencion->estatus_extenciones == 1)
+                                <a href="{{route('extencion.bajaextenciones', ['pk_extenciones' => $extencion->pk_extenciones])}}" >
+                                    <i class="bi bi-lock" title="Inactivar motor"></i>
                                 </a>
+                                @else
+                                <a href="{{route('extencion.activarextenciones', ['pk_extenciones' => $extencion->pk_extenciones])}}" >
+                                    <i class="bi bi-unlock" title="Activar motor"></i>
+                                </a>
+                                @endif
                             </div>
                         </td>
                     </tr>

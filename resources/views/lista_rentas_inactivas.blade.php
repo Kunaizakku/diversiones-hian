@@ -10,16 +10,6 @@
 <body class="body">
 
     @include('sidebar')
-    @if (session('success'))
-        <script>
-            Swal.fire({
-                title: 'Éxito!',
-                text: '{{ session("success") }}',
-                icon: 'success',
-                confirmButtonText: 'Aceptar'
-            });
-        </script>
-    @endif
     
     <div class="body-container">
         <div class="table-container">
@@ -33,31 +23,32 @@
                         <th>Número de Celular</th>
                         <th>Costo de la Renta</th>
                         <th>Sillas</th>
-                        <th>Mesas</th>
+                        <th>mesas</th>
                         <th>Brincolines</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($dato_rentas as $renta)
+                    <!-- Datos de ejemplo estáticos -->
+                     @foreach ($dato_rentas as $renta)
                     <tr>
-                        <td data-label="Fecha de Entrega">{{$renta->fecha_entrega}}</td>
-                        <td data-label="Dirección">{{$renta->direccion}}</td>
-                        <td data-label="Número de Celular">{{$renta->celular}}</td>
-                        <td data-label="Costo de la Renta">{{$renta->costo}}</td>
-                        <td data-label="Sillas">{{$renta->forma_sillas}}</td>
-                        <td data-label="Mesas">{{$renta->forma_mesas}}</td>
-                        <td data-label="Brincolines">{{$renta->nombre_brincolines}}</td>
-                        <td data-label="Acciones">
-                            <div class="acciones-iconos">
+                        <td>{{$renta->fecha_entrega}}</td>
+                        <td>{{$renta->direccion}}</td>
+                        <td>{{$renta->celular}}</td>
+                        <td>{{$renta->costo}}</td>
+                        <td>{{$renta->forma_sillas}}</td>
+                        <td>{{$renta->forma_mesas}}</td>
+                        <td>{{$renta->nombre_brincolines}}</td>
+                        <td>
+                            <div>
                                 <a href="{{ route('renta.editarrenta', [ 'pk_rentas' => $renta->pk_rentas]) }}">
-                                    <i class="bi bi-pencil-square editar" title="Editar renta"></i>
+                                    <i class="bi bi-pencil-square" title="Editar renta"></i>
                                 </a>
-                                <a href="{{route('renta.bajarentas', ['pk_rentas' => $renta->pk_rentas])}}" >
-                                    <i class="bi bi-lock" title="Desactivar renta"></i>
+                                <a href="{{route('renta.activarrentas', ['pk_rentas' => $renta->pk_rentas])}}" >
+                                    <i class="bi bi-unlock" title="Activar renta"></i>
                                 </a>
                                 <a href="{{ route('renta.ver_renta', ['pk_rentas' => $renta->pk_rentas]) }}">
-                                    <i class="bi bi-eye ver" title="Mostrar información de renta"></i>
+                                    <i class="bi bi-eye" title="Mostrar informacion derenta"></i>
                                 </a>
                             </div>
                         </td>
@@ -87,18 +78,18 @@
             });
         });
 
-        // function confirmarBaja(event) {
-        //     event.preventDefault();
+        function confirmarBaja(event) {
+            event.preventDefault();
 
-        //     const link = event.target.closest('a');
+            const link = event.target.closest('a');
 
-        //     if (link) {
-        //         const confirmacion = confirm('¿Seguro que deseas eliminar esta renta?');
-        //         if (confirmacion) {
-        //             // Acción para eliminar el registro
-        //         }
-        //     }
-        // }
+            if (link) {
+                const confirmacion = confirm('¿Seguro que deseas eliminar esta renta?');
+                if (confirmacion) {
+                    // Acción para eliminar el registro
+                }
+            }
+        }
     </script>
 
     @include('fooder')

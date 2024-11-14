@@ -49,9 +49,17 @@
                                 <a href="{{ route('mesa.editarmesa', ['pk_mesas' => $mesa->pk_mesas]) }}">
                                     <i class="bi bi-pencil-square editar" title="Editar silla"></i>
                                 </a>
+                                @if ($mesa->estatus_mesas == 1)
+                                <a href="{{route('mesa.bajamesas', ['pk_mesas' => $mesa->pk_mesas])}}" >
+                                    <i class="bi bi-lock" title="Inactivar motor"></i>
+                                </a>
+                                @else
+                                <a href="{{route('mesa.activarmesas', ['pk_mesas' => $mesa->pk_mesas])}}" >
+                                    <i class="bi bi-unlock" title="Activar motor"></i>
                                 <a href="#" onclick="confirmarBaja(event)">
                                     <i class="bi bi-lock eliminar" title="Eliminar silla"></i>
                                 </a>
+                                @endif
                             </div>
                         </td>
                     </tr>

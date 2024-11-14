@@ -32,7 +32,7 @@ class SillasController extends Controller
 
     public function ver_sillas()
     {
-        $dato_sillas = Sillas::where('estatus_sillas', 1)->get();
+        $dato_sillas = Sillas::whereIn('estatus_sillas', [1,0])->get();
         return view('lista_sillas', compact('dato_sillas'));
     }
 
@@ -59,5 +59,21 @@ class SillasController extends Controller
         $editar_sillas->save(); 
         return redirect('/lista_sillas')->with('success', 'Silla actualizada');
     }
+
+
+    public function bajasillas($pk_sillas){
+        $baja_sillas = Sillas::find($pk_sillas);
+        $baja_sillas->estatus_sillas = 0;
+        $baja_sillas->save();
+        return redirect('/lista_sillas')->with('success', 'Silla dado de baja');
+    }
+
+    public function activarsillas($pk_sillas){
+        $baja_sillas = Sillas::find($pk_sillas);
+        $baja_sillas->estatus_sillas = 1;
+        $baja_sillas->save();
+        return redirect('/lista_sillas')->with('success', 'Silla dado de alta');
+    }
+
 
 }

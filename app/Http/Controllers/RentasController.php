@@ -64,6 +64,7 @@ class RentasController extends Controller
         // $rentas->save();
         // return redirect('/form_rentas')->with('success', 'Renta registrada con éxito');
         // Guardar en la base de datos
+
             $rentas->save();
             return redirect()->route('form_renta', ['vista' => 'form_rentas'])->with('success', 'Renta registrada con éxito');
         } catch (\Exception $e) {
@@ -107,6 +108,19 @@ class RentasController extends Controller
             ->where('rentas.estatus_renta', '=', 1)
             ->Get();
         return view('lista_rentas', compact('dato_rentas'));
+    }
+
+    public function ver_rentasLista_inactivas()
+    {
+        $dato_rentas = Rentas::join('sillas', 'sillas.pk_sillas', '=', 'rentas.fk_sillas')
+            ->join('mesas', 'mesas.pk_mesas', '=', 'rentas.fk_mesas')
+            ->join('manteles', 'manteles.pk_manteles', '=', 'rentas.fk_manteles')
+            ->join('brincolines', 'brincolines.pk_brincolines', '=', 'rentas.fk_brincolines')
+            ->join('motores', 'motores.pk_motores', '=', 'rentas.fk_motores')
+            ->join('extenciones', 'extenciones.pk_extenciones', '=', 'rentas.fk_extenciones')
+            ->where('rentas.estatus_renta', '=', 0)
+            ->Get();
+        return view('lista_rentas_inactivas', compact('dato_rentas'));
     }
 
 
@@ -167,5 +181,20 @@ class RentasController extends Controller
 
         return redirect('/lista_rentas')->with('success', 'Renta actualizada exitosamente');
     }
+
+    public function bajarentas($pk_rentas){
+        $baja_rentas = Rentas::find($pk_rentas);
+        $baja_rentas->estatus_renta = 0;
+        $baja_rentas->save();
+        return redirect('/lista_rentas_inactivas')->with('success', 'Renta dada de baja');
+    }
+ 
+    public function activarrentas($pk_rentas){
+        $baja_motores = Rentas::find($pk_rentas);
+        $baja_motores->estatus_renta = 1;
+        $baja_motores->save();
+        return redirect('/lista_rentas')->with('success', 'Renta dada de alta');
+    }
+
 }
     
