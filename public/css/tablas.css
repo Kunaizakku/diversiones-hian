@@ -1,55 +1,96 @@
-.body-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 5px;
-    padding: 0 20px; /* Espaciado para móviles */
-}
-.table-container {
-    width: 100%;
-    margin: 0 auto;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    background: #fff;
-    max-width: 1200px;
-}
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-table th, table td {
-    padding: 10px;
-    text-align: left;
-}
-table thead {
-    background-color: #f8f8f8;
-    font-weight: bold;
-}
-table tbody tr {
-    border-bottom: 1px solid #e0e0e0;
-}
-table tbody tr:hover {
-    background-color: #f0f0f0;
-}
-table th {
-    font-size: 14px;
-    color: #333;
-}
-table td {
-    font-size: 13px;
-}
-/* Estilo para pantallas más pequeñas */
+    /* Contenedor general */
+    .body-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        padding: 0 20px; /* Espaciado adaptable */
+    }
+
+    /* Contenedor de la tabla */
+    .table-container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        margin: 20px;
+        padding: 20px;
+        border-radius: 12px;
+        background-color: #ffffff;
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Tabla y elementos básicos */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #fdfdfd;
+        padding: 20px;
+        overflow: hidden;
+        border-radius: 8px;
+    }
+
+    table th, table td {
+        padding: 12px 15px;
+        text-align: center;
+        vertical-align: middle;
+    }
+ 
+    table thead {
+        background-color: #2E8B57; /* Color de encabezado */
+        color: #fff;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    table tbody tr {
+        border-bottom: 1px solid #e0e0e0;
+        transition: background-color 0.3s ease;
+    }
+
+    table tbody tr:hover {
+        background-color: #f2f9ff; /* Fondo al pasar el ratón */
+    }
+
+    table th {
+        font-size: 15px;
+        color: #ffffff;
+    }
+
+    table td {
+        font-size: 14px;
+        color: #333;
+    }
+
+    /* Responsividad para pantallas pequeñas */
 @media (max-width: 768px) {
+    .table-container {
+        width: 100%;
+        padding-bottom: 20px;
+        padding: 15px 140px;
+        margin: 20px;
+        
+        text-align: center;
+        margin: 0 auto;
+    }
+
     table, th, td {
         display: block;
+        text-align: left;
         width: 100%;
+        padding: 20px;
+        margin: 20px;
+        text-align: center;
+        margin: 0 auto;
     }
     table thead {
         display: none;
     }
     table tr {
         margin-bottom: 15px;
+        background-color: #f8f8f8;
+        border-radius: 8px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 10px; /* Añadir espacio alrededor de cada fila */
     }
     table td {
         display: flex;
@@ -60,6 +101,39 @@ table td {
     table td:before {
         content: attr(data-label);
         font-weight: bold;
+        color: #666;
         text-transform: uppercase;
+        flex-basis: 40%;
+    }
+    .acciones-iconos {
+        justify-content: flex-start; /* Alinear iconos a la izquierda en pantallas pequeñas */
+        gap: 10px;
     }
 }
+
+    /* Iconos de acción */
+    .acciones-iconos {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .acciones-iconos i {
+        font-size: 1.4em;
+        transition: color 0.3s ease;
+    }
+
+    .acciones-iconos .editar {
+        color: #28a745;
+    }
+    .acciones-iconos .eliminar {
+        color: #dc3545;
+    }
+    .acciones-iconos .ver {
+        color: #17a2b8;
+    }
+
+    .acciones-iconos i:hover {
+        transform: scale(1.1); /* Efecto de agrandamiento en hover */
+        color: #0056b3; /* Color en hover */
+    }

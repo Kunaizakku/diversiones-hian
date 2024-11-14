@@ -28,7 +28,8 @@ class RentasController extends Controller
         //usó para los select de el formualrio de rentas y como los select de editar renta lo requerian esto hace que pueda
         //usar esta consulta en varias vistas, esto continua en el web.php y el sidebar.php 
         //AVISO, SOLO FUNCIONA CUANDO SE OCUPAN LAS VARIABLES LAS MISMAS VARIABLES SIN OCUPAS OTRAS VARIABLES COM OEL PK Y OTRAS COSAS QUE SEAN ESPECIFICAS
-        return view($vista, compact('opcion_sillas', 'opcion_mesas', 'opcion_manteles', 'opcion_brincolines', 'opcion_motores', 'opcion_extenciones'));
+        return view($vista, compact('opcion_sillas', 'opcion_mesas', 'opcion_manteles', 'opcion_brincolines', 'opcion_motores', 
+        'opcion_extenciones'));
     }
 
     public function insertarrentas(Request $request)
@@ -41,7 +42,6 @@ class RentasController extends Controller
             'direccion' => 'required|string',
             // Agregar más reglas de validación según sea necesario
         ]);
-
         // Crear una nueva instancia de Renta y asignar los valores del formulario
         $rentas = new Rentas();
         $rentas->fecha_entrega = $request->input('fecha_entrega');
@@ -61,24 +61,14 @@ class RentasController extends Controller
         $rentas->fk_motores = $request->input('fk_motores');
         $rentas->fk_extenciones = $request->input('fk_extenciones');
         $rentas->estatus_renta = 1; // O lo que corresponda
-
         // $rentas->save();
         // return redirect('/form_rentas')->with('success', 'Renta registrada con éxito');
-        
         // Guardar en la base de datos
-<<<<<<< HEAD
-        $rentas->save();
-
-        // Redireccionar o devolver respuesta
-        return redirect('/form_rentas')->with('success', 'Renta registrada con éxito');
-=======
-
             $rentas->save();
             return redirect()->route('form_renta', ['vista' => 'form_rentas'])->with('success', 'Renta registrada con éxito');
         } catch (\Exception $e) {
             return redirect()->route('form_renta', ['vista' => 'form_rentas'])->with('error', 'Error al registrar la renta: ' . $e->getMessage());
         }
->>>>>>> e2924288e12b757e68930a8e592b8c27559f41b0
     }
 
     public function ver_renta($pk_rentas)
@@ -145,7 +135,8 @@ class RentasController extends Controller
             ->where('rentas.estatus_renta', '=', 1)
             ->first();
 
-        return view('editar_rentas', compact('ver_renta', 'dato_renta_fks', 'opcion_sillas', 'opcion_mesas', 'opcion_manteles', 'opcion_brincolines', 'opcion_motores', 'opcion_extenciones'));
+        return view('editar_rentas', compact('ver_renta', 'dato_renta_fks', 'opcion_sillas', 'opcion_mesas', 'opcion_manteles', 
+        'opcion_brincolines', 'opcion_motores', 'opcion_extenciones'));
     }
 
     public function actualizarrenta(Request $request, $pk_rentas)

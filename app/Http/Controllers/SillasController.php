@@ -56,7 +56,7 @@ class SillasController extends Controller
         $editar_sillas->cant_sillas = $request->cant_sillas;
         $editar_sillas->audiencia_sillas = $request->audiencia_sillas;
 
-        $editar_sillas->save();
+        $editar_sillas->save(); 
         return redirect('/lista_sillas')->with('success', 'Silla actualizada');
     }
 

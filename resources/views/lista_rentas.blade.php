@@ -10,6 +10,16 @@
 <body class="body">
 
     @include('sidebar')
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                title: 'Éxito!',
+                text: '{{ session("success") }}',
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+            });
+        </script>
+    @endif
     
     <div class="body-container">
         <div class="table-container">
@@ -23,32 +33,31 @@
                         <th>Número de Celular</th>
                         <th>Costo de la Renta</th>
                         <th>Sillas</th>
-                        <th>mesas</th>
+                        <th>Mesas</th>
                         <th>Brincolines</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Datos de ejemplo estáticos -->
-                     @foreach ($dato_rentas as $renta)
+                    @foreach ($dato_rentas as $renta)
                     <tr>
-                        <td>{{$renta->fecha_entrega}}</td>
-                        <td>{{$renta->direccion}}</td>
-                        <td>{{$renta->celular}}</td>
-                        <td>{{$renta->costo}}</td>
-                        <td>{{$renta->forma_sillas}}</td>
-                        <td>{{$renta->forma_mesas}}</td>
-                        <td>{{$renta->nombre_brincolines}}</td>
-                        <td>
-                            <div>
+                        <td data-label="Fecha de Entrega">{{$renta->fecha_entrega}}</td>
+                        <td data-label="Dirección">{{$renta->direccion}}</td>
+                        <td data-label="Número de Celular">{{$renta->celular}}</td>
+                        <td data-label="Costo de la Renta">{{$renta->costo}}</td>
+                        <td data-label="Sillas">{{$renta->forma_sillas}}</td>
+                        <td data-label="Mesas">{{$renta->forma_mesas}}</td>
+                        <td data-label="Brincolines">{{$renta->nombre_brincolines}}</td>
+                        <td data-label="Acciones">
+                            <div class="acciones-iconos">
                                 <a href="{{ route('renta.editarrenta', [ 'pk_rentas' => $renta->pk_rentas]) }}">
-                                    <i class="bi bi-pencil-square" title="Editar renta"></i>
+                                    <i class="bi bi-pencil-square editar" title="Editar renta"></i>
                                 </a>
                                 <a href="#" onclick="confirmarBaja(event)">
-                                    <i class="bi bi-lock" title="Eliminar renta"></i>
+                                    <i class="bi bi-lock eliminar" title="Eliminar renta"></i>
                                 </a>
                                 <a href="{{ route('renta.ver_renta', ['pk_rentas' => $renta->pk_rentas]) }}">
-                                    <i class="bi bi-eye" title="Mostrar informacion derenta"></i>
+                                    <i class="bi bi-eye ver" title="Mostrar información de renta"></i>
                                 </a>
                             </div>
                         </td>
@@ -60,24 +69,6 @@
     </div>
 
     <script>
-        // Inicializar la tabla con DataTable
-        $(document).ready(function () {
-            $('#tabla-rentas').DataTable({
-                "language": {
-                    "search": "Buscar:",
-                    "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
-                    "zeroRecords": "Sin resultados",
-                    "lengthMenu": "Mostrar _MENU_ registros por página",
-                    "paginate": {
-                        "first": "Primero",
-                        "last": "Último",
-                        "next": "Siguiente",
-                        "previous": "Anterior"
-                    }
-                }
-            });
-        });
-
         function confirmarBaja(event) {
             event.preventDefault();
 

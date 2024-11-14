@@ -15,7 +15,7 @@
                 title: 'Error!',
                 text: '{{ session("error") }}',
                 icon: 'error',
-                confirmButtonText: 'Aceptar'
+                confirmButtonText: 'Aceptar' 
             });
         </script>
     @endif
@@ -34,25 +34,21 @@
     <div class="form-container">
         <form action="{{ route('motor.insertarmotor') }}" method="post" enctype="multipart/form-data">
             @csrf
-
             <!-- Campo para la imagen de la mesa -->
             <div class="input-group">
                 <label for="imagen_motor">Imagen del motor</label>
                 <input type="file" name="imagen_motor" id="imagen_motor" required>
             </div>
-
             <!-- Campo para el color del motor-->
             <div class="input-group">
                 <label for="color_motor">Color del motor</label>
                 <input type="text" name="color_motor" id="color_motor" placeholder="Ingresa la forma de la mesa" required>
             </div>
-
             <!-- Campo para la cantidad de motores -->
             <div class="input-group">
                 <label for="cant_motor">Cantidad de Mesas</label>
                 <input type="number" name="cant_motor" id="cant_motor" placeholder="Ingresa la cantidad de mesas" min="1" required>
             </div>
-
             <!-- Botón para enviar el formulario -->
             <button class="sign">Agregar Motor</button>
         </form>
