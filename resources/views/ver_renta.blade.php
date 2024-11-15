@@ -153,53 +153,61 @@
             </div>
 
             <!-- Sillas -->
-            <div class="sillas-container">
-                <div class="field">
-                    <span>Tipo de Silla:</span> {{ $dato_renta->forma_sillas }}
+            @if ($dato_renta->forma_sillas !== 'sin silla')
+                <div class="sillas-container">
+                    <div class="field">
+                        <span>Tipo de Silla:</span> {{ $dato_renta->forma_sillas }}
+                    </div>
+                    <div class="field">
+                        <span>Cantidad de Sillas:</span> {{ $dato_renta->cant_sillas_renta ?? 'sin cantidad de sillas' }}
+                    </div>
+                    <div class="field">
+                        <span>Audiencia de Sillas:</span> {{ $dato_renta->audiencia_sillas_renta ?? 'sin audiencia de sillas' }}
+                    </div>
                 </div>
-                <div class="field">
-                    <span>Cantidad de Sillas:</span> {{ $dato_renta->cant_sillas_renta ?? 'sin cantidad de sillas' }}
-                </div>
-                <div class="field">
-                    <span>Audiencia de Sillas:</span> {{ $dato_renta->audiencia_sillas_renta ?? 'sin audiencia de sillas' }}
-                </div>
-            </div>
+            @endif
 
             <!-- Mesas -->
-            <div class="mesas-container">
-                <div class="field">
-                    <span>Tipo de Mesa:</span> {{ $dato_renta->forma_mesas }}
+            @if ($dato_renta->forma_mesas !== 'sin mesa')
+                <div class="mesas-container">
+                    <div class="field">
+                        <span>Tipo de Mesa:</span> {{ $dato_renta->forma_mesas }}
+                    </div>
+                    <div class="field">
+                        <span>Cantidad de Mesas:</span> {{ $dato_renta->cant_mesas_renta ?? 'sin cantidad de mesas' }}
+                    </div>
+                    <div class="field">
+                        <span>Audiencia de Mesas:</span> {{ $dato_renta->audiencia_mesas_renta ?? 'sin audiencia de mesas' }}
+                    </div>
                 </div>
-                <div class="field">
-                    <span>Cantidad de Mesas:</span> {{ $dato_renta->cant_mesas_renta ?? 'sin cantidad de mesas' }}
-                </div>
-                <div class="field">
-                    <span>Audiencia de Mesas:</span> {{ $dato_renta->audiencia_mesas_renta ?? 'sin audiencia de mesas' }}
-                </div>
-            </div>
+            @endif
 
             <!-- Manteles -->
-            <div class="manteles-container">
-                <div class="field">
-                    <span>Tipo de Manteles:</span> {{ $dato_renta->tipo_manteles_renta }}
+            @if ($dato_renta->tipo_manteles_renta !== 'sin mantel')
+                <div class="manteles-container">
+                    <div class="field">
+                        <span>Tipo de Manteles:</span> {{ $dato_renta->tipo_manteles_renta }}
+                    </div>
+                    <div class="field">
+                        <span>Cantidad de Manteles:</span> {{ $dato_renta->cant_manteles_renta ?? 'sin cantidad de manteles' }}
+                    </div>
                 </div>
-                <div class="field">
-                    <span>Cantidad de Manteles:</span> {{ $dato_renta->cant_manteles_renta ?? 'sin cantidad de manteles' }}
-                </div>
-            </div>
+            @endif
 
             <!-- Otros elementos -->
-            <div class="otros-container">
-                <div class="field">
-                    <span>Brincolín Rentado:</span> {{ $dato_renta->nombre_brincolines }}
+            @if ($dato_renta->nombre_brincolines !== 'sin brincolin')
+                <div class="otros-container">
+                    <div class="field">
+                        <span>Brincolín Rentado:</span> {{ $dato_renta->nombre_brincolines }}
+                    </div>
+                    <div class="field">
+                        <span>Motor Rentado:</span> {{ $dato_renta->color_motores }}
+                    </div>
+                    <div class="field">
+                        <span>Extensión Rentada:</span> {{ $dato_renta->nombre_extenciones }}
+                    </div>
                 </div>
-                <div class="field">
-                    <span>Motor Rentado:</span> {{ $dato_renta->color_motores }}
-                </div>
-                <div class="field">
-                    <span>Extensión Rentada:</span> {{ $dato_renta->nombre_extenciones }}
-                </div>
-            </div>
+            @endif
 
             <!-- Botones de acción -->
             <div class="actions_btn_list_renta">
