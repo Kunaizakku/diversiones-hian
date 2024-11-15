@@ -5,12 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="ruta/a/tu/imagen.ico" rel="icon">
-    <title>Extenciones Registradas</title>
+    <title>Extensiones Registradas</title>
 </head>
 <body class="body">
 
     @include('sidebar')
     
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                title: 'Éxito!',
+                text: '{{ session("success") }}',
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+            });
+        </script>
+    @endif
     <div class="body-container">
         <div class="table-container">
             <h1>Extensiones Registradas</h1>
@@ -21,7 +31,7 @@
                         <th>Imagen de la Extensión</th>
                         <th>Nombre de la Extensión</th>
                         <th>Cantidad</th>
-                        <th>Estado de Extenciones</th>
+                        <th>Estado de Extensiones</th>
                         <th>Opciones</th>
                     </tr>
                 </thead>
@@ -29,14 +39,14 @@
                     <!-- Datos de ejemplo estáticos -->
                     @foreach ($dato_extensiones as $extencion)
                     <tr>
-                        <td><img src="{{ asset('storage/' . $extencion->imagen_extenciones) }}" alt="$extencion->nombre_extenciones" width="50"></td>
-                        <td>{{$extencion->nombre_extenciones}}</td>
-                        <td>{{$extencion->cant_extenciones}}</td>
-                        <td>{{ $extencion->estatus_extenciones == 1 ? 'Activo' : 'Inactivo' }}</td>
-                        <td>
-                            <div>
+                        <td data-label="Imagen de la Extensión"><img src="{{ asset('storage/' . $extencion->imagen_extenciones) }}" alt="{{ $extencion->nombre_extenciones }}" width="50"></td>
+                        <td data-label="Nombre de la Extensión">{{$extencion->nombre_extenciones}}</td>
+                        <td data-label="Cantidad">{{$extencion->cant_extenciones}}</td>
+                        <td data-label="Estado de Extensiones">{{ $extencion->estatus_extenciones == 1 ? 'Activo' : 'Inactivo' }}</td>
+                        <td data-label="Opciones">
+                            <div class="acciones-iconos">
                                 <a href="{{ route('extencion.editarextencion', ['pk_extenciones' => $extencion->pk_extenciones]) }}">
-                                    <i class="bi bi-pencil-square" title="Editar silla"></i>
+                                    <i class="bi bi-pencil-square editar" title="Editar extensión"></i>
                                 </a>
                                 @if ($extencion->estatus_extenciones == 1)
                                 <a href="{{route('extencion.bajaextenciones', ['pk_extenciones' => $extencion->pk_extenciones])}}" >
@@ -62,9 +72,9 @@
             $('#tabla-extensiones').DataTable({
                 "language": {
                     "search": "Buscar:",
-                    "info": "Mostrando START a END de TOTAL registros",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
                     "zeroRecords": "Sin resultados",
-                    "lengthMenu": "Mostrar MENU registros por página",
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
                     "paginate": {
                         "first": "Primero",
                         "last": "Último",
@@ -88,3 +98,6 @@
     </script>
 
     @include('fooder')
+
+</body>
+</html>

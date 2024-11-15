@@ -9,10 +9,8 @@
 </head>
 <body class="body">
 
-
     @include('sidebar')
 
-    
     @if (session('success'))
         <script>
             Swal.fire({
@@ -41,22 +39,22 @@
                 <tbody>
                     @foreach ($dato_motor as $motor)
                     <tr>
-                        <td><img src="{{ asset('storage/' . $motor->imagen_motores) }}" alt="" width="50"></td>
-                        <td>{{$motor->color_motores}}</td>
-                        <td>{{$motor->cant_motores}}</td>
-                        <td>{{$motor->estatus_motores == 1 ? 'Activo' : 'Inactivo' }}</td>
-                        <td>
-                            <div> 
+                        <td data-label="Imagen del motor"><img src="{{ asset('storage/' . $motor->imagen_motores) }}" alt="" width="50"></td>
+                        <td data-label="Color del motor">{{$motor->color_motores}}</td>
+                        <td data-label="Cantidad">{{$motor->cant_motores}}</td>
+                        <td data-label="Estado del motor">{{$motor->estatus_motores == 1 ? 'Activo' : 'Inactivo' }}</td>
+                        <td data-label="Opciones">
+                            <div class="acciones-iconos">
                                 <a href="{{route('motor.editarmotor', ['pk_motores' => $motor->pk_motores])}}">
-                                    <i class="bi bi-pencil-square" title="Editar motor"></i>
+                                    <i class="bi bi-pencil-square editar" title="Editar motor"></i>
                                 </a>
                                 @if ($motor->estatus_motores == 1)
-                                <a href="{{route('motor.bajamotores', ['pk_motores' => $motor->pk_motores])}}" >
-                                    <i class="bi bi-lock" title="Inactivar motor"></i>
+                                <a href="{{route('motor.bajamotores', ['pk_motores' => $motor->pk_motores])}}">
+                                    <i class="bi bi-lock eliminar" title="Inactivar motor"></i>
                                 </a>
                                 @else
-                                <a href="{{route('motor.activarmotores', ['pk_motores' => $motor->pk_motores])}}" >
-                                    <i class="bi bi-unlock" title="Activar motor"></i>
+                                <a href="{{route('motor.activarmotores', ['pk_motores' => $motor->pk_motores])}}">
+                                    <i class="bi bi-unlock ver" title="Activar motor"></i>
                                 </a>
                                 @endif
                             </div>
@@ -74,9 +72,9 @@
             $('#tabla-motor').DataTable({
                 "language": {
                     "search": "Buscar:",
-                    "info": "Mostrando START a END de TOTAL registros",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
                     "zeroRecords": "Sin resultados",
-                    "lengthMenu": "Mostrar MENU registros por página",
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
                     "paginate": {
                         "first": "Primero",
                         "last": "Último",
@@ -100,3 +98,6 @@
     </script>
 
     @include('fooder')
+
+</body>
+</html>
