@@ -30,14 +30,6 @@
 
 <body>
 
-{{-- funcion para redireccionar al inicio de sesion si no se ha iniciado la sesion --}}
-@if(session('id'))
-
-@else
-    <script>
-        window.location.href="{{url('/')}}";
-    </script>
-@endif
 
     <div class="sidebar">
         <div class="logo_content">

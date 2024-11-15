@@ -11,27 +11,40 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-@if(session('id'))
-    <script>
-        window.location.href="{{url('/inicio')}}";
-    </script>
-@endif
 
-<div class="form-container" style="margin-top: 15vh;">
-    <p class="title">Inicio de sesión</p>
-    <form class="form" id="form-login" action="{{ route('usuario.login') }}" method="post">
-        @csrf
-        <div class="input-group">
-            <label for="username">Nombre de usuario</label>
-            <input autocomplete="off" type="text" name="usuario" id="username" placeholder="Ingresa tu nombre de usuario" required>
+ 
+
+    {{-- @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
         </div>
-        <div class="input-group">
-            <label for="password">Contraseña</label>
-            <input type="password" name="contrasena" id="contraseña" placeholder="Ingresa tu contraseña" required>
-            <!-- pattern y título comentados para deshabilitar la validación -->
-            <!-- pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Debe contener un número, una mayúscula, una minúscula, y ser 8 caracteres" -->
+    @elseif (session('error_credentials'))
+        <div class="alert alert-danger">
+            {{ session('error_credentials') }}
         </div>
-        <button class="sign">Iniciar sesión</button>
+    @elseif (session('error_retry'))
+        <div class="alert alert-danger">
+            {{ session('error_retry') }}
+        </div>
+    @elseif (session ('error_status'))
+        <div class="alert alert-danger">
+            {{ session('error_status') }}
+        </div>
+    @endif --}}
+        
+  <div class="form-container" style="margin-top: 15vh; >
+      <p class="title">Inicio de sesión</p>
+      <form class="form" id="form-login" action="{{ route('login') }}" method="post">
+          @csrf
+          <div class="input-group">
+              <label for="username">Nombre de usuario</label>
+              <input autocomplete="off" type="text" name="usuario" id="username" placeholder="Ingresa tu nombre de usuario" required>
+          </div>
+          <div class="input-group">
+              <label for="password">Contraseña</label>
+              <input type="password" name="contrasena" id="contraseña" placeholder="Ingresa tu contraseña" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Debe contener un número, una mayúscula, una minúscula, y ser 8 caracteres" required>
+          </div>
+          <button class="sign" >Iniciar sesión</button>
 
         @if(session('success'))
             <script>
