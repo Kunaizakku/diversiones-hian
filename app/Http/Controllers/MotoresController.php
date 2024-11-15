@@ -61,7 +61,7 @@ class MotoresController extends Controller
         $baja_motores->save();
         return redirect('/lista_motores')->with('success', 'Motor dado de baja');
     }
-
+ 
     public function activarmotores($pk_motores){
         $baja_motores = Motores::find($pk_motores);
         $baja_motores->estatus_motores = 1;

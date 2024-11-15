@@ -177,7 +177,7 @@
     position: absolute;
     min-height: 100%; /* Para asegurar que al menos ocupe el 100% de la altura de la ventana */
     width: calc(100% - 78px);
-    left: 40px;
+    /* left: 40px; */
     box-shadow: 0 5px 10px rgba(0,0,0,0.2px);
     transition: all 0.5s ease;
   }

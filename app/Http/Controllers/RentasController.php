@@ -28,7 +28,8 @@ class RentasController extends Controller
         //usó para los select de el formualrio de rentas y como los select de editar renta lo requerian esto hace que pueda
         //usar esta consulta en varias vistas, esto continua en el web.php y el sidebar.php 
         //AVISO, SOLO FUNCIONA CUANDO SE OCUPAN LAS VARIABLES LAS MISMAS VARIABLES SIN OCUPAS OTRAS VARIABLES COM OEL PK Y OTRAS COSAS QUE SEAN ESPECIFICAS
-        return view($vista, compact('opcion_sillas', 'opcion_mesas', 'opcion_manteles', 'opcion_brincolines', 'opcion_motores', 'opcion_extenciones'));
+        return view($vista, compact('opcion_sillas', 'opcion_mesas', 'opcion_manteles', 'opcion_brincolines', 'opcion_motores', 
+        'opcion_extenciones'));
     }
 
     public function insertarrentas(Request $request)
@@ -41,7 +42,6 @@ class RentasController extends Controller
             'direccion' => 'required|string',
             // Agregar más reglas de validación según sea necesario
         ]);
-
         // Crear una nueva instancia de Renta y asignar los valores del formulario
         $rentas = new Rentas();
         $rentas->fecha_entrega = $request->input('fecha_entrega');
@@ -61,10 +61,8 @@ class RentasController extends Controller
         $rentas->fk_motores = $request->input('fk_motores');
         $rentas->fk_extenciones = $request->input('fk_extenciones');
         $rentas->estatus_renta = 1; // O lo que corresponda
-
         // $rentas->save();
         // return redirect('/form_rentas')->with('success', 'Renta registrada con éxito');
-        
         // Guardar en la base de datos
 
             $rentas->save();
@@ -112,6 +110,19 @@ class RentasController extends Controller
         return view('lista_rentas', compact('dato_rentas'));
     }
 
+    public function ver_rentasLista_inactivas()
+    {
+        $dato_rentas = Rentas::join('sillas', 'sillas.pk_sillas', '=', 'rentas.fk_sillas')
+            ->join('mesas', 'mesas.pk_mesas', '=', 'rentas.fk_mesas')
+            ->join('manteles', 'manteles.pk_manteles', '=', 'rentas.fk_manteles')
+            ->join('brincolines', 'brincolines.pk_brincolines', '=', 'rentas.fk_brincolines')
+            ->join('motores', 'motores.pk_motores', '=', 'rentas.fk_motores')
+            ->join('extenciones', 'extenciones.pk_extenciones', '=', 'rentas.fk_extenciones')
+            ->where('rentas.estatus_renta', '=', 0)
+            ->Get();
+        return view('lista_rentas_inactivas', compact('dato_rentas'));
+    }
+
 
     public function editarrenta($pk_rentas)
     {
@@ -138,7 +149,8 @@ class RentasController extends Controller
             ->where('rentas.estatus_renta', '=', 1)
             ->first();
 
-        return view('editar_rentas', compact('ver_renta', 'dato_renta_fks', 'opcion_sillas', 'opcion_mesas', 'opcion_manteles', 'opcion_brincolines', 'opcion_motores', 'opcion_extenciones'));
+        return view('editar_rentas', compact('ver_renta', 'dato_renta_fks', 'opcion_sillas', 'opcion_mesas', 'opcion_manteles', 
+        'opcion_brincolines', 'opcion_motores', 'opcion_extenciones'));
     }
 
     public function actualizarrenta(Request $request, $pk_rentas)
@@ -169,5 +181,20 @@ class RentasController extends Controller
 
         return redirect('/lista_rentas')->with('success', 'Renta actualizada exitosamente');
     }
+
+    public function bajarentas($pk_rentas){
+        $baja_rentas = Rentas::find($pk_rentas);
+        $baja_rentas->estatus_renta = 0;
+        $baja_rentas->save();
+        return redirect('/lista_rentas_inactivas')->with('success', 'Renta dada de baja');
+    }
+ 
+    public function activarrentas($pk_rentas){
+        $baja_motores = Rentas::find($pk_rentas);
+        $baja_motores->estatus_renta = 1;
+        $baja_motores->save();
+        return redirect('/lista_rentas')->with('success', 'Renta dada de alta');
+    }
+
 }
     

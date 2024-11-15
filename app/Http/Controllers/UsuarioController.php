@@ -11,18 +11,22 @@ class UsuarioController extends Controller
 {
     /* Inserción de datos */
     public function insertar(Request $req) {
+        $validated = $req->validate([
+            'nombre' => 'required|string|max:255',
+            'usuario' => 'required|string|unique:usuario,usuario|max:255',
+            'contrasena' => 'required|string|min:8',
+        ]);
+    
         $usuario = new Usuario();
-        
         $usuario->nombre = $req->nombre;
         $usuario->usuario = $req->usuario;
-        // Hashear la contraseña antes de guardarla en la base de datos
         $usuario->contrasena = Hash::make($req->contrasena);
         $usuario->estatus_usuario = 1;
-
         $usuario->save();
-
+    
         return redirect()->back()->with('success', 'Usuario agregado');
     }
+    
 
     public function login(Request $request) {
         $nombre = $request->input('usuario');
@@ -57,7 +61,7 @@ class UsuarioController extends Controller
         Auth::logout(); 
         session()->flush(); // Cierra la sesión del usuario
         return redirect('/')->with('success', 'Sesión cerrada');
-    }
+    }   
 
     public function detalle_usuario() {
         $usuarios = Usuario::all();

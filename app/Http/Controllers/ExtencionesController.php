@@ -32,7 +32,7 @@ class ExtencionesController extends Controller
     }
 
     public function ver_extenciones(){
-        $dato_extensiones = Extenciones::where('estatus_extenciones', 1)->get();
+        $dato_extensiones = Extenciones::whereIn('estatus_extenciones', [1, 0])->get();
         return view('lista_extenciones', compact('dato_extensiones'));
     }
 
@@ -55,4 +55,19 @@ class ExtencionesController extends Controller
         $editar_extenciones->save();
         return redirect('/lista_extenciones')->with('success', 'Extensión actualizada');
     }
+    
+    public function bajaextenciones($pk_extenciones){
+        $baja_extenciones = Extenciones::find($pk_extenciones);
+        $baja_extenciones->estatus_extenciones = 0;
+        $baja_extenciones->save();
+        return redirect('/lista_extenciones')->with('success', 'Extensión dado de baja');
+    }
+ 
+    public function activarextenciones($pk_extenciones){
+        $baja_extenciones = Extenciones::find($pk_extenciones);
+        $baja_extenciones->estatus_extenciones = 1;
+        $baja_extenciones->save();
+        return redirect('/lista_extenciones')->with('success', 'Extensión dado de alta');
+    }
+
 }

@@ -11,6 +11,16 @@
 
     @include('sidebar')
     
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                title: 'Éxito!',
+                text: '{{ session("success") }}',
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+            });
+        </script>
+    @endif
     <div class="body-container">
         <div class="table-container">
             <h1>Brincolines Registrados</h1>
@@ -36,18 +46,24 @@
                         <td>{{$brincolin->cant_brincolines}}</td>
                         <td>{{$brincolin->cat_brincolines}}</td>
                         <td>{{$brincolin->tam_brincolines}}</td>
-                        <td>{{ $brincolin->estatus_sillas == 1 ? 'Activo' : 'Inactivo' }}</td>
+                        <td>{{ $brincolin->estatus_brincolines == 1 ? 'Activo' : 'Inactivo' }}</td>
                         <td>
-                            <div>
+                            <div class="acciones-iconos">
                                 <a href="{{ route('brincolin.editarbrincolin', ['pk_brincolines' => $brincolin->pk_brincolines]) }}">
-                                    <i class="bi bi-pencil-square" title="Editar silla"></i>
+                                    <i class="bi bi-pencil-square editar" title="Editar silla"></i>
                                 </a>
-                                <a href="#" onclick="confirmarBaja(event)">
-                                    <i class="bi bi-lock" title="Eliminar silla"></i>
+                                @if ($brincolin->estatus_brincolines == 1)
+                                <a href="{{route('brincolin.bajabrincolines', ['pk_brincolines' => $brincolin->pk_brincolines])}}" >
+                                    <i class="bi bi-lock" title="Desactivar motor"></i>
                                 </a>
+                                @else
+                                <a href="{{route('brincolin.activarbrincolines', ['pk_brincolines' => $brincolin->pk_brincolines])}}" >
+                                    <i class="bi bi-unlock" title="Activar motor"></i>
+                                </a>
+                                @endif
                             </div>
                         </td>
-                    </tr>
+                    </tr> 
                     @endforeach
                 </tbody>
             </table>

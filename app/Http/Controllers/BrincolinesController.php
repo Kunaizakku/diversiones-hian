@@ -35,7 +35,7 @@ class BrincolinesController extends Controller
 
     public function ver_brincolines()
     {
-        $dato_brincolines = Brincolines::where('estatus_brincolines', 1)->get();
+        $dato_brincolines = Brincolines::whereIn('estatus_brincolines', [1,0])->get();
 
         return view('lista_brincolines', compact('dato_brincolines'));
     }
@@ -65,5 +65,19 @@ class BrincolinesController extends Controller
 
         $brincolines->save();
         return redirect('/lista_brincolines')->with('success', 'Brincolín actualizado');
+    }
+
+    public function bajabrincolines($pk_brincolines){
+        $baja_brincolines = Brincolines::find($pk_brincolines);
+        $baja_brincolines->estatus_brincolines = 0;
+        $baja_brincolines->save();
+        return redirect('/lista_brincolines')->with('success', 'Brincolin dado de baja');
+    }
+
+    public function activarbrincolines($pk_brincolines){
+        $avtivar_brincolines = Brincolines::find($pk_brincolines);
+        $avtivar_brincolines->estatus_brincolines = 1;
+        $avtivar_brincolines->save();
+        return redirect('/lista_brincolines')->with('success', 'Brincolin dado de alta');
     }
 }

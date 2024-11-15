@@ -10,6 +10,16 @@
 <body class="body">
 
     @include('sidebar')
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                title: 'Éxito!',
+                text: '{{ session("success") }}',
+                icon: 'success',
+                confirmButtonText: 'Aceptar'
+            });
+        </script>
+    @endif
     
     <div class="body-container">
         <div class="table-container">
@@ -27,22 +37,29 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Datos de ejemplo estáticos -->
                     @foreach ($dato_mesas as $mesa)
                     <tr>
-                        <td><img src="{{ asset('storage/' . $mesa->imagen_mesas) }}" alt="$mesa->forma_mesas" width="50"></td>
-                        <td>{{$mesa->forma_mesas}}</td>
-                        <td>{{$mesa->cant_mesas}}</td>
-                        <td>{{$mesa->audiencia_mesas}}</td>
-                        <td>{{ $mesa->estatus_mesas == 1 ? 'Activas' : 'Inactivas' }}</td>
-                        <td>
-                            <div>
+                        <td data-label="Imagen de la Mesa"><img src="{{ asset('storage/' . $mesa->imagen_mesas) }}" alt="{{$mesa->forma_mesas}}" width="50"></td>
+                        <td data-label="Forma de la Mesa">{{$mesa->forma_mesas}}</td>
+                        <td data-label="Cantidad">{{$mesa->cant_mesas}}</td>
+                        <td data-label="Audiencia Dirigida">{{$mesa->audiencia_mesas}}</td>
+                        <td data-label="Estado de Mesas">{{ $mesa->estatus_mesas == 1 ? 'Activas' : 'Inactivas' }}</td>
+                        <td data-label="Opciones">
+                            <div class="acciones-iconos">
                                 <a href="{{ route('mesa.editarmesa', ['pk_mesas' => $mesa->pk_mesas]) }}">
-                                    <i class="bi bi-pencil-square" title="Editar silla"></i>
+                                    <i class="bi bi-pencil-square editar" title="Editar silla"></i>
                                 </a>
+                                @if ($mesa->estatus_mesas == 1)
+                                <a href="{{route('mesa.bajamesas', ['pk_mesas' => $mesa->pk_mesas])}}" >
+                                    <i class="bi bi-lock" title="Inactivar motor"></i>
+                                </a>
+                                @else
+                                <a href="{{route('mesa.activarmesas', ['pk_mesas' => $mesa->pk_mesas])}}" >
+                                    <i class="bi bi-unlock" title="Activar motor"></i>
                                 <a href="#" onclick="confirmarBaja(event)">
-                                    <i class="bi bi-lock" title="Eliminar silla"></i>
+                                    <i class="bi bi-lock eliminar" title="Eliminar silla"></i>
                                 </a>
+                                @endif
                             </div>
                         </td>
                     </tr>
@@ -86,3 +103,6 @@
     </script>
 
     @include('fooder')
+
+</body>
+</html>
