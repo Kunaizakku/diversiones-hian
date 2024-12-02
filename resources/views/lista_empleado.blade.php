@@ -54,19 +54,25 @@
                                     <td data-label="Acciones">
                                         <div class="acciones-iconos">
                                             <div>
-                                                <a href="#">
+                                                <a href="{{route('usuario.editar', ['pk_usuario' => $user->pk_usuario])}}">
                                                     <i class="bi bi-pencil-square editar" title="Editar datos"></i>
                                                 </a>
                                             </div>
-                                            <div>
+                                            {{-- <div>
                                                 <a href="#">
                                                     <i class="bi bi-key ver" title="Cambiar contraseña"></i>
                                                 </a>
-                                            </div>
+                                            </div> --}}
                                             <div>
-                                                <a href="#" onclick="confirmarBaja(event)">
-                                                    <i class="bi bi-lock eliminar" title="Dar baja"></i>
+                                                @if ($user->estatus_usuario == 1)
+                                                <a href="{{route('usuario.bajausuarios', ['pk_usuario' => $user->pk_usuario])}}">
+                                                    <i class="bi bi-lock eliminar" title="Inactivar usuario"></i>
                                                 </a>
+                                                @else
+                                                <a href="{{route('usuario.activarusuarios', ['pk_usuario' => $user->pk_usuario])}}">
+                                                    <i class="bi bi-unlock ver" title="Activar usuario"></i>
+                                                </a>
+                                                @endif
                                             </div>
                                         </div>
                                     </td>

@@ -78,4 +78,34 @@ class UsuarioController extends Controller
         $usuarios = Usuario::all();
         return view('lista_empleado', compact('usuarios'));
     }
+
+
+    public function bajausuarios($pk_usuario){
+        $baja_usuario = Usuario::find($pk_usuario);
+        $baja_usuario->estatus_usuario = 0;
+        $baja_usuario->save();
+        return redirect('/lista_usuario')->with('success', 'Empleado dado de baja');
+    }
+
+    public function activarusuarios($pk_usuario){
+        $baja_usuario = Usuario::find($pk_usuario);
+        $baja_usuario->estatus_usuario = 1;
+        $baja_usuario->save();
+        return redirect('/lista_usuario')->with('success', 'Empelado dado de alta');
+    }
+
+    public function editarusuario($pk_usuario){
+        $dato_usuario = Usuario::find($pk_usuario);
+
+        return view('editar_usuario', compact('dato_usuario'));
+    }
+
+    public function actualizarusuario($pk_usuario, Request $request){
+        $editar_usuario = Usuario::find($pk_usuario);
+
+        $editar_usuario->nombre = $request->nombre;
+        $editar_usuario->usuario = $request->usuario;
+        $editar_usuario->save();
+        return redirect('/lista_usuario')->with('success', 'Usuario actualizada');
+    }
 }
