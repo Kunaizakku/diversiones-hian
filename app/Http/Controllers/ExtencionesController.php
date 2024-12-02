@@ -8,19 +8,44 @@ use Illuminate\Support\Facades\Log; // Para el manejo de logs
 
 class ExtencionesController extends Controller
 {
-    public function insertarextenciones(Request $request)
+    // public function insertarextenciones(Request $request)
+    // {
+    //     try {
+    //         $extenciones = new Extenciones;
+
+    //         if ($request->hasFile('imagen_extenciones')) {
+    //             $imagen = $request->file('imagen_extenciones');
+    //             $rutaimagen = $imagen->store('public/images');
+    //             $extenciones->imagen_extenciones = str_replace('public/', '', $rutaimagen);
+    //         }
+
+    //         $extenciones->nombre_extenciones = $request->nombre_extenciones;
+    //         $extenciones->cant_extenciones = $request->cant_extenciones;
+    //         $extenciones->estatus_extenciones = 1;
+
+    //         $extenciones->save();
+    //         return redirect('/form_extenciones')->with('success', 'Extensión agregada');
+    //     } catch (\Exception $e) {
+    //         Log::error('Error al agregar extensión: ' . $e->getMessage()); // Registro del error
+    //         return redirect('/form_extenciones')->with('error', 'Ocurrió un error al agregar la extensión. Inténtalo de nuevo.');
+    //     }
+    // }
+
+    public function sincronizar(Request $request)
     {
+        // Validar los datos
+        $validatedData = $request->validate([
+            'nombre_extenciones' => 'required|string|max:255',
+            'imagen_extenciones' => 'required|string',
+            'cant_extenciones' => 'required|integer',
+        ]);
+
         try {
             $extenciones = new Extenciones;
 
-            if ($request->hasFile('imagen_extenciones')) {
-                $imagen = $request->file('imagen_extenciones');
-                $rutaimagen = $imagen->store('public/images');
-                $extenciones->imagen_extenciones = str_replace('public/', '', $rutaimagen);
-            }
-
-            $extenciones->nombre_extenciones = $request->nombre_extenciones;
-            $extenciones->cant_extenciones = $request->cant_extenciones;
+            $extenciones->nombre_extenciones = $validatedData['nombre_extenciones'];
+            $extenciones->imagen_extenciones = $validatedData['imagen_extenciones'];
+            $extenciones->cant_extenciones = $validatedData['cant_extenciones'];
             $extenciones->estatus_extenciones = 1;
 
             $extenciones->save();
@@ -62,7 +87,7 @@ class ExtencionesController extends Controller
         $baja_extenciones->save();
         return redirect('/lista_extenciones')->with('success', 'Extensión dado de baja');
     }
- 
+
     public function activarextenciones($pk_extenciones){
         $baja_extenciones = Extenciones::find($pk_extenciones);
         $baja_extenciones->estatus_extenciones = 1;
@@ -71,3 +96,4 @@ class ExtencionesController extends Controller
     }
 
 }
+

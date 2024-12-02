@@ -5,8 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">  
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Registro de Renta</title>
+
+  <link rel="manifest" href="{{ asset('/manifest.json') }}">
+
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- Incluye SweetAlert -->
 </head>
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
 <body>
 
   @include('sidebar')
@@ -24,7 +29,7 @@
 
   <div class="form-container-rentas">
     <p class="title">Registro de Renta</p>
-    <form action="{{ route('renta.insertarrentas') }}" method="post" enctype="multipart/form-data">
+      <form id="rentaForm" action="{{ route('renta.insertarrentas') }}" method="post" enctype="multipart/form-data">  {{--action="{{ route('renta.insertarrentas') }}" --}}
       @csrf
 
       <div class="form-flex">
@@ -81,7 +86,7 @@
         <label for="cant_sillas_renta">Cantidad de sillas</label>
         <input type="number" name="cant_sillas_renta" id="cant_sillas_renta" value="0">
         <label for="audencia_sillas_renta">Audiencia</label>
-        <select name="audencia_sillas_renta">
+        <select name="audiencia_sillas_renta">
             <option value="sin audencia">Selecciona una audiencia</option>
             <option value="Adultos">Adultos</option>
             <option value="Niños">Niños</option>
@@ -99,8 +104,8 @@
         </select>
         <label for="cant_mesas_renta">Cantidad de mesas</label>
         <input type="number" name="cant_mesas_renta" id="cant_mesas_renta" value="0">
-        <label for="audencia_mesas_renta">Audiencia</label>
-        <select name="audencia_mesas_renta">
+        <label for="audiencia_mesas_renta">Audiencia</label>
+        <select name="audiencia_mesas_renta">
             <option value="sin audiencia">Selecciona una audiencia</option>
             <option value="Adultos">Adultos</option>
             <option value="Niños">Niños</option>
@@ -157,24 +162,6 @@
 
   </div>
 
-  <script>
-    // Mostrar/ocultar campos basados en los checkboxes
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    
-    checkboxes.forEach(checkbox => {
-      checkbox.addEventListener('change', function() {
-        const relatedInputs = document.getElementById(`${this.id}_inputs`);
-        if (relatedInputs) {
-          relatedInputs.classList.toggle('hidden', !this.checked);
-        }
-      });
-    });
-
-
-    ////////SCRIPT DEL A FECHA////
-    const today = new Date().toISOString().split("T")[0];
-    document.getElementById("fecha_entrega").setAttribute("min", today);
-  </script>
   <style>
     .hidden {
       display: none;

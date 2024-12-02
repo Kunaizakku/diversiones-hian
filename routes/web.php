@@ -63,7 +63,8 @@ Route::get('/activarbrincolines/{pk_brincolines}', [BrincolinesController::class
 Route::get('/form_extenciones', function () {
     return view('form_extenciones');
 })->name('form_extenciones');
-Route::post('/formularioextenciones', [ExtencionesController::class, 'insertarextenciones'])->name('extencion.insertarextenciones');
+// Route::post('/formularioextenciones', [ExtencionesController::class, 'insertarextenciones'])->name('extencion.insertarextenciones');
+Route::post('/sincronizar', [ExtencionesController::class, 'sincronizar'])->name('extencion.sincronizar');
 Route::get('/lista_extenciones', [ExtencionesController::class, 'ver_extenciones'])->name('extencion.listaextenciones');
 Route::get('/editar_extenciones/{pk_extenciones}', [ExtencionesController::class, 'editarextencion'])->name('extencion.editarextencion');
 Route::post('/actualizarextenciones/{pk_extenciones}', [ExtencionesController::class, 'actualizarextencion'])->name('extencion.actualizarextencion');
@@ -114,6 +115,9 @@ Route::post('/registroUsuario', [UsuarioController::class, 'insertar'])->name('u
 Route::match(['get', 'post'], '/login', [UsuarioController::class, 'login'])->name('login');
 Route::get('/logout', [UsuarioController::class, 'logout'])->name('logout');
 Route::get('/lista_usuario', [UsuarioController::class,'detalle_usuario'])->name('detalle_usuario');
+
+
+
 
 }); 
 
