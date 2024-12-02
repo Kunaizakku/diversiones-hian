@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">  
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Registro de Renta</title>
+
+  <link rel="manifest" href="{{ asset('/manifest.json') }}">
+
+
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- Incluye SweetAlert -->
 </head>
 <body>

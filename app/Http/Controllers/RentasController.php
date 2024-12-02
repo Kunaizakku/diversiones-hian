@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Validator;
+
+use Illuminate\Support\Facades\Log;
+
+
 use App\Models\Rentas;
 use App\Models\Sillas;
 use App\Models\Mesas;

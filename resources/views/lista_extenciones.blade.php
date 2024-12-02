@@ -6,6 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="ruta/a/tu/imagen.ico" rel="icon">
     <title>Extensiones Registradas</title>
+
+    <link rel="manifest" href="{{ asset('/manifest.json') }}">
+
 </head>
 <body class="body">
 

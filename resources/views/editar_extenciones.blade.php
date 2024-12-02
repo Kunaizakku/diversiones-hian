@@ -6,6 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- Incluye SweetAlert -->
     <title>Registro de Extensiones</title>
+
+    <link rel="manifest" href="{{ asset('/manifest.json') }}">
+
+
 </head>
 <body>
 

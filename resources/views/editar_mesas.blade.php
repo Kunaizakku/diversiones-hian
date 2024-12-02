@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- Incluye SweetAlert -->
     <title>Diversiones-Hian | Registro de Mesas</title>
+
+    <link rel="manifest" href="{{ asset('/manifest.json') }}">
+
+
 </head>
 <body oncopy="return false" onpaste="return false">
     @include('sidebar')
