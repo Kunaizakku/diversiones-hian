@@ -11,14 +11,19 @@ use App\Http\Controllers\RentasController;
 use App\Http\Controllers\MotoresController;
 use App\Models\Motores;
 use App\Models\Usuario;
+use App\Http\Middleware\VerificarSesion;
 
 Route::get('/', function () {
     return view('login');
 })->name('login');
 
-Route::get('/inicio', function () {
+Route::middleware(['web', VerificarSesion::class])->group(function () {
+
+    Route::get('/inicio', function () {
         return view('index');
-})->name('inicio');
+    })->name('inicio') ;
+
+
 
 //sillas
 Route::get('/form_sillas', function () {
@@ -100,30 +105,18 @@ Route::post('/actualizarmotores/{pk_motores}', [MotoresController::class, 'actua
 Route::get('/bajamotores/{pk_motores}', [MotoresController::class, 'bajamotores'])->name('motor.bajamotores');
 Route::get('/activarmotores/{pk_motores}', [MotoresController::class, 'activarmotores'])->name('motor.activarmotores');
 
+
 //usuario/login
-Route::get('/iniciarsesion', function () { return view('login'); })->name('iniciarsesion');
-Route::get('/login', function () {
-    $PK_USUARIO = session('pk_usuario');
-    if ($PK_USUARIO) {
-        return redirect()->back()->with('warning', 'Ya has iniciado sesión');
-    }
-    return view('login');
-})->name('login');
 Route::get('/registro', function () {
-    $PK_USUARIO = session('pk_usuario');
-    if ($PK_USUARIO) {
-        return redirect()->back()->with('warning', 'Cierra sesión para acceder');
-    } else {
         return view('registro');
-    }
 })->name('registro');
-// Route::get('/lista_empleados', function () {
-//     return view('lista_empleado');
-// })->name('lista_empleados');
 Route::post('/registroUsuario', [UsuarioController::class, 'insertar'])->name('usuario.insertar');
-Route::match(['get', 'post'], '/login', [UsuarioController::class, 'login'])->name('usuario.login');
+Route::match(['get', 'post'], '/login', [UsuarioController::class, 'login'])->name('login');
 Route::get('/logout', [UsuarioController::class, 'logout'])->name('logout');
 Route::get('/lista_usuario', [UsuarioController::class,'detalle_usuario'])->name('detalle_usuario');
+
+}); 
+
 
 /////pruebas
 

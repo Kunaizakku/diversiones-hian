@@ -1,0 +1,29 @@
+{
+    "name": "Inventario DIVERCIONES HIAN",
+    "short_name": "D-HIAN",
+    "start_url": "/",
+    "background_color": "#008080",
+    "description": "Sistema de Inventario de DIVERCIONES HIAN",
+    "display": "fullscreen",
+    "theme_color": "#008080",
+    "icons": [
+        {
+            "src": "logo.PNG",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "images/screenshots/desktop-screenshot.png",
+            "sizes": "1920x1080",
+            "form_factor": "wide"
+        },
+        {
+            "src": "images/screenshots/mobile-screenshot.png",
+            "sizes": "720x1600",
+            "form_factor": "tall"
+        }
+    ]
+} 

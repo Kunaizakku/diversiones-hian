@@ -37,7 +37,7 @@ class UsuarioController extends Controller
         if ($usuario && Hash::check($contraseña, $usuario->contrasena)) {
             // Verificar si el estatus del usuario es 0
             if ($usuario->estatus_usuario == 0) {
-                return redirect()->to('/iniciarsesion')
+                return redirect()->to('/')
                     ->with('error_status', 'Tu cuenta está desactivada. Contacta al administrador.');
             }
 
@@ -50,9 +50,9 @@ class UsuarioController extends Controller
 
             return redirect()->to('/inicio')->with('success', '¡Bienvenido(a) ' . $usuario->usuario);
         } else {
-            return redirect()->to('/iniciarsesion')
+            return redirect()->to('/')
                 ->with('error_credentials', 'Usuario o contraseña incorrectos')
-                ->with('error_retry', 'Introduzca sus datos de nuevo')
+                ->with('error_retry', 'Inicie sesión Para ingresar')
                 ->with('use_js_alerts', true);
         }
     }
@@ -61,7 +61,18 @@ class UsuarioController extends Controller
         Auth::logout(); 
         session()->flush(); // Cierra la sesión del usuario
         return redirect('/')->with('success', 'Sesión cerrada');
-    }   
+    }
+
+    private function buscar($usuario, $contrasena) {
+        $usuario = Usuario::where('usuario', $usuario)
+            ->first();
+    
+        if ($usuario && Hash::check($contrasena, $usuario->contrasena)) {
+            return $usuario;
+        } else {
+            return null;
+        }
+    }
 
     public function detalle_usuario() {
         $usuarios = Usuario::all();
