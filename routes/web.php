@@ -116,8 +116,10 @@ Route::match(['get', 'post'], '/login', [UsuarioController::class, 'login'])->na
 Route::get('/logout', [UsuarioController::class, 'logout'])->name('logout');
 Route::get('/lista_usuario', [UsuarioController::class,'detalle_usuario'])->name('detalle_usuario');
 
-
-
+Route::get('/bajausuarios/{pk_usuario}', [UsuarioController::class, 'bajausuarios'])->name('usuario.bajausuarios');
+Route::get('/activarusuarios/{pk_usuario}', [UsuarioController::class, 'activarusuarios'])->name('usuario.activarusuarios');
+Route::get('/editar_usuario/{pk_usuario}', [UsuarioController::class, 'editarusuario'])->name('usuario.editar');
+Route::post('/actualizarusuario/{pk_usuario}', [UsuarioController::class, 'actualizarusuario'])->name('usuario.actualizar');
 
 }); 
 
